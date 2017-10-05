@@ -19,6 +19,16 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'trailblazer', '1.1.2'
+gem 'trailblazer-rails', '0.4.0'
+gem "reform"
+gem "reform-rails"
+
+gem 'multi_json'
+gem 'oj'
+gem 'representable'
+gem 'responders'
+
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -34,10 +44,19 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'awesome_print'
+  gem 'better_errors'
+  gem "binding_of_caller"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Adds support for Capybara system testing and selenium driver
+  gem 'factory_girl_rails'
   gem 'capybara', '~> 2.13'
+  gem 'guard', require: false
+  gem 'guard-bundler', require: false
+  gem 'guard-rspec', require: false
+  gem 'faker'
+  gem 'rails-controller-testing'
+  gem 'rspec-mocks'
+  gem 'rspec-rails', '~> 3.0'
   gem 'selenium-webdriver'
 end
 
