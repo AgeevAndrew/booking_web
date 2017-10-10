@@ -21,7 +21,6 @@ port ENV.fetch("PORT") { 3000 }
 
 workers 3
 
-bind 'tcp://0.0.0.0:8080'
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
