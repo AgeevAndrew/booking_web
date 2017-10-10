@@ -49,6 +49,17 @@ set :ssh_options, forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rs
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
 
+  desc 'Copy API documentation to the server'
+  after :restart, :copy_docs do
+    on roles(:app) do
+      upload!(
+        File.expand_path('../../doc/api', __FILE__),
+        "#{deploy_to}/current/doc",
+        recursive: true
+      )
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
