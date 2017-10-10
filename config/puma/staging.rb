@@ -10,7 +10,7 @@ rackup "/home/deployer/apps/booking_web/current/config.ru"
 
 pidfile "/home/deployer/apps/booking_web/shared/tmp/pids/puma.pid"
 state_path "/home/deployer/apps/booking_web/shared/tmp/pids/puma.state"
-stdout_redirect ['/home/deployer/apps/booking_web/current/log/puma.access.log', '/home/deployer/apps/booking_web/current/log/puma.error.log', true]
+stdout_redirect '/home/deployer/apps/booking_web/current/log/puma.access.log', '/home/deployer/apps/booking_web/current/log/puma.error.log', true
 
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
