@@ -7,7 +7,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    respond Products::Find
+    result, operation = Products::Find.run params
+    if result
+      render json: operation.to_json
+    else
+      render json: { errors: operation.contract.errors.messages }
+    end
   end
 
   # GET /products/1

@@ -43,21 +43,30 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# documentation
+gem 'apitome', git: 'git@github.com:jejacks0n/apitome.git', branch: 'master'
+
 group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
   gem "binding_of_caller"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_girl_rails'
   gem 'capybara', '~> 2.13'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'faker-russian'
   gem 'guard', require: false
   gem 'guard-bundler', require: false
   gem 'guard-rspec', require: false
-  gem 'faker'
   gem 'rails-controller-testing'
   gem 'rspec-mocks'
   gem 'rspec-rails', '~> 3.0'
+  gem 'rspec_api_documentation'
   gem 'selenium-webdriver'
+end
+
+group :test do
+  gem 'database_cleaner'
 end
 
 group :development do

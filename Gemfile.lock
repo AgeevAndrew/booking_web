@@ -1,3 +1,12 @@
+GIT
+  remote: git@github.com:jejacks0n/apitome.git
+  revision: 808f3b1bdf3379838e12143037737bd49d8b4426
+  branch: master
+  specs:
+    apitome (0.1.0)
+      kramdown
+      railties
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -70,6 +79,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.2)
+    database_cleaner (1.6.1)
     debug_inspector (0.0.3)
     declarative (0.0.10)
     declarative-builder (0.1.0)
@@ -82,7 +92,7 @@ GEM
       declarative-option (< 0.2.0)
       representable (>= 2.4.0, <= 3.1.0)
       uber (< 0.2.0)
-    erubi (1.6.1)
+    erubi (1.7.0)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -91,6 +101,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.8.4)
       i18n (~> 0.5)
+    faker-russian (0.0.6)
     ffi (1.9.18)
     formatador (0.2.5)
     globalid (0.4.0)
@@ -117,6 +128,7 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
+    kramdown (1.15.0)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -135,6 +147,7 @@ GEM
     mini_portile2 (2.3.0)
     minitest (5.10.3)
     multi_json (1.12.2)
+    mustache (1.0.5)
     nenv (0.3.0)
     nio4r (2.1.0)
     nokogiri (1.8.1)
@@ -217,6 +230,10 @@ GEM
       rspec-mocks (~> 3.6.0)
       rspec-support (~> 3.6.0)
     rspec-support (3.6.0)
+    rspec_api_documentation (5.1.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
     ruby_dep (1.5.0)
     rubyzip (1.2.1)
     sass (3.5.2)
@@ -281,14 +298,17 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  apitome!
   awesome_print
   better_errors
   binding_of_caller
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  database_cleaner
   factory_girl_rails
   faker
+  faker-russian
   guard
   guard-bundler
   guard-rspec
@@ -306,6 +326,7 @@ DEPENDENCIES
   responders
   rspec-mocks
   rspec-rails (~> 3.0)
+  rspec_api_documentation
   sass-rails (~> 5.0)
   selenium-webdriver
   spring

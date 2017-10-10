@@ -1,6 +1,8 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
+  respond_to :json
+
   # GET /accounts
   # GET /accounts.json
   def index
@@ -24,16 +26,11 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(account_params)
-
-    respond_to do |format|
-      if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully created.' }
-        format.json { render :show, status: :created, location: @account }
-      else
-        format.html { render :new }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
+    result, operation = Accounts::Create.run params
+    if result
+      render json: operation.to_json
+    else
+      render json: { errors: operation.errors.messages }, status: :unprocessable_entity
     end
   end
 

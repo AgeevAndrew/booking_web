@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Products
-  class Find < ApplicationOperation
+module Accounts
+  class New < ApplicationOperation
     def model!(*)
       Account.new
     end
