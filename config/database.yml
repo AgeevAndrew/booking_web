@@ -15,7 +15,7 @@ test:
   database: booking_web_test
 
 staging:
-  <<: * default
+  <<: *default
   database: booking_web
   password: booker-web
 
