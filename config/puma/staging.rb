@@ -4,6 +4,14 @@
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
+
+directory '/home/deployer/apps/booking_web/current'
+rackup "/home/deployer/apps/booking_web/current/config.ru"
+
+pidfile "/home/deployer/apps/booking_web/shared/tmp/pids/puma.pid"
+state_path "/home/deployer/apps/booking_web/shared/tmp/pids/puma.state"
+stdout_redirect ['/home/deployer/apps/booking_web/current/log/puma.access.log', '/home/deployer/apps/booking_web/current/log/puma.error.log', true]
+
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
@@ -11,10 +19,25 @@ threads threads_count, threads_count
 #
 port ENV.fetch("PORT") { 3000 }
 
+workers 3
+
+bind 'tcp://0.0.0.0:8080'
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
+preload_app!
+
+on_restart do
+  puts 'Refreshing Gemfile'
+  ENV["BUNDLE_GEMFILE"] = "/home/deployer/apps/torg-b2b/current/Gemfile"
+end
+
+on_worker_boot do
+  ActiveSupport.on_load(:active_record) do
+    ActiveRecord::Base.establish_connection
+  end
+end
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
 # the concurrency of the application would be max `threads` * `workers`.
