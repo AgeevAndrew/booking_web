@@ -3,10 +3,13 @@
 require 'acceptance_helper'
 
 RSpec.resource 'Products', acceptance: true do
-  let(:product) { create(:product) }
   get '/api/products' do
-    let(:company_id) { product.company_id }
-    let(:category_id) { Faker::Number.number(2) }
+    let(:company) { create(:company) }
+    let(:category) { create(:category) }
+    let!(:products) { create_list(:product, 3, company: company, category: category) }
+
+    let(:company_id) { company.id }
+    let(:category_id) { category.id }
 
     parameter :company_id, required: true
     parameter :category_id

@@ -52,6 +52,7 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
+  gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'faker-russian'
@@ -63,10 +64,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec_api_documentation'
   gem 'selenium-webdriver'
-end
-
-group :test do
-  gem 'database_cleaner'
 end
 
 group :development do

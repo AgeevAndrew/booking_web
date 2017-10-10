@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :company do
-    name "MyString"
+    name Faker::Company.name
     categories []
-    description "MyText"
+    description Faker::Company.catch_phrase
   end
 end

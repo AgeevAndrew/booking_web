@@ -7,7 +7,6 @@ RSpec.resource 'Account', acceptance: true do
     parameter :name, required: true
     parameter :email, required: true
     parameter :phone, required: true
-    parameter :title, scope: :addresses, required: true
     parameter :addresses, required: true
 
     let(:addresses) do

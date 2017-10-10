@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :category do
-    name "MyString"
-    icon_type "MyString"
-    description "MyText"
+    name Faker::Lorem.word
+    icon_type Faker::Lorem.word
+    description Faker::Lorem.sentence
   end
 end
