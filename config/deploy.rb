@@ -43,7 +43,8 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 5
+set :ssh_options, forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub)
 
 namespace :deploy do
   desc "Make sure local git is in sync with remote."
@@ -57,6 +58,5 @@ namespace :deploy do
   end
 
   after :finishing,     :cleanup
-  # after :finishing,     :compile_ng4
   after :finishing,     :restart
 end
