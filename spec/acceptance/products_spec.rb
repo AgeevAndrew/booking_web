@@ -3,7 +3,7 @@
 require 'acceptance_helper'
 
 RSpec.resource 'Products', acceptance: true do
-  get '/api/products' do
+  get '/api/companies/:company_id/products' do
     let(:company) { create(:company) }
     let(:category) { create(:category) }
     let!(:products) { create_list(:product, 3, company: company, category: category) }
@@ -21,7 +21,7 @@ RSpec.resource 'Products', acceptance: true do
 
     example 'Find (errors)' do
       do_request(company_id: nil)
-      expect(status).to eq(200)
+      expect(status).to eq(404)
     end
   end
 end

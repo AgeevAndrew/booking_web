@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ProductRepresenter < ApplicationRepresenter
+  property :id
   property :company_id
   property :category_id
   property :title

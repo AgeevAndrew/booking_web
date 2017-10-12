@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
-  resources :accounts
-  resources :categories
-  resources :companies
-
   scope "/api", defaults: { format: :json } do
-    resources :products
-    resources :categories
-    resources :companies
+    resources :companies do
+      resources :products
+      resources :categories do
+        post 'find', on: :collection
+      end
+    end
     resources :accounts
   end
 end

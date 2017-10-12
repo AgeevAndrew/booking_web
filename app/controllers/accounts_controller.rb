@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   respond_to :json
-  skip_before_action :verify_authenticity_token
 
   # GET /accounts
   # GET /accounts.json

@@ -24,7 +24,7 @@ require 'rails_helper'
 # `rails-controller-testing` gem.
 
 RSpec.describe ProductsController, type: :controller do
-
+  let(:company) { create(:company) }
   # This should return the minimal set of attributes required to create a valid
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
@@ -44,7 +44,7 @@ RSpec.describe ProductsController, type: :controller do
   describe "GET #index" do
     it "returns a success response" do
       product = Product.create! valid_attributes
-      get :index, params: {}, session: valid_session
+      get :index, params: {company_id: company.id}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -52,14 +52,14 @@ RSpec.describe ProductsController, type: :controller do
   describe "GET #show" do
     it "returns a success response" do
       product = Product.create! valid_attributes
-      get :show, params: {id: product.to_param}, session: valid_session
+      get :show, params: {company_id: company.id, id: product.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
 
   describe "GET #new" do
     it "returns a success response" do
-      get :new, params: {}, session: valid_session
+      get :new, params: {company_id: company.id}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -67,7 +67,7 @@ RSpec.describe ProductsController, type: :controller do
   describe "GET #edit" do
     it "returns a success response" do
       product = Product.create! valid_attributes
-      get :edit, params: {id: product.to_param}, session: valid_session
+      get :edit, params: {company_id: company.id, id: product.to_param}, session: valid_session
       expect(response).to be_success
     end
   end
@@ -76,19 +76,19 @@ RSpec.describe ProductsController, type: :controller do
     context "with valid params" do
       it "creates a new Product" do
         expect {
-          post :create, params: {product: valid_attributes}, session: valid_session
+          post :create, params: {company_id: company.id, product: valid_attributes}, session: valid_session
         }.to change(Product, :count).by(1)
       end
 
       it "redirects to the created product" do
-        post :create, params: {product: valid_attributes}, session: valid_session
+        post :create, params: {company_id: company.id, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Product.last)
       end
     end
 
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'new' template)" do
-        post :create, params: {product: invalid_attributes}, session: valid_session
+        post :create, params: {company_id: company.id, product: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -102,14 +102,14 @@ RSpec.describe ProductsController, type: :controller do
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
-        put :update, params: {id: product.to_param, product: new_attributes}, session: valid_session
+        put :update, params: {company_id: company.id, id: product.to_param, product: new_attributes}, session: valid_session
         product.reload
         skip("Add assertions for updated state")
       end
 
       it "redirects to the product" do
         product = Product.create! valid_attributes
-        put :update, params: {id: product.to_param, product: valid_attributes}, session: valid_session
+        put :update, params: {company_id: company.id, id: product.to_param, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(product)
       end
     end
@@ -117,7 +117,7 @@ RSpec.describe ProductsController, type: :controller do
     context "with invalid params" do
       it "returns a success response (i.e. to display the 'edit' template)" do
         product = Product.create! valid_attributes
-        put :update, params: {id: product.to_param, product: invalid_attributes}, session: valid_session
+        put :update, params: {company_id: company.id, id: product.to_param, product: invalid_attributes}, session: valid_session
         expect(response).to be_success
       end
     end
@@ -127,13 +127,13 @@ RSpec.describe ProductsController, type: :controller do
     it "destroys the requested product" do
       product = Product.create! valid_attributes
       expect {
-        delete :destroy, params: {id: product.to_param}, session: valid_session
+        delete :destroy, params: {company_id: company.id, id: product.to_param}, session: valid_session
       }.to change(Product, :count).by(-1)
     end
 
     it "redirects to the products list" do
       product = Product.create! valid_attributes
-      delete :destroy, params: {id: product.to_param}, session: valid_session
+      delete :destroy, params: {company_id: company.id, id: product.to_param}, session: valid_session
       expect(response).to redirect_to(products_url)
     end
   end
