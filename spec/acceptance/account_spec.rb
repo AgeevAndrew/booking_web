@@ -37,7 +37,7 @@ RSpec.resource 'Account', acceptance: true do
 
     example 'Create' do
       do_request
-      expect(status).to eq(200)
+      expect(status).to eq(201)
     end
 
     example 'Create (errors)' do

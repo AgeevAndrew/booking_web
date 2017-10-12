@@ -28,12 +28,7 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    result, operation = Accounts::Create.run params
-    if result
-      render json: operation.to_json
-    else
-      render json: { errors: operation.errors.messages }, status: :unprocessable_entity
-    end
+    respond Accounts::Create, location: nil
   end
 
   # PATCH/PUT /accounts/1
