@@ -10,9 +10,16 @@ Product.delete_all
 Category.delete_all
 Company.delete_all
 
-Category.create(name: 'Pizza', icon_type: 'pizza', description: "God's meal")
-Category.create(name: 'Burger', icon_type: 'pburger', description: 'American pie')
-Category.create(name: 'Pasta', icon_type: 'pasta', description: 'Italiano food')
+Category.create(name: 'Бургеры', icon_type: 'icon_burger', description: '')
+Category.create(name: 'Крылышки', icon_type: 'icon_wing', description: '')
+Category.create(name: 'Ножки', icon_type: 'icon_leg', description: '')
+Category.create(name: 'Картофель фри и чипсы', icon_type: 'icon_chips', description: '')
+Category.create(name: 'Салаты', icon_type: 'icon_salat', description: '')
+Category.create(name: 'Соусы', icon_type: 'icon_sauce', description: '')
+Category.create(name: 'Супы', icon_type: 'icon_soup', description: '')
+Category.create(name: 'Напитки', icon_type: 'icon_drinks', description: '')
+Category.create(name: 'Наборы', icon_type: 'icon_set', description: '')
+
 
 Company.create(name: 'Pied Piper',
                categories: Category.pluck(:id),
