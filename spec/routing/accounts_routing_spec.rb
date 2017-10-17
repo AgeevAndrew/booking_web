@@ -23,12 +23,8 @@ RSpec.describe AccountsController, type: :routing do
       expect(:post => "/api/accounts").to route_to("accounts#create", format: :json)
     end
 
-    it "routes to #update via PUT" do
-      expect(:put => "/api/accounts/1").to route_to("accounts#update", :id => "1", format: :json)
-    end
-
-    it "routes to #update via PATCH" do
-      expect(:patch => "/api/accounts/1").to route_to("accounts#update", :id => "1", format: :json)
+    it "routes to #update via POST" do
+      expect(:post => "/api/accounts/1/update").to route_to("accounts#update", :id => "1", format: :json)
     end
 
     it "routes to #destroy" do

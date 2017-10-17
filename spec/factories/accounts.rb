@@ -9,12 +9,12 @@ FactoryGirl.define do
     addresses do
       [
         {
-          title: Faker::Lorem.unique.word, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
+          title: Faker::Space.unique.galaxy, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
           house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
           floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
         },
         {
-          title: Faker::Lorem.unique.word, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
+          title: Faker::Space.unique.galaxy, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
           house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
           floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
         },

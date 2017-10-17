@@ -34,15 +34,16 @@ class AccountsController < ApplicationController
   # PATCH/PUT /accounts/1
   # PATCH/PUT /accounts/1.json
   def update
-    respond_to do |format|
-      if @account.update(account_params)
-        format.html { redirect_to @account, notice: 'Account was successfully updated.' }
-        format.json { render :show, status: :ok, location: @account }
-      else
-        format.html { render :edit }
-        format.json { render json: @account.errors, status: :unprocessable_entity }
-      end
-    end
+    respond Accounts::Update, location: nil
+    # respond_to do |format|
+    #   if @account.update(account_params)
+    #     format.html { redirect_to @account, notice: 'Account was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @account }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @account.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /accounts/1

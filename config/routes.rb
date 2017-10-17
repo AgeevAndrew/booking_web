@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :companies
     resources :products
     resources :categories
-    resources :accounts
+    resources :accounts, except: :update do
+      post 'update', on: :member
+    end
   end
 end
