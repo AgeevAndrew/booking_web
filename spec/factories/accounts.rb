@@ -1,8 +1,24 @@
+# frozen_string_literal: true
+
 FactoryGirl.define do
   factory :account do
-    name "MyString"
-    phone "MyString"
-    email "MyString"
-    addresses ""
+    id { SecureRandom.uuid }
+    name Faker::Name.name_with_middle
+    phone Faker::PhoneNumber.cell_phone
+    email Faker::Internet.email
+    addresses do
+      [
+        {
+          title: Faker::Lorem.unique.word, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
+          house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
+          floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
+        },
+        {
+          title: Faker::Lorem.unique.word, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
+          house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
+          floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
+        },
+      ]
+    end
   end
 end
