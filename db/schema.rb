@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171005063243) do
     t.text "description"
     t.string "photo"
     t.jsonb "main_options", default: [], null: false, array: true
-    t.jsonb "additional_info", default: "{}", null: false
+    t.jsonb "additional_info", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id", "company_id"], name: "index_products_on_category_id_and_company_id"

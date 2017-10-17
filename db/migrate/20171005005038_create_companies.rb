@@ -26,7 +26,7 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
       t.text :description
       t.string :photo
       t.column :main_options, 'jsonb[]', null: false, default: '{}'
-      t.jsonb :additional_info, null: false, default: '{}'
+      t.column :additional_info, 'jsonb[]', null: false, default: '{}'
 
       t.timestamps
     end

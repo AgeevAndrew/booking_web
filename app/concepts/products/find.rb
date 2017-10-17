@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class Products::Find < ApplicationOperation
-  contract Forms::FindForm
-
   representer Representers::ProductsRepresenter
 
   Facade = Struct.new(
@@ -14,10 +12,8 @@ class Products::Find < ApplicationOperation
   end
 
   def process(params)
-    validate(params) do
-      @result = Product.where(company_id: contract.company_id)
-      @result = @result.where(category_id: contract.category_id) if contract.category_id.present?
-      @result
-    end
+    @result = Product.all
+    @result = @result.where(company_id: params[:company_id]) if params[:company_id].present?
+    @result = @result.where(category_id: params[:category_id]) if params[:category_id].present?
   end
 end

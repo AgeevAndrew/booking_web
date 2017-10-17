@@ -9,17 +9,15 @@ FactoryGirl.define do
     photo Faker::Internet.url
     main_options do
       [
-        {
-          Faker::Food.unique.measurement => Faker::Number.unique.number(2),
-          Faker::Food.unique.measurement => Faker::Number.unique.number(2),
-        },
+        { name: Faker::Food.unique.measurement, cost: Faker::Number.unique.number(2) },
+        { name: Faker::Food.unique.measurement, cost: Faker::Number.unique.number(2) },
       ]
     end
     additional_info do
-      {
-        Faker::Food.unique.ingredient => Faker::Number.unique.number(2),
-        Faker::Food.unique.ingredient => Faker::Number.unique.number(2),
-      }
+      [
+        { name: Faker::Food.unique.ingredient, cost: Faker::Number.unique.number(2) },
+        { name: Faker::Food.unique.ingredient, cost: Faker::Number.unique.number(2) },
+      ]
     end
   end
 end

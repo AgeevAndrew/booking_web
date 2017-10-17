@@ -5,14 +5,15 @@ class CategoriesController < ApplicationController
 
   respond_to :json
 
-  def find
-    respond Categories::Find, location: nil
-  end
-
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    result, operation = Categories::Find.run params
+    if result
+      render json: operation.to_json
+    else
+      render json: { errors: operation.contract.errors.messages }
+    end
   end
 
   # GET /categories/1

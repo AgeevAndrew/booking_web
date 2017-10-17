@@ -12,10 +12,11 @@ class Categories::Find < ApplicationOperation
   end
 
   def model!(params)
-    Company.find params[:company_id]
+    Company.find_by(id: params[:company_id])
   end
 
   def process(*)
-    @result = Category.where(id: model.categories)
+    @result = Category.all
+    @result = @result.where(id: model.categories) if model.present?
   end
 end

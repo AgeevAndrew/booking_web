@@ -20,41 +20,39 @@ Category.create(name: 'Супы', icon_type: 'icon_soup', description: '')
 Category.create(name: 'Напитки', icon_type: 'icon_drinks', description: '')
 Category.create(name: 'Наборы', icon_type: 'icon_set', description: '')
 
-
 Company.create(name: 'Pied Piper',
                categories: Category.pluck(:id),
                contact_info: { phone: '01234567890', email: 'a@b.com' })
-
 
 Product.create(
   category_id: Category.second.id,
   company_id: Company.first.id,
   title: 'Chikenburger',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-  main_options: [{ main: 150 }],
-  additional_info: { 'salad' => 40, 'sour-cream' => 30, 'bacon' => 50 },
+  main_options: [{ name: nil, cost: 150 }],
+  additional_info: [{ name: 'salad', cost: 40 }, { name: 'sour-cream', cost: 30 }, { name: 'bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.second.id,
   company_id: Company.first.id,
   title: 'Cheeseburger',
   description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-  main_options: [{ chiken: 200 }, { beef: 300 }, { pork: 300 }],
-  additional_info: { 'salad' => 40, 'bacon' => 50 },
+  main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
+  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.second.id,
   company_id: Company.first.id,
   title: 'Peperoni',
   description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
-  main_options: [{ '30 cm' => 500 }, { '45 cm' => 750 }],
-  additional_info: { 'tomato' => 70 },
+  main_options: [{ name: '30 cm', cost: 500 }, { name: '45 cm', cost: 750 }],
+  additional_info: [{ name: 'tomato', cost: 70 }],
 )
 Product.create(
   category_id: Category.second.id,
   company_id: Company.first.id,
   title: 'Quadro formajo',
   description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  main_options: [{ '30 cm' => 450 }, { '45 cm' => 700 }],
-  additional_info: { 'tomato' => 40 },
+  main_options: [{ name: '30 cm', cost: 450 }, { name: '45 cm', cost: 700 }],
+  additional_info: [{ name: 'tomato', cost: 40 }],
 )

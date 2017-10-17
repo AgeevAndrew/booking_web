@@ -19,10 +19,5 @@ RSpec.describe Categories::Find do
     context 'success' do
       it { should be true }
     end
-
-    context 'fail' do
-      let(:company_id) { nil }
-      it { expect { operation_run }.to raise_error(ActiveRecord::RecordNotFound) }
-    end
   end
 end
