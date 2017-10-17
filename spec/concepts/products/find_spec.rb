@@ -22,11 +22,6 @@ module Products
       context 'success' do
         it { should be true }
       end
-
-      context 'fail' do
-        let(:company_id) { nil }
-        it { should be false }
-      end
     end
   end
 end

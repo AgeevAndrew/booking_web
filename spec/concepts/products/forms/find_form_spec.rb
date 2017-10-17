@@ -26,7 +26,7 @@ module Products::Forms
       end
 
       context 'company_id' do
-        it { expect(subject[:company_id]).to include "can't be blank" }
+        it { expect(subject[:company_id]).to be_blank }
       end
 
       context 'category_id' do
