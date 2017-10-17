@@ -11,6 +11,7 @@ Category.delete_all
 Company.delete_all
 
 Category.create(name: 'Бургеры', icon_type: 'icon_burger', description: '')
+Category.create(name: 'Пицца', icon_type: 'icon_pizza', description: '')
 Category.create(name: 'Крылышки', icon_type: 'icon_wing', description: '')
 Category.create(name: 'Ножки', icon_type: 'icon_leg', description: '')
 Category.create(name: 'Картофель фри и чипсы', icon_type: 'icon_chips', description: '')
@@ -25,18 +26,38 @@ Company.create(name: 'Pied Piper',
                contact_info: { phone: '01234567890', email: 'a@b.com' })
 
 Product.create(
-  category_id: Category.second.id,
+  category_id: Category.first.id,
   company_id: Company.first.id,
   title: 'Chikenburger',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger1.png',
   main_options: [{ name: nil, cost: 150 }],
   additional_info: [{ name: 'salad', cost: 40 }, { name: 'sour-cream', cost: 30 }, { name: 'bacon', cost: 50 }],
 )
 Product.create(
-  category_id: Category.second.id,
+  category_id: Category.first.id,
   company_id: Company.first.id,
   title: 'Cheeseburger',
   description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger2.png',
+  main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
+  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
+)
+Product.create(
+  category_id: Category.first.id,
+  company_id: Company.first.id,
+  title: 'Chiliburger',
+  description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger3.png',
+  main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
+  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
+)
+Product.create(
+  category_id: Category.first.id,
+  company_id: Company.first.id,
+  title: 'Big Mac',
+  description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger4.png',
   main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
   additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
 )
@@ -45,6 +66,7 @@ Product.create(
   company_id: Company.first.id,
   title: 'Peperoni',
   description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger5.png',
   main_options: [{ name: '30 cm', cost: 500 }, { name: '45 cm', cost: 750 }],
   additional_info: [{ name: 'tomato', cost: 70 }],
 )
@@ -53,6 +75,7 @@ Product.create(
   company_id: Company.first.id,
   title: 'Quadro formajo',
   description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+  photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger6.png',
   main_options: [{ name: '30 cm', cost: 450 }, { name: '45 cm', cost: 700 }],
   additional_info: [{ name: 'tomato', cost: 40 }],
 )
