@@ -10,5 +10,6 @@ Rails.application.routes.draw do
 
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
+    resources :orders
   end
 end

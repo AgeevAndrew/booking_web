@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 20171024031104) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "company_id"
+    t.bigint "account_id"
+    t.decimal "total_cost"
+    t.string "address_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_orders_on_account_id"
+    t.index ["company_id"], name: "index_orders_on_company_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.bigint "category_id"
     t.bigint "company_id"
