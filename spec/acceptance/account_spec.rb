@@ -33,6 +33,7 @@ RSpec.resource 'Account', acceptance: true do
           street: street,
           house: house,
           office: office,
+          entrance: entrance,
           floor: floor,
           code: code,
         },
@@ -48,6 +49,7 @@ RSpec.resource 'Account', acceptance: true do
     let(:street) { Faker::Address.street_name }
     let(:house) { Faker::Address.building_number }
     let(:office) { Faker::Number.number(2) }
+    let(:entrance) { Faker::Number.between(1, 4) }
     let(:floor) { Faker::Number.number(1) }
     let(:code) { office }
 
@@ -79,6 +81,7 @@ RSpec.resource 'Account', acceptance: true do
           street: street,
           house: house,
           office: office,
+          entrance: entrance,
           floor: floor,
           code: code,
         },
@@ -94,6 +97,7 @@ RSpec.resource 'Account', acceptance: true do
     let(:street) { Faker::Address.street_name }
     let(:house) { Faker::Address.building_number }
     let(:office) { Faker::Number.number(2) }
+    let(:entrance) { Faker::Number.between(1, 4) }
     let(:floor) { Faker::Number.number(1) }
     let(:code) { office }
 
