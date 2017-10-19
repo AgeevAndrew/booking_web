@@ -21,6 +21,7 @@ module Accounts::Forms
       property :street
       property :house
       property :office
+      property :entrance
       property :floor
       property :code
 

@@ -18,6 +18,7 @@ module Accounts::Forms
           house: house,
           office: office,
           floor: floor,
+          entrance: entrance,
           code: code,
         }],
       }
@@ -33,6 +34,7 @@ module Accounts::Forms
     let(:house) { Faker::Address.building_number }
     let(:office) { Faker::Number.number(2) }
     let(:floor) { Faker::Number.number(1) }
+    let(:entrance) { Faker::Number.between(1, 4) }
     let(:code) { office }
 
     let(:form) { described_class.new(model) }
