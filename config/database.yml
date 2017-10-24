@@ -18,7 +18,8 @@ staging:
   <<: *default
   database: booking_web
   password: booker-web
-
+  host: 23.101.67.216
+  
 # production:
 #   <<: *default
 #   database: booking_web_production

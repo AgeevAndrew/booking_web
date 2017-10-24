@@ -9,6 +9,7 @@
 Product.delete_all
 Category.delete_all
 Company.delete_all
+Account.delete_all
 
 Category.create(name: 'Бургеры', icon_type: 'icon_burger', description: '')
 Category.create(name: 'Пицца', icon_type: 'icon_pizza', description: '')
@@ -32,8 +33,8 @@ Product.create(
   brief: 'Chicken for slim ckiks',
   description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger1.png',
-  main_options: [{ name: nil, cost: 150 }],
-  additional_info: [{ name: 'salad', cost: 40 }, { name: 'sour-cream', cost: 30 }, { name: 'bacon', cost: 50 }],
+  main_options: [{ name: 'beef', cost: 150 }],
+  additional_info: [{ name: '🥗 salad', cost: 40 }, { name: '😋 sour-cream', cost: 30 }, { name: '🥓 bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.first.id,
@@ -43,7 +44,7 @@ Product.create(
   description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger2.png',
   main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
-  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
+  additional_info: [{ name: '🥗 salad', cost: 40 }, { name: '🥓 bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.first.id,
@@ -53,7 +54,7 @@ Product.create(
   description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger3.png',
   main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
-  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
+  additional_info: [{ name: '🥗 salad', cost: 40 }, { name: '🥓 bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.first.id,
@@ -63,7 +64,7 @@ Product.create(
   description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger4.png',
   main_options: [{ name: 'chiken', cost: 200 }, { name: 'beef', cost: 300 }, { name: 'pork', cost: 300 }],
-  additional_info: [{ name: 'salad', cost: 40 }, { name: 'bacon', cost: 50 }],
+  additional_info: [{ name: '🥗 salad', cost: 40 }, { name: '🥓 bacon', cost: 50 }],
 )
 Product.create(
   category_id: Category.second.id,
@@ -73,7 +74,7 @@ Product.create(
   description: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger5.png',
   main_options: [{ name: '30 cm', cost: 500 }, { name: '45 cm', cost: 750 }],
-  additional_info: [{ name: 'tomato', cost: 70 }],
+  additional_info: [{ name: '🍅 tomato', cost: 70 }],
 )
 Product.create(
   category_id: Category.second.id,
@@ -83,5 +84,36 @@ Product.create(
   description: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
   photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/burger6.png',
   main_options: [{ name: '30 cm', cost: 450 }, { name: '45 cm', cost: 700 }],
-  additional_info: [{ name: 'tomato', cost: 40 }],
+  additional_info: [{ name: '🍅 tomato', cost: 40 }],
+)
+
+Account.create(
+  id: 'eb5378e4-48e6-4d03-b954-d00739b8c8ff',
+  name: 'Ilene Pearline Boyle',
+  phone: '(409) 941-2819',
+  email: 'domenick@padberg.io',
+  addresses: [
+    {
+      city: 'Астрахань',
+      code: '71',
+      floor: '4',
+      house: '144',
+      title: 'work',
+      entrance: '4',
+      office: '90',
+      street: 'Комарова пр.'
+    },
+    {
+      city: 'Санкт-Петербург',
+      code: '75',
+      floor: '6',
+      house: '100',
+      title: 'home',
+      entrance: '2',
+      office: '13',
+      street: 'пр. Южная'
+    }
+  ],
+  created_at: '2017-10-17T04:42:52.790Z',
+  updated_at: '2017-10-17T04:42:52.790Z',
 )
