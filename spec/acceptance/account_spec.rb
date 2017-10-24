@@ -96,4 +96,18 @@ RSpec.resource 'Account', acceptance: true do
       expect(status).to eq(422)
     end
   end
+
+  delete '/api/accounts/:account_id/addresses/:id' do
+    parameter :account_id, required: true
+    parameter :id, required: true
+
+    let(:account) { create(:account, :with_addresses) }
+    let(:account_id) { account.id }
+    let(:id) { account.address_ids.sample }
+
+    example 'Destroy address' do
+      do_request
+      expect(status).to eq(204)
+    end
+  end
 end
