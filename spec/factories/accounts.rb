@@ -11,12 +11,12 @@ FactoryGirl.define do
         {
           title: Faker::Space.unique.galaxy, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
           house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
-          floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
+          entrance: Faker::Number.number(1), floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
         },
         {
           title: Faker::Space.unique.galaxy, city: Faker::Address.unique.city, street: Faker::Address.unique.street_name,
           house: Faker::Address.unique.building_number, office: Faker::Number.unique.number(2),
-          floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
+          entrance: Faker::Number.number(1), floor: Faker::Number.unique.number(1), code: Faker::Number.unique.number(2)
         },
       ]
     end

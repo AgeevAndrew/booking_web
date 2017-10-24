@@ -5,7 +5,8 @@ FactoryGirl.define do
     association :category
     association :company
     title Faker::Food.dish
-    description Faker::Lorem.sentence
+    brief Faker::Lorem.sentence(3, true, 4)
+    description Faker::Lorem.paragraph
     photo Faker::Internet.url
     main_options do
       [
