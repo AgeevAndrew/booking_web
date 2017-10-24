@@ -10,6 +10,7 @@ Product.delete_all
 Category.delete_all
 Company.delete_all
 Account.delete_all
+Address.delete_all
 
 Category.create(name: 'Бургеры', icon_type: 'icon_burger', description: '')
 Category.create(name: 'Пицца', icon_type: 'icon_pizza', description: '')
@@ -87,33 +88,34 @@ Product.create(
   additional_info: [{ name: '🍅 tomato', cost: 40 }],
 )
 
+Address.create(
+  city: 'Астрахань',
+  code: '71',
+  floor: '4',
+  house: '144',
+  title: 'work',
+  entrance: '4',
+  office: '90',
+  street: 'Комарова пр.',
+)
+
+Address.create(
+  city: 'Санкт-Петербург',
+  code: '75',
+  floor: '6',
+  house: '100',
+  title: 'home',
+  entrance: '2',
+  office: '13',
+  street: 'пр. Южная',
+)
+
 Account.create(
   id: 'eb5378e4-48e6-4d03-b954-d00739b8c8ff',
   name: 'Ilene Pearline Boyle',
   phone: '(409) 941-2819',
   email: 'domenick@padberg.io',
-  addresses: [
-    {
-      city: 'Астрахань',
-      code: '71',
-      floor: '4',
-      house: '144',
-      title: 'work',
-      entrance: '4',
-      office: '90',
-      street: 'Комарова пр.'
-    },
-    {
-      city: 'Санкт-Петербург',
-      code: '75',
-      floor: '6',
-      house: '100',
-      title: 'home',
-      entrance: '2',
-      office: '13',
-      street: 'пр. Южная'
-    }
-  ],
+  address_ids: Address.pluck(:id),
   created_at: '2017-10-17T04:42:52.790Z',
   updated_at: '2017-10-17T04:42:52.790Z',
 )

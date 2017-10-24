@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :categories
     resources :accounts, except: :update do
       post 'update', on: :member
+
+      resources :addresses, only: [:index, :create, :update, :destroy]
     end
   end
 end
