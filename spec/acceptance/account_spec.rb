@@ -97,6 +97,43 @@ RSpec.resource 'Account', acceptance: true do
     end
   end
 
+  patch '/api/accounts/:account_id/addresses/:id' do
+    parameter :account_id, required: true
+    parameter :id, required: true
+
+    parameter :title, scope: :address, required: true
+    parameter :city, scope: :address, required: true
+    parameter :street, scope: :address, required: true
+    parameter :house, scope: :address, required: true
+    parameter :office, scope: :address
+    parameter :floor, scope: :address
+    parameter :entrance, scope: :address
+    parameter :code, scope: :address
+
+    let(:account) { create(:account, :with_addresses) }
+    let(:account_id) { account.id }
+    let(:id) { account.address_ids.sample }
+
+    let(:title) { Faker::Lorem.word }
+    let(:city) { Faker::Address.city }
+    let(:street) { Faker::Address.street_name }
+    let(:house) { Faker::Address.building_number }
+    let(:office) { Faker::Number.number(2) }
+    let(:floor) { Faker::Number.number(1) }
+    let(:entrance) { Faker::Number.between(1, 4) }
+    let(:code) { office }
+
+    example 'Update address' do
+      do_request
+      expect(status).to eq(204)
+    end
+
+    example 'Update address (errors)' do
+      do_request(address: { title: nil, street: nil })
+      expect(status).to eq(422)
+    end
+  end
+
   delete '/api/accounts/:account_id/addresses/:id' do
     parameter :account_id, required: true
     parameter :id, required: true
