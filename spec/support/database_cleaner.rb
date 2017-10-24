@@ -4,7 +4,7 @@
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
-  KEEP_TABLES = %w[].freeze
+  KEEP_TABLES = %w[spatial_ref_sys].freeze
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

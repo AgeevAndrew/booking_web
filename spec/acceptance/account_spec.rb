@@ -63,4 +63,37 @@ RSpec.resource 'Account', acceptance: true do
       expect(status).to eq(422)
     end
   end
+
+  post '/api/accounts/:account_id/addresses' do
+    parameter :account_id, required: true
+
+    parameter :title, scope: :address, required: true
+    parameter :city, scope: :address, required: true
+    parameter :street, scope: :address, required: true
+    parameter :house, scope: :address, required: true
+    parameter :office, scope: :address
+    parameter :floor, scope: :address
+    parameter :entrance, scope: :address
+    parameter :code, scope: :address
+
+    let(:account_id) { create(:account).id }
+    let(:title) { Faker::Lorem.word }
+    let(:city) { Faker::Address.city }
+    let(:street) { Faker::Address.street_name }
+    let(:house) { Faker::Address.building_number }
+    let(:office) { Faker::Number.number(2) }
+    let(:floor) { Faker::Number.number(1) }
+    let(:entrance) { Faker::Number.between(1, 4) }
+    let(:code) { office }
+
+    example 'Add address' do
+      do_request
+      expect(status).to eq(201)
+    end
+
+    example 'Add address (errors)' do
+      do_request(address: { title: nil, street: nil })
+      expect(status).to eq(422)
+    end
+  end
 end
