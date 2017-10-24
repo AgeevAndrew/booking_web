@@ -15,19 +15,6 @@ module Accounts::Forms
       super Phone.normalize(value)
     end
 
-    collection :addresses, field: :hash, populate_if_empty: Hash do
-      property :title
-      property :city
-      property :street
-      property :house
-      property :office
-      property :entrance
-      property :floor
-      property :code
-
-      validates :title, :city, :street, :house, presence: true
-    end
-
     validates :name, :phone, :email, presence: true
 
     validates :phone, format: { with: Phone::REGEX }

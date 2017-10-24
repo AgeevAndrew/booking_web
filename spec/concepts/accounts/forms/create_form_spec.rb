@@ -11,16 +11,6 @@ module Accounts::Forms
         name: name,
         phone: phone,
         email: email,
-        addresses: [{
-          title: title,
-          city: city,
-          street: street,
-          house: house,
-          office: office,
-          floor: floor,
-          entrance: entrance,
-          code: code,
-        }],
       }
     end
 
@@ -28,14 +18,6 @@ module Accounts::Forms
     let(:name) { Faker::Name.name_with_middle }
     let(:phone) { Faker::PhoneNumber.phone_number }
     let(:email) { Faker::Internet.email }
-    let(:title) { Faker::Lorem.word }
-    let(:city) { Faker::Address.city }
-    let(:street) { Faker::Address.street_name }
-    let(:house) { Faker::Address.building_number }
-    let(:office) { Faker::Number.number(2) }
-    let(:floor) { Faker::Number.number(1) }
-    let(:entrance) { Faker::Number.between(1, 4) }
-    let(:code) { office }
 
     let(:form) { described_class.new(model) }
     let(:form_validate) { form.validate(params) }
@@ -50,13 +32,6 @@ module Accounts::Forms
         context field.to_s do
           let(field) { nil }
           it { expect(subject[field]).to include "can't be blank" }
-        end
-      end
-
-      %i[title city street house].each do |field|
-        context field.to_s do
-          let(field) { nil }
-          it { expect(subject[:"addresses.#{field}"]).to include "can't be blank" }
         end
       end
 

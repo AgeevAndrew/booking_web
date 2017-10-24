@@ -23,35 +23,11 @@ RSpec.resource 'Account', acceptance: true do
     parameter :name, required: true
     parameter :email, required: true
     parameter :phone, required: true
-    parameter :addresses, required: true
-
-    let(:addresses) do
-      [
-        {
-          title: title,
-          city: city,
-          street: street,
-          house: house,
-          office: office,
-          entrance: entrance,
-          floor: floor,
-          code: code,
-        },
-      ]
-    end
 
     # default_params
     let(:name) { Faker::Name.name_with_middle }
     let(:phone) { Faker::PhoneNumber.phone_number }
     let(:email) { Faker::Internet.email }
-    let(:title) { Faker::Lorem.word }
-    let(:city) { Faker::Address.city }
-    let(:street) { Faker::Address.street_name }
-    let(:house) { Faker::Address.building_number }
-    let(:office) { Faker::Number.number(2) }
-    let(:entrance) { Faker::Number.between(1, 4) }
-    let(:floor) { Faker::Number.number(1) }
-    let(:code) { office }
 
     example 'Create' do
       do_request
@@ -69,37 +45,13 @@ RSpec.resource 'Account', acceptance: true do
     parameter :name, required: true
     parameter :email, required: true
     parameter :phone, required: true
-    parameter :addresses, required: true
 
     let(:id) { create(:account).id }
-
-    let(:addresses) do
-      [
-        {
-          title: title,
-          city: city,
-          street: street,
-          house: house,
-          office: office,
-          entrance: entrance,
-          floor: floor,
-          code: code,
-        },
-      ]
-    end
 
     # default_params
     let(:name) { Faker::Name.name_with_middle }
     let(:phone) { Faker::PhoneNumber.phone_number }
     let(:email) { Faker::Internet.email }
-    let(:title) { Faker::Lorem.word }
-    let(:city) { Faker::Address.city }
-    let(:street) { Faker::Address.street_name }
-    let(:house) { Faker::Address.building_number }
-    let(:office) { Faker::Number.number(2) }
-    let(:entrance) { Faker::Number.between(1, 4) }
-    let(:floor) { Faker::Number.number(1) }
-    let(:code) { office }
 
     example 'Update' do
       do_request
