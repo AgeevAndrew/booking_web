@@ -20,11 +20,13 @@ RSpec.resource 'Account', acceptance: true do
   end
 
   post '/api/accounts' do
+    parameter :id, required: true
     parameter :name, required: true
     parameter :email, required: true
     parameter :phone, required: true
 
     # default_params
+    let(:id) { SecureRandom.uuid }
     let(:name) { Faker::Name.name_with_middle }
     let(:phone) { Faker::PhoneNumber.phone_number }
     let(:email) { Faker::Internet.email }
@@ -35,7 +37,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Create (errors)' do
-      do_request(name: nil, addresses: [{ title: nil }])
+      do_request(name: nil)
       expect(status).to eq(422)
     end
   end
@@ -59,7 +61,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Update (errors)' do
-      do_request(name: nil, addresses: [{ title: nil }])
+      do_request(name: nil)
       expect(status).to eq(422)
     end
   end
