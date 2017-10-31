@@ -19,6 +19,10 @@ staging:
   database: booking_web
   password: booker-web
   host: 23.101.67.216
+  variables:
+    tcp_keepalives_idle: 60
+    tcp_keepalives_interval: 60
+    tcp_keepalives_count: 100
   
 # production:
 #   <<: *default
