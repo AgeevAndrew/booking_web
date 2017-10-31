@@ -16,16 +16,14 @@ module Accounts::Addresses
       {
         account_id: account.id,
         id: id,
-        address: {
-          title: title,
-          city: city,
-          street: street,
-          house: house,
-          office: office,
-          entrance: entrance,
-          floor: floor,
-          code: code,
-        },
+        title: title,
+        city: city,
+        street: street,
+        house: house,
+        office: office,
+        entrance: entrance,
+        floor: floor,
+        code: code,
       }
     end
 

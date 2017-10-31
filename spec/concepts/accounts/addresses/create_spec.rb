@@ -14,16 +14,14 @@ module Accounts::Addresses
     let(:params) do
       {
         account_id: model.id,
-        address: {
-          title: title,
-          city: city,
-          street: street,
-          house: house,
-          office: office,
-          entrance: entrance,
-          floor: floor,
-          code: code,
-        }
+        title: title,
+        city: city,
+        street: street,
+        house: house,
+        office: office,
+        entrance: entrance,
+        floor: floor,
+        code: code,
       }
     end
 

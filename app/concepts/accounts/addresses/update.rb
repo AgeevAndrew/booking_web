@@ -11,7 +11,7 @@ module Accounts::Addresses
     end
 
     def process(params)
-      validate(params[:address]) do
+      validate(params) do
         contract.save
       end
     end

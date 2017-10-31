@@ -67,14 +67,14 @@ RSpec.resource 'Account', acceptance: true do
   post '/api/accounts/:account_id/addresses' do
     parameter :account_id, required: true
 
-    parameter :title, scope: :address, required: true
-    parameter :city, scope: :address, required: true
-    parameter :street, scope: :address, required: true
-    parameter :house, scope: :address, required: true
-    parameter :office, scope: :address
-    parameter :floor, scope: :address
-    parameter :entrance, scope: :address
-    parameter :code, scope: :address
+    parameter :title, required: true
+    parameter :city, required: true
+    parameter :street,  required: true
+    parameter :house, required: true
+    parameter :office
+    parameter :floor
+    parameter :entrance
+    parameter :code
 
     let(:account_id) { create(:account).id }
     let(:title) { Faker::Lorem.word }
@@ -92,7 +92,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Add address (errors)' do
-      do_request(address: { title: nil, street: nil })
+      do_request(title: nil, street: nil)
       expect(status).to eq(422)
     end
   end
@@ -101,14 +101,14 @@ RSpec.resource 'Account', acceptance: true do
     parameter :account_id, required: true
     parameter :id, required: true
 
-    parameter :title, scope: :address, required: true
-    parameter :city, scope: :address, required: true
-    parameter :street, scope: :address, required: true
-    parameter :house, scope: :address, required: true
-    parameter :office, scope: :address
-    parameter :floor, scope: :address
-    parameter :entrance, scope: :address
-    parameter :code, scope: :address
+    parameter :title, required: true
+    parameter :city, required: true
+    parameter :street, required: true
+    parameter :house, required: true
+    parameter :office
+    parameter :floor
+    parameter :entrance
+    parameter :code
 
     let(:account) { create(:account, :with_addresses) }
     let(:account_id) { account.id }
@@ -129,7 +129,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Update address (errors)' do
-      do_request(address: { title: nil, street: nil })
+      do_request(title: nil, street: nil)
       expect(status).to eq(422)
     end
   end

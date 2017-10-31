@@ -11,7 +11,7 @@ module Accounts::Addresses
     end
 
     def process(params)
-      validate(params[:address]) do
+      validate(params) do
         model.address_ids << address_id
         model.save
       end
