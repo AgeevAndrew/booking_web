@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 require 'disposable/twin/property/hash'
+require 'disposable/twin/parent'
 
 module Orders::Forms
   class CreateForm < Reform::Form
     include Disposable::Twin::Property::Hash
+    feature Disposable::Twin::Parent
+
     model Order
 
     property :company_id
@@ -12,42 +15,45 @@ module Orders::Forms
     property :address_id, virtual: true
     property :total_cost
 
-    collection :products do
-      property :id
+    collection :order_products, populate_if_empty: OrderProduct do
+      include Disposable::Twin::Property::Hash
+
+      property :product_id
       property :main_option
 
-      # collection :ingridients do
-      #   property :qty
-      #   property :name
-      #
-      #   validates :qty, :name, presence: true
-      #   validate :ingridient_exist
-      #   def ingridient_exist
-      #     return if parent.product.blank?
-      #     errors.add(:name, :invalid) if parent.product_ingridients.select { |i| i[:name] == name }.blank?
-      #   end
-      # end
+      collection :ingredients, field: :hash, populate_if_empty: Hash do
+        property :qty
+        property :name
 
-      # validates :id, :main_option, presence: true
+        validates :qty, :name, presence: true
+        validate :ingridient_exist
+        def ingridient_exist
+          return if name.blank? || parent.product.blank?
+          errors.add(:name, :invalid) if parent.product_ingredients.select { |i| i['name'] == name }.blank?
+        end
+      end
 
-      # validate :product_exists
-      # def product_exists
-      #   errors.add(:id, :invalid) if product.blank?
-      # end
+      validates :product_id, :main_option, presence: true
 
-      # validate :main_option_exists
-      # def product_valid
-      #   return if product.blank?
-      #   errors.add(:main_option, :invalid) if product.main_options[main_option].blank?
-      # end
+      validate :product_exists
+      def product_exists
+        return if product_id.blank?
+        errors.add(:product_id, :invalid) if product.blank?
+      end
 
-      # def product
-      #   @product ||= Product.find_by(id: id)
-      # end
-      #
-      # def product_ingridients
-      #   @product_ingridients ||= product.additional_info
-      # end
+      validate :main_option_exists
+      def main_option_exists
+        return if product.blank? || main_option.blank?
+        errors.add(:main_option, :invalid) if product.main_options.select { |option| option['name'] == main_option }.blank?
+      end
+
+      def product
+        @product ||= Product.find_by(id: product_id)
+      end
+
+      def product_ingredients
+        product.additional_info
+      end
     end
 
     validates :company_id, presence: true

@@ -56,6 +56,16 @@ ActiveRecord::Schema.define(version: 20171030230618) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "order_id", null: false
+    t.string "main_option"
+    t.decimal "total_cost", precision: 18, scale: 2, default: "0.0", null: false
+    t.jsonb "ingredients"
+    t.index ["order_id"], name: "index_order_products_on_order_id"
+    t.index ["product_id"], name: "index_order_products_on_product_id"
+  end
+
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "company_id"
     t.bigint "account_id"
@@ -63,7 +73,6 @@ ActiveRecord::Schema.define(version: 20171030230618) do
     t.string "address_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "products", array: true
     t.index ["account_id"], name: "index_orders_on_account_id"
     t.index ["company_id"], name: "index_orders_on_company_id"
   end

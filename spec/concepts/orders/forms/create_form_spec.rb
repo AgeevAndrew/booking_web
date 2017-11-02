@@ -11,7 +11,7 @@ module Orders::Forms
         company_id: company_id,
         account_id: account_id,
         address_id: address_id,
-        products: products,
+        order_products: products,
       }
     end
 
@@ -70,37 +70,72 @@ module Orders::Forms
         let(:products) do
           [
             product1,
-            # product2,
+            product2,
           ]
         end
 
         let(:product1) do
           {
-            id: product_id,
+            product_id: product_id,
             main_option: product_main_option,
-            # ingridients: [],
           }
         end
 
-        # let(:product2) do
-        #   {
-        #     id: product_id2,
-        #     main_option: product_main_option2,
-        #     ingridients: [
-        #       qty: ingridient_qty,
-        #       name: ingridient_name,
-        #     ],
-        #   }
-        # end
+        let(:product2) do
+          {
+            product_id: product_id2,
+            main_option: product_main_option2,
+            ingredients: [ingredient1, ingredient2],
+          }
+        end
 
         # default params
         let(:product) { create(:product, company_id: company_id) }
         let(:product_id) { product.id }
         let(:product_main_option) { product.main_options[0]['name'] }
 
-        context 'id' do
+        let(:another_product) { create(:product, company_id: company_id) }
+        let(:product_id2) { another_product.id }
+        let(:product_main_option2) { another_product.main_options[1]['name'] }
+        let(:ingredient1) { build(:ingredient, name: another_product.additional_info[0]['name']) }
+        let(:ingredient2) { build(:ingredient, name: another_product.additional_info[1]['name']) }
+
+        context 'product' do
           let(:product_id) { nil }
-          it { ap params }
+          it { expect(form.errors.messages[:"order_products.product_id"]).to eq ["can't be blank"] }
+
+          context 'not exists' do
+            let(:product_id) { -1 }
+            it { expect(form.errors.messages[:"order_products.product_id"]).to eq ['is invalid'] }
+          end
+        end
+
+        context 'main_option' do
+          let(:product_main_option) { nil }
+          it { expect(form.errors.messages[:"order_products.main_option"]).to eq(["can't be blank"]) }
+
+          context 'not exists' do
+            let(:product_main_option) { product.main_options[0]['name'] + Faker::Lorem.word }
+            it { expect(form.errors.messages[:"order_products.main_option"]).to eq ['is invalid'] }
+          end
+        end
+
+        context 'ingridients' do
+          context 'qty' do
+            let(:ingredient1) { build(:ingredient, qty: nil, name: another_product.additional_info[0]['name']) }
+            it { expect(form.errors.messages[:"order_products.ingredients.qty"]).to eq ["can't be blank"] }
+            it { expect(form.errors.messages[:"order_products.ingredients.name"]).not_to include 'is invalid' }
+          end
+
+          context 'name' do
+            let(:ingredient2) { build(:ingredient, name: nil) }
+            it { expect(form.errors.messages[:"order_products.ingredients.name"]).to eq ["can't be blank"] }
+
+            context 'not exist in product' do
+              let(:ingredient2) { build(:ingredient, name: Faker::Number.number(4)) }
+              it { expect(form.errors.messages[:"order_products.ingredients.name"]).to eq ["is invalid"] }
+            end
+          end
         end
       end
     end
