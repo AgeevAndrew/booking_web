@@ -2,6 +2,27 @@
 
 class CreateCompanies < ActiveRecord::Migration[5.1]
   def change
+    create_table :accounts, id: :uuid do |t|
+      t.string :name, null: false
+      t.string :phone, null: false
+      t.string :email
+      t.column :address_ids, 'integer[]', null: false, default: []
+
+      t.timestamps
+    end
+
+    create_table :addresses do |t|
+      t.string :title, null: false
+      t.string :city, null: false
+      t.string :street, null: false
+      t.string :house, null: false
+      t.string :office
+      t.string :entrance
+      t.string :floor
+      t.string :code
+
+      t.timestamps
+    end
     create_table :companies do |t|
       t.string :name, null: false
       t.column :categories, 'integer[]', null: false, default: '{}'
@@ -19,10 +40,28 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
+    create_table :orders, id: :uuid do |t|
+      t.references :company
+      t.references :account, type: :uuid
+      t.decimal :total_cost
+      t.jsonb :address_info
+
+      t.timestamps
+    end
+
+    create_table :order_products, id: :uuid do |t|
+      t.references :product, null: false
+      t.references :order, null: false
+      t.string :main_option
+      t.decimal :total_cost, precision: 18, scale: 2, null: false, default: 0
+      t.jsonb :ingredients
+    end
+
     create_table :products do |t|
       t.references :category, foreign_key: true
       t.references :company, foreign_key: true
       t.string :title
+      t.string :brief, limit: 140
       t.text :description
       t.string :photo
       t.column :main_options, 'jsonb[]', null: false, default: '{}'
@@ -32,5 +71,6 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
     end
 
     add_index :products, [:category_id, :company_id]
+
   end
 end

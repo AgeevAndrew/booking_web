@@ -13,13 +13,13 @@ module Orders::Forms
     property :company_id
     property :account_id
     property :address_id, virtual: true
-    property :total_cost
 
     collection :order_products, populate_if_empty: OrderProduct do
       include Disposable::Twin::Property::Hash
 
       property :product_id
       property :main_option
+      property :qty, virtual: true, default: 1
 
       collection :ingredients, field: :hash, populate_if_empty: Hash do
         property :qty
@@ -29,7 +29,11 @@ module Orders::Forms
         validate :ingridient_exist
         def ingridient_exist
           return if name.blank? || parent.product.blank?
-          errors.add(:name, :invalid) if parent.product_ingredients.select { |i| i['name'] == name }.blank?
+          errors.add(:name, :invalid) if ingredient.blank?
+        end
+
+        def ingredient
+          parent.product_ingredients.select { |i| i['name'] == name }[0]
         end
       end
 
@@ -44,11 +48,15 @@ module Orders::Forms
       validate :main_option_exists
       def main_option_exists
         return if product.blank? || main_option.blank?
-        errors.add(:main_option, :invalid) if product.main_options.select { |option| option['name'] == main_option }.blank?
+        errors.add(:main_option, :invalid) if product_main_option.blank?
       end
 
       def product
         @product ||= Product.find_by(id: product_id)
+      end
+
+      def product_main_option
+        @product_main_option ||= product.main_options.select { |option| option['name'] == main_option }
       end
 
       def product_ingredients
@@ -75,6 +83,11 @@ module Orders::Forms
       errors.add(:address_id, :invalid) if address.blank?
     end
 
+    def address
+      return if account.blank?
+      @address ||= Address.find_by(id: address_id)
+    end
+
     private
 
     def company
@@ -83,11 +96,6 @@ module Orders::Forms
 
     def account
       @account ||= Account.find_by(id: account_id)
-    end
-
-    def address
-      return if account.blank?
-      @address ||= Address.find_by(id: address_id)
     end
   end
 end

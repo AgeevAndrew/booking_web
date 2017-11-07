@@ -10,20 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171030230618) do
+ActiveRecord::Schema.define(version: 20171005005038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
-  enable_extension "postgis"
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "phone", null: false
     t.string "email"
+    t.integer "address_ids", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "address_ids", default: [], null: false, array: true
   end
 
   create_table "addresses", force: :cascade do |t|
@@ -68,9 +67,9 @@ ActiveRecord::Schema.define(version: 20171030230618) do
 
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "company_id"
-    t.bigint "account_id"
+    t.uuid "account_id"
     t.decimal "total_cost"
-    t.string "address_name"
+    t.jsonb "address_info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_orders_on_account_id"
@@ -81,23 +80,16 @@ ActiveRecord::Schema.define(version: 20171030230618) do
     t.bigint "category_id"
     t.bigint "company_id"
     t.string "title"
+    t.string "brief", limit: 140
     t.text "description"
     t.string "photo"
     t.jsonb "main_options", default: [], null: false, array: true
     t.jsonb "additional_info", default: [], null: false, array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "brief", limit: 140
     t.index ["category_id", "company_id"], name: "index_products_on_category_id_and_company_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
-  end
-
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
   end
 
   add_foreign_key "products", "categories"
