@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20171005005038) do
   create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "order_id", null: false
+    t.integer "qty", default: 1, null: false
     t.string "main_option"
     t.decimal "total_cost", precision: 18, scale: 2, default: "0.0", null: false
     t.jsonb "ingredients"

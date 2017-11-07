@@ -19,7 +19,7 @@ module Orders::Forms
 
       property :product_id
       property :main_option
-      property :qty, virtual: true, default: 1
+      property :qty, default: 1
 
       collection :ingredients, field: :hash, populate_if_empty: Hash do
         property :qty
