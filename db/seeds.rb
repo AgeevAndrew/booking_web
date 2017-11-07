@@ -119,3 +119,20 @@ Account.create(
   created_at: '2017-10-17T04:42:52.790Z',
   updated_at: '2017-10-17T04:42:52.790Z',
 )
+
+Order.create(
+  # id: SecureRandom.uuid,
+  account_id: Account.first.id,
+  address_info: Address.first.to_json,
+  company_id: Company.first.id
+)
+
+OrderProduct.create(
+  order_id: Order.first.id,
+  product_id: Product.first.id,
+  main_option: 'beef',
+  ingredients: [
+    qty: 2,
+    name: '🥗 salad'
+  ]
+)
