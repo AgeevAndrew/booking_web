@@ -4,7 +4,7 @@ module Accounts::Addresses
   class Update < ApplicationOperation
     contract ::Accounts::Addresses::Forms::CreateForm
 
-    representer AccountRepresenter
+    representer AddressRepresenter
 
     def model!(params)
       Address.find params[:id]

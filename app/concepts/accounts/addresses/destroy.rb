@@ -2,7 +2,7 @@
 
 module Accounts::Addresses
   class Destroy < ApplicationOperation
-    representer AccountRepresenter
+    representer AddressRepresenter
 
     def model!(params)
       Account.find params[:account_id]

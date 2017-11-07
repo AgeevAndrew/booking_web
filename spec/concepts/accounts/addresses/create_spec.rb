@@ -9,11 +9,12 @@ module Accounts::Addresses
     let(:operation) { operation_run[1] }
     let(:contract_class) { operation.contract.class }
 
-    let!(:model) { create(:account, :with_addresses) }
+    let!(:account) { create(:account, :with_addresses) }
+    let(:model) { Address.new }
 
     let(:params) do
       {
-        account_id: model.id,
+        account_id: account.id,
         title: title,
         city: city,
         street: street,
@@ -43,7 +44,11 @@ module Accounts::Addresses
 
       context 'success' do
         it { should be true }
-        it { expect(operation.model.reload.address_ids).to include Address.last.id }
+        it { expect(operation.model.reload.id).to eq Address.last.id }
+        it do
+          operation_run
+          expect(account.reload.address_ids).to include Address.last.id
+        end
       end
 
       context 'fail' do
