@@ -68,6 +68,7 @@ module Orders
 
         subject { operation.model.reload.order_products.first }
 
+        it { expect(subject.order_id).to eq Order.last.id }
         it { expect(subject.product_id).to eq product_id }
         it { expect(subject.main_option).to eq main_option }
         it { expect(subject.total_cost).to eq result_cost }
