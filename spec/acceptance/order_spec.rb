@@ -20,6 +20,7 @@ RSpec.resource 'Orders', acceptance: true do
       [
         product_id: product_id,
         main_option: main_option,
+        qty: qty,
         ingredients: [
           qty: qty,
           name: ingredient_name,
