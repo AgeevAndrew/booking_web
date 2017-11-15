@@ -25,6 +25,7 @@ Category.create(name: 'Наборы', icon_type: 'icon_set', description: '')
 
 Company.create(name: 'Pied Piper',
                categories: Category.pluck(:id),
+               delivery: { cost: 300, free_shipping: 1_500, pickup_discount: 10, period: { start: '09:00', end: '18:00' } },
                contact_info: { phone: '01234567890', email: 'a@b.com' })
 
 Product.create(
