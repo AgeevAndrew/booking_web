@@ -13,6 +13,8 @@ module Orders::Forms
     property :company_id
     property :account_id
     property :address_id, virtual: true
+    property :delivery_time
+    property :pickup, default: false
 
     collection :order_products, populate_if_empty: OrderProduct do
       include Disposable::Twin::Property::Hash
@@ -67,6 +69,7 @@ module Orders::Forms
     validates :company_id, presence: true
     validates :account_id, presence: true
     validates :address_id, presence: true
+    validates :delivery_time, presence: true, inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
 
     validate :company_presence
     def company_presence
@@ -88,14 +91,19 @@ module Orders::Forms
       @address ||= Address.find_by(id: address_id)
     end
 
-    private
-
     def company
       @company ||= Company.find_by(id: company_id)
     end
 
+    private
+
     def account
       @account ||= Account.find_by(id: account_id)
+    end
+
+    def delivery_period
+      return [] if company.blank?
+      Time.parse(company.delivery['period']['start'])..Time.parse(company.delivery['period']['end'])
     end
   end
 end

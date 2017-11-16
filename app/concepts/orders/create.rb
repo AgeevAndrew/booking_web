@@ -5,15 +5,18 @@ class Orders::Create < ApplicationOperation
 
   representer OrderRepresenter
 
+  def represented
+    model.reload
+  end
+
   def model!(*)
-    Order.new
+    Order.new(status_id: Statuses::NEW)
   end
 
   def process(params)
     validate(params) do
-      contract.sync
       assign_special_attributes
-      model.save
+      contract.save
     end
   end
 
@@ -22,20 +25,35 @@ class Orders::Create < ApplicationOperation
   def assign_special_attributes
     assign_products_cost
     model.total_cost = order_cost
+    model.delivery_cost = delivery_cost
     model.address_info = contract.address.to_json
   end
 
   def order_cost
-    contract.order_products.map do |op|
-      op.model.total_cost
-    end.sum
+    @order_cost ||= contract.order_products.map do |op|
+                      op.model.total_cost
+                    end.sum * discount
   end
 
   def assign_products_cost
     contract.order_products.each do |op|
-      op.model.total_cost = op.qty * (
-        op.product_main_option[0]['cost'].to_f + op.ingredients.map { |i| i.qty * i.ingredient['cost'].to_f }.sum
-      )
+      # I don't agree with this calculation. I believe this is a bullshit!!!
+      # True formula = qty * (product_cost + sum_ingridient_costs)
+      op.model.total_cost = op.qty * op.product_main_option[0]['cost'].to_f + ingridients_cost(op)
     end
+  end
+
+  def ingridients_cost(product)
+    product.ingredients.map { |i| i.qty * i.ingredient['cost'].to_f }.sum
+  end
+
+  def delivery_cost
+    return 0 if contract.pickup || contract.company.delivery['free_shipping'] <= order_cost
+    contract.company.delivery['cost']
+  end
+
+  def discount
+     return 1 unless contract.pickup
+     (1 + contract.company.delivery['pickup_discount'] / 100.0).round(2)
   end
 end

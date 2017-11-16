@@ -11,6 +11,11 @@ Category.delete_all
 Company.delete_all
 Account.delete_all
 Address.delete_all
+Status.delete_all
+
+Status.create(id: 10_010, name: 'Новый', position: 1)
+Status.create(id: 10_020, name: 'Подтвержден', position: 2)
+Status.create(id: 10_030, name: 'Отменен', position: 3)
 
 Category.create(name: 'Бургеры', icon_type: 'icon_burger', description: '')
 Category.create(name: 'Пицца', icon_type: 'icon_pizza', description: '')
@@ -125,7 +130,10 @@ Order.create(
   # id: SecureRandom.uuid,
   account_id: Account.first.id,
   address_info: Address.first.to_json,
-  company_id: Company.first.id
+  company_id: Company.first.id,
+  status_id: Statuses::NEW,
+  delivery_time: '15:00',
+  total_cost: 230,
 )
 
 OrderProduct.create(
@@ -134,6 +142,6 @@ OrderProduct.create(
   main_option: 'beef',
   ingredients: [
     qty: 2,
-    name: '🥗 salad'
-  ]
+    name: '🥗 salad',
+  ],
 )

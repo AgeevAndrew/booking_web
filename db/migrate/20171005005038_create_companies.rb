@@ -27,7 +27,8 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
       t.string :name, null: false
       t.column :categories, 'integer[]', null: false, default: '{}'
       t.text :description
-      t.jsonb :contact_info
+      t.jsonb :delivery, null: false, default: {}.to_json
+      t.jsonb :contact_info, null: false, default: {}.to_json
 
       t.timestamps
     end
@@ -43,8 +44,13 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
     create_table :orders, id: :uuid do |t|
       t.references :company
       t.references :account, type: :uuid
-      t.decimal :total_cost
-      t.jsonb :address_info
+      t.references :status, null: false
+      t.column :num, 'serial', null: false
+      t.jsonb :address_info, null: false, default: {}
+      t.decimal :total_cost, null: false
+      t.decimal :delivery_cost, null: false, default: 0
+      t.boolean :pickup, null: false, default: false
+      t.column :delivery_time, 'datetime', null: false
 
       t.timestamps
     end
@@ -73,5 +79,9 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
 
     add_index :products, [:category_id, :company_id]
 
+    create_table :statuses do |t|
+      t.string :name, null: false
+      t.column :position, 'smallint', null: false
+    end
   end
 end
