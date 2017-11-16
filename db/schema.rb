@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171115222746) do
+ActiveRecord::Schema.define(version: 20171005005038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(version: 20171115222746) do
     t.string "name", null: false
     t.integer "categories", default: [], null: false, array: true
     t.text "description"
-    t.jsonb "contact_info"
+    t.jsonb "delivery", default: "{}", null: false
+    t.jsonb "contact_info", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.jsonb "delivery", default: "{}", null: false
   end
 
   create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -70,12 +70,18 @@ ActiveRecord::Schema.define(version: 20171115222746) do
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "company_id"
     t.uuid "account_id"
-    t.decimal "total_cost"
-    t.jsonb "address_info"
+    t.bigint "status_id", null: false
+    t.serial "num", null: false
+    t.jsonb "address_info", default: {}, null: false
+    t.decimal "total_cost", null: false
+    t.decimal "delivery_cost", default: "0.0", null: false
+    t.boolean "pickup", default: false, null: false
+    t.datetime "delivery_time", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["account_id"], name: "index_orders_on_account_id"
     t.index ["company_id"], name: "index_orders_on_company_id"
+    t.index ["status_id"], name: "index_orders_on_status_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -92,6 +98,11 @@ ActiveRecord::Schema.define(version: 20171115222746) do
     t.index ["category_id", "company_id"], name: "index_products_on_category_id_and_company_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "position", limit: 2, null: false
   end
 
   add_foreign_key "products", "categories"

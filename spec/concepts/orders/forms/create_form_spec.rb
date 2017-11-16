@@ -11,6 +11,8 @@ module Orders::Forms
         company_id: company_id,
         account_id: account_id,
         address_id: address_id,
+        pickup: pickup,
+        delivery_time: delivery_time,
         order_products: products,
       }
     end
@@ -21,6 +23,8 @@ module Orders::Forms
     let(:company_id) { company.id }
     let(:account_id) { account.id }
     let(:address_id) { account.address_ids[0] }
+    let(:delivery_time) { Time.now }
+    let(:pickup) { nil }
     let(:products) { nil }
 
     let(:form) { described_class.new(model) }
@@ -54,15 +58,25 @@ module Orders::Forms
         end
       end
 
-      context 'address_id' do
+      context 'delivery_time' do
         context 'blank' do
-          let(:address_id) { nil }
-          it { expect(subject[:address_id]).to include "can't be blank" }
+          let(:delivery_time) { nil }
+          it { expect(subject[:delivery_time]).to include "can't be blank" }
         end
 
         context 'invalid' do
-          let(:address_id) { -1 }
-          it { expect(subject[:address_id]).to include "is invalid" }
+          let(:delivery_time) { Faker::Time.between(Time.zone.today, Time.zone.today, :midnight) }
+          it { expect(subject[:delivery_time]).to include "is invalid" }
+        end
+
+        context 'valid time' do
+          let(:time_start) { Time.parse(company.delivery['period']['start']) }
+          let(:time_end) { Time.parse(company.delivery['period']['end']) }
+          let(:delivery_time) do
+            Faker::Time.between(time_start, time_end, :day)
+          end
+
+          it { expect(subject[:delivery_time]).not_to include 'is invalid' }
         end
       end
 
