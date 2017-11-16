@@ -62,4 +62,28 @@ RSpec.resource 'Orders', acceptance: true do
       expect(status).to eq(422)
     end
   end
+
+  post '/api/orders/:id/accept' do
+    parameter :id, required: true
+
+    let(:id) { create(:order, :with_products).id }
+    let!(:new_status) { create(:status, :accepted) }
+
+    example 'Accept' do
+      do_request
+      expect(status).to eq(201)
+    end
+  end
+
+  post '/api/orders/:id/cancel' do
+    parameter :id, required: true
+
+    let(:id) { create(:order, :with_products).id }
+    let!(:new_status) { create(:status, :cancelled) }
+
+    example 'Cancel' do
+      do_request
+      expect(status).to eq(201)
+    end
+  end
 end

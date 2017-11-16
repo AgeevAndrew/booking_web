@@ -7,7 +7,7 @@ FactoryGirl.define do
     total_cost "9.99"
     delivery_time Time.current
     pickup false
-    association(:status, :new)
+    association :status, factory: [:status, :new]
 
     after(:build) do |order|
       order.address_info = order.account.addresses[0].to_json

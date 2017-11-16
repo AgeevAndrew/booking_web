@@ -8,4 +8,12 @@ class OrdersController < ApplicationController
   def create
     respond Orders::Create, location: nil
   end
+
+  def accept
+    respond Orders::Accept, location: nil
+  end
+
+  def cancel
+    respond Orders::Cancel, location: nil
+  end
 end

@@ -3,8 +3,19 @@ FactoryGirl.define do
     name Faker::Lorem.word
     position 1
 
-    trait(:new) { id Statuses::NEW }
-    trait(:accepted) { id Statuses::ACCEPTED }
-    trait(:cancelled) { id Statuses::CANCELLED }
+    trait(:new) do
+      id Statuses::NEW
+      name 'New'
+    end
+
+    trait(:accepted) do
+      id Statuses::ACCEPTED
+      name 'Accepted'
+    end
+
+    trait(:cancelled) do
+      id Statuses::CANCELLED
+      name 'Cancelled'
+    end
   end
 end

@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
-    resources :orders
+    resources :orders, only: [:index, :create] do
+      post :accept, on: :member
+      post :cancel, on: :member
+    end
   end
 end

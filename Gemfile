@@ -23,6 +23,7 @@ gem 'trailblazer', '1.1.2'
 gem 'trailblazer-rails', '0.4.0'
 gem "reform"
 gem "reform-rails"
+gem 'micromachine'
 
 gem 'multi_json'
 gem 'oj'
