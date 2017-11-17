@@ -129,7 +129,7 @@ Account.create(
 Order.create(
   # id: SecureRandom.uuid,
   account_id: Account.first.id,
-  address_info: Address.first.to_json,
+  address_info: Address.first,
   company_id: Company.first.id,
   status_id: Statuses::NEW,
   delivery_time: '15:00',

@@ -10,7 +10,7 @@ FactoryGirl.define do
     association :status, factory: [:status, :new]
 
     after(:build) do |order|
-      order.address_info = order.account.addresses[0].to_json
+      order.address_info = order.account.addresses[0]
     end
 
     trait :with_products do

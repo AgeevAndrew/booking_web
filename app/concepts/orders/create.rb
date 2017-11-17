@@ -26,7 +26,7 @@ class Orders::Create < ApplicationOperation
     assign_products_cost
     model.total_cost = order_cost
     model.delivery_cost = delivery_cost
-    model.address_info = contract.address.to_json
+    model.address_info = contract.address
   end
 
   def order_cost
