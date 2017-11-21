@@ -63,7 +63,7 @@ module Orders
         it { expect(subject.company_id).to eq company_id }
         it { expect(subject.account_id).to eq account_id }
         it { expect(subject.status_id).to eq Statuses::NEW }
-        it { expect(subject.address_info).to eq Address.find(address_id).to_json }
+        it { expect(subject.address_info['id']).to eq address_id }
 
         let(:result_cost) do
           qty * product.main_options[0]['cost'].to_f + qty * product.additional_info[0]['cost'].to_f
