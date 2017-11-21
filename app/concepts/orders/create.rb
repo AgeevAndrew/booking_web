@@ -26,7 +26,7 @@ class Orders::Create < ApplicationOperation
     assign_products_cost
     model.total_cost = order_cost
     model.delivery_cost = delivery_cost
-    model.address_info = contract.address
+    model.address_info = contract.address || {}
   end
 
   def order_cost
@@ -44,7 +44,7 @@ class Orders::Create < ApplicationOperation
   end
 
   def ingridients_cost(product)
-    product.ingredients.map { |i| i.qty * i.ingredient['cost'].to_f }.sum
+    product.ingredients.map(&:total_cost).sum
   end
 
   def delivery_cost

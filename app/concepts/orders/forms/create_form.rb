@@ -26,6 +26,11 @@ module Orders::Forms
       collection :ingredients, field: :hash, populate_if_empty: Hash do
         property :qty
         property :name
+        property :total_cost
+
+        def total_cost
+          qty * ingredient['cost'].to_f
+        end
 
         validates :qty, :name, presence: true
         validate :ingridient_exist
@@ -83,6 +88,7 @@ module Orders::Forms
 
     validate :address_presence
     def address_presence
+      return if address_id.blank?
       errors.add(:address_id, :invalid) if address.blank?
     end
 

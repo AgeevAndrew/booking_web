@@ -31,7 +31,7 @@ RSpec.resource 'Orders', acceptance: true do
     let(:delivery_time) do
       rand(time_start..time_end)
     end
-    let(:pickup) { true }
+    let(:pickup) { false }
     let(:product_id) { product.id }
     let(:main_option) { product.main_options[0]['name'] }
     let(:qty) { 1 }
