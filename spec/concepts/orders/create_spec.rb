@@ -97,7 +97,7 @@ module Orders
             let(:discount) { 10 }
             let(:company) { create(:company, :delivery, pickup_discount: discount) }
 
-            it { expect(subject.total_cost).to be_within(0.01).of(result_cost * (1 + discount / 100.0)) }
+            it { expect(subject.total_cost).to be_within(0.01).of(result_cost * (1 - discount / 100.0)) }
           end
         end
       end

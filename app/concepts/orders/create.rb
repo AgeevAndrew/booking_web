@@ -54,6 +54,6 @@ class Orders::Create < ApplicationOperation
 
   def discount
      return 1 unless contract.pickup
-     (1 + contract.company.delivery['pickup_discount'] / 100.0).round(2)
+     (1 - contract.company.delivery['pickup_discount'] / 100.0).round(2)
   end
 end
