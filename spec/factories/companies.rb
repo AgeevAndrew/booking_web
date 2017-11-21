@@ -10,7 +10,7 @@ FactoryGirl.define do
         'cost' => Faker::Number.number(3).to_i,
         'free_shipping' => Faker::Number.number(3).to_i,
         'pickup_discount' => Faker::Number.number(1).to_i,
-        'period' => { 'start' => '09:00', 'end' => '18:00' },
+        'period' => { 'start' => '09:00 UTC', 'end' => '18:00 UTC' },
       }
     end
     contact_info do

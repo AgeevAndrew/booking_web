@@ -26,7 +26,11 @@ RSpec.resource 'Orders', acceptance: true do
     let(:company_id) { company.id }
     let(:account_id) { account.id }
     let(:address_id) { account.address_ids[0] }
-    let(:delivery_time) { Time.now }
+    let(:time_start) { Time.parse(company.delivery['period']['start']) }
+    let(:time_end) { Time.parse(company.delivery['period']['end']) }
+    let(:delivery_time) do
+      rand(time_start..time_end)
+    end
     let(:pickup) { true }
     let(:product_id) { product.id }
     let(:main_option) { product.main_options[0]['name'] }
@@ -58,7 +62,7 @@ RSpec.resource 'Orders', acceptance: true do
     end
 
     example 'Create (errors)' do
-      do_request(company_id: nil, account_id: nil)
+      do_request(locale: 'ru', company_id: nil, account_id: nil)
       expect(status).to eq(422)
     end
   end

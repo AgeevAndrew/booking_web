@@ -27,6 +27,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 
+I18n.default_locale = :en
 Faker::Config.locale = 'ru'
 
 ActiveRecord::Migration.maintain_test_schema!
@@ -41,6 +42,7 @@ RSpec.configure do |config|
     header 'Host', 'hostname'
     header 'Accept', 'application/json'
     header 'Content-Type', 'application/json'
+    header 'User-TimeZone', 'UTC'
     header 'User-Locale', 'en'
   end
 

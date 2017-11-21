@@ -43,7 +43,7 @@ module Orders
     let(:time_start) { Time.parse(company.delivery['period']['start']) }
     let(:time_end) { Time.parse(company.delivery['period']['end']) }
     let(:delivery_time) do
-      Faker::Time.between(time_start, time_end, :day)
+      rand(time_start..time_end)
     end
     let(:pickup) { false }
     let(:qty) { 1 }
