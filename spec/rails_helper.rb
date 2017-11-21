@@ -47,6 +47,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
+    I18n.locale = :en
     Faker::UniqueGenerator.clear
   end
 

@@ -68,7 +68,7 @@ module Orders::Forms
 
     validates :company_id, presence: true
     validates :account_id, presence: true
-    validates :address_id, presence: true
+    validates :address_id, presence: true, unless: :pickup
     validates :delivery_time, presence: true, inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
 
     validate :company_presence
