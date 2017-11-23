@@ -6,6 +6,7 @@ class ProductRepresenter < ApplicationRepresenter
   property :category_id
   property :title
   property :description
+  property :brief
   property :photo
   property :main_options
   property :additional_info

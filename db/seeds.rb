@@ -222,7 +222,7 @@ Product.create(
 	main_options: [{ name: '200 гр', cost: 90 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Сальса',
 	brief: 'Традиционный мексиканский соус на томатной основе.',
@@ -231,7 +231,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Блю чиз',
 	brief: 'Традиционный соус на основе благородного голубого сыра, фреш крема и белого перца.',
@@ -240,7 +240,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 90 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Горчичный',
 	brief: 'Пряно-горчичный соус, на основе подсолнечного масла, желтков, семян горчицы и специй.',
@@ -249,7 +249,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Сырный',
 	brief: 'Соус с насыщенным, ярким вкусом и ароматом.',
@@ -258,7 +258,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Барбекю (BBQ)',
 	brief: 'Классический соус',
@@ -267,7 +267,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Чесночный',
 	brief: 'Классический чесночный соус',
@@ -276,7 +276,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: '1000 Островов',
 	brief: 'Классический соус средиземноморской и американской кухонь.',
@@ -285,7 +285,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Кетчуп',
 	brief: 'Классический кетчупа HEINZ.',
@@ -294,7 +294,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 50 }],
 	)
 Product.create(
-	category_id: Category[6].id,
+	category_id: Category.find_by_name("Соусы").id,
 	company_id: Company.first.id,
 	title: 'Китайский Кисло-сладкий',
 	brief: 'Пикантный соус к любому блюду, играющий неожиданными вкусовыми гранями.',
@@ -303,7 +303,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[7].id,
+	category_id: Category.find_by_name("Супы").id,
 	company_id: Company.first.id,
 	title: 'Чили кон карне',
 	brief: 'Новинка! HOT!HOT! Чили кон карне -  мясной суп техасской и мексиканской кухонь.',
@@ -313,7 +313,7 @@ Product.create(
 	main_options: [{ name: '60 мл', cost: 60 }],
 	)
 Product.create(
-	category_id: Category[8].id,
+	category_id: Category.find_by_name("Напитки").id,
 	company_id: Company.first.id,
 	title: '7up',
 	brief: 'Великолепная тройка - напитки, давно зарекомендовавшие себя для любого повода.',
@@ -322,7 +322,7 @@ Product.create(
 	main_options: [{ name: '600 мл', cost: 80 }],
 	)
 Product.create(
-	category_id: Category[8].id,
+	category_id: Category.find_by_name("Напитки").id,
 	company_id: Company.first.id,
 	title: 'Mirinda',
 	brief: 'Великолепная тройка - напитки, давно зарекомендовавшие себя для любого повода.',
@@ -331,7 +331,7 @@ Product.create(
 	main_options: [{ name: '600 мл', cost: 80 }],
 	)
 Product.create(
-	category_id: Category[8].id,
+	category_id: Category.find_by_name("Напитки").id,
 	company_id: Company.first.id,
 	title: 'Pepsi',
 	brief: 'Великолепная тройка - напитки, давно зарекомендовавшие себя для любого повода.',
@@ -340,7 +340,7 @@ Product.create(
 	main_options: [{ name: '600 мл', cost: 80 }],
 	)
 Product.create(
-	category_id: Category[9].id,
+	category_id: Category.find_by_name("Наборы").id,
 	company_id: Company.first.id,
 	title: 'Wing cет',
 	brief: 'Куриные крылышки: Баффало / Кентукки / Медово-горчичные / Бурбон-барбекю, Картофель дольками, Луковые кольца, Луковые кольца',
@@ -349,7 +349,7 @@ Product.create(
 	main_options: [{ name: 'Wing cет', cost: 1770 }],
 	)
 Product.create(
-	category_id: Category[9].id,
+	category_id: Category.find_by_name("Наборы").id,
 	company_id: Company.first.id,
 	title: 'Burger сет',
 	brief: 'В состав сета входят 4 больших бургера: Чикен / Классик, Салат Коул слоу, Картофель дольками',
@@ -358,7 +358,7 @@ Product.create(
 	main_options: [{ name: 'Burger сет', cost: 1610 }],
 	)
 Product.create(
-	category_id: Category[9].id,
+	category_id: Category.find_by_name("Наборы").id,
 	company_id: Company.first.id,
 	title: 'Mix сет',
 	brief: 'В состав сета входят 2 больших бургера: Чикен / Классик, Куриные крылышки 2 порции M на выбор, Картофель дольками, Соус на выбор',
@@ -367,7 +367,7 @@ Product.create(
 	main_options: [{ name: 'Mix сет', cost: 1470 }],
 	)
 Product.create(
-	category_id: Category[9].id,
+	category_id: Category.find_by_name("Наборы").id,
 	company_id: Company.first.id,
 	title: 'Beer сет',
 	brief: 'Самый большой ChiXX сет: Куриные крылышки на выбор, Картофель дольками, Луковые кольца, Соус на выбор',
