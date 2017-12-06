@@ -74,7 +74,14 @@ module Orders::Forms
     validates :company_id, presence: true
     validates :account_id, presence: true
     validates :address_id, presence: true, unless: :pickup
-    validates :delivery_time, presence: true, inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
+    # TODO, Решить проблему с таймзонами
+    # Как посчитать валидно ли датавремя доставки, если приложение работает с разными таймзонами
+    # Компания указывает время (и только время) работы со своими таймзонами
+    # Соответственно при преобразовании в датувремя есть проблемы с датой и построением верного интервала датвремен
+    # Примеры: с 10:00 до 18:00 время хабаровское или
+    #          с 22:00 до 08:00 время лондонское (гринвич)
+    # Библиотека business_time индиферентна к таймзонам (в конфиг не засунешь свою зону, только системная)
+    validates :delivery_time, presence: true # , inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
 
     validate :company_presence
     def company_presence
@@ -107,9 +114,9 @@ module Orders::Forms
       @account ||= Account.find_by(id: account_id)
     end
 
-    def delivery_period
-      return [] if company.blank?
-      Time.parse(company.delivery['period']['start'])..Time.parse(company.delivery['period']['end'])
-    end
+    # def delivery_period
+    #   return [] if company.blank?
+    #   Time.parse(company.delivery['period']['start'])..Time.parse(company.delivery['period']['end'])
+    # end
   end
 end
