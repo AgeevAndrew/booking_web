@@ -14,6 +14,7 @@ class NewOrderPropogateJob < ApplicationJob
   attr_reader :order
 
   def operators
-    order.company.contact_info['email']
+    # order.company.contact_info['email']
+    ['arkhipovky@arink-group.ru', 'bodakovda@arink-group.ru']
   end
 end
