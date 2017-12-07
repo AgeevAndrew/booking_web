@@ -89,20 +89,20 @@ module Orders::Forms
           it { expect(subject[:delivery_time]).to include "can't be blank" }
         end
 
-        context 'invalid' do
-          let(:delivery_time) { Faker::Time.between(Time.zone.today, Time.zone.today, :midnight) }
-          it { expect(subject[:delivery_time]).to include "is invalid" }
-        end
-
-        context 'valid time' do
-          let(:time_start) { Time.parse(company.delivery['period']['start']) }
-          let(:time_end) { Time.parse(company.delivery['period']['end']) }
-          let(:delivery_time) do
-            rand(time_start..time_end)
-          end
-
-          it { expect(subject[:delivery_time]).not_to include 'is invalid' }
-        end
+        # context 'invalid' do
+        #   let(:delivery_time) { Faker::Time.between(Time.zone.today, Time.zone.today, :midnight) }
+        #   it { expect(subject[:delivery_time]).to include "is invalid" }
+        # end
+        #
+        # context 'valid time' do
+        #   let(:time_start) { Time.parse(company.delivery['period']['start']) }
+        #   let(:time_end) { Time.parse(company.delivery['period']['end']) }
+        #   let(:delivery_time) do
+        #     rand(time_start..time_end)
+        #   end
+        #
+        #   it { expect(subject[:delivery_time]).not_to include 'is invalid' }
+        # end
       end
 
       context 'products' do
