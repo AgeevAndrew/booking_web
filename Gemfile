@@ -18,12 +18,13 @@ gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
+gem 'figaro'
 
-gem 'trailblazer', '1.1.2'
-gem 'trailblazer-rails', '0.4.0'
+gem 'micromachine'
 gem "reform"
 gem "reform-rails"
-gem 'micromachine'
+gem 'trailblazer', '1.1.2'
+gem 'trailblazer-rails', '0.4.0'
 
 gem 'multi_json'
 gem 'oj'
@@ -36,8 +37,6 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -46,6 +45,11 @@ gem 'jbuilder', '~> 2.5'
 
 # documentation
 gem 'apitome', git: 'git@github.com:jejacks0n/apitome.git', branch: 'master'
+
+# services
+gem 'mailgun_rails'
+gem 'redis', '~> 3.0'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'awesome_print'

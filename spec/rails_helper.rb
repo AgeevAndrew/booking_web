@@ -7,6 +7,7 @@ require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'sidekiq/testing'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -27,6 +28,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 # Checks for pending migration and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove this line.
 
+Sidekiq::Testing.fake!
 I18n.default_locale = :en
 Faker::Config.locale = 'ru'
 
@@ -49,6 +51,7 @@ RSpec.configure do |config|
   config.before(:each) do
     I18n.locale = :en
     Faker::UniqueGenerator.clear
+    Sidekiq::Worker.clear_all
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

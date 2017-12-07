@@ -50,10 +50,18 @@ module Orders
     let(:ingredient_name) { product.additional_info[0]['name'] }
 
     describe '#process' do
+      before do
+        allow(NewOrderPropogateJob).to receive(:perform_later)
+      end
+
       it { expect(contract_class).to be < ::Orders::Forms::CreateForm }
 
       it { expect { operation_run }.to change { Order.count }.by(1) }
       it { expect { operation_run }.to change { OrderProduct.count }.by(1) }
+      it do
+        operation_run
+        expect(NewOrderPropogateJob).to have_received(:perform_later).with(Order.last.id)
+      end
       it { expect(result).to eq true }
 
       describe 'order attributes' do

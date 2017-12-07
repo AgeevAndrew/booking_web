@@ -1,0 +1,7 @@
+en:
+  operator_mailer:
+    new_order:
+      subject: 'New order #%{num}'
+      title: 'Order #%{num}'
+      activate: Activate
+      cancel: Cancel
