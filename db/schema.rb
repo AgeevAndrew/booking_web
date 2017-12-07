@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171005005038) do
+ActiveRecord::Schema.define(version: 20171207071150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,14 @@ ActiveRecord::Schema.define(version: 20171005005038) do
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
+  create_table "order_tokens", force: :cascade do |t|
+    t.uuid "order_id", null: false
+    t.uuid "token"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_tokens_on_order_id"
+  end
+
   create_table "orders", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "company_id"
     t.uuid "account_id"
@@ -105,6 +113,7 @@ ActiveRecord::Schema.define(version: 20171005005038) do
     t.integer "position", limit: 2, null: false
   end
 
+  add_foreign_key "order_tokens", "orders"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
 end
