@@ -65,6 +65,7 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # invoke 'puma:restart'
       sudo 'service booking_web restart'
+      sudo 'service booking_sidekiq restart'
     end
   end
 
