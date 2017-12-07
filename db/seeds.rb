@@ -375,3 +375,55 @@ Product.create(
 	photo: 'https://195319.selcdn.ru/delivery_food/Chixx/products/set4-min.png',
 	main_options: [{ name: 'Beer сет', cost: 1810 }],
 	)
+
+	Address.create(
+	  city: 'Астрахань',
+	  code: '71',
+	  floor: '4',
+	  house: '144',
+	  title: 'work',
+	  entrance: '4',
+	  office: '90',
+	  street: 'Комарова пр.',
+	)
+
+	Address.create(
+	  city: 'Санкт-Петербург',
+	  code: '75',
+	  floor: '6',
+	  house: '100',
+	  title: 'home',
+	  entrance: '2',
+	  office: '13',
+	  street: 'пр. Южная',
+	)
+
+	Account.create(
+	  id: 'eb5378e4-48e6-4d03-b954-d00739b8c8ff',
+	  name: 'Ilene Pearline Boyle',
+	  phone: '(409) 941-2819',
+	  email: 'domenick@padberg.io',
+	  address_ids: Address.pluck(:id),
+	  created_at: '2017-10-17T04:42:52.790Z',
+	  updated_at: '2017-10-17T04:42:52.790Z',
+	)
+
+	Order.create(
+	  # id: SecureRandom.uuid,
+	  account_id: Account.first.id,
+	  address_info: Address.first,
+	  company_id: Company.first.id,
+	  status_id: Statuses::NEW,
+	  delivery_time: '15:00',
+	  total_cost: 230,
+	)
+
+	OrderProduct.create(
+	  order_id: Order.first.id,
+	  product_id: Product.first.id,
+	  main_option: 'beef',
+	  ingredients: [
+	    qty: 2,
+	    name: '🥗 salad',
+	  ],
+	)

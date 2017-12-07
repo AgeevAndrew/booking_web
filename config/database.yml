@@ -4,7 +4,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: booker
+  username: postgres
 
 development:
   <<: *default
@@ -23,7 +23,7 @@ staging:
     tcp_keepalives_idle: 60
     tcp_keepalives_interval: 60
     tcp_keepalives_count: 100
-  
+
 # production:
 #   <<: *default
 #   database: booking_web_production

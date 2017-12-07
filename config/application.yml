@@ -1,0 +1,2 @@
+booking_mailgun_api_key: 'key-c1e1ceed2371213407a37d13c20cb782'
+redis_url: redis://localhost

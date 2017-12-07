@@ -1,0 +1,7 @@
+ru:
+  operator_mailer:
+    new_order:
+      subject: Новый заказ №%{num}
+      title: Заказ №%{num}
+      activate: Активировать
+      cancel: Отменить

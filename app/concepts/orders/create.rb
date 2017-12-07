@@ -17,6 +17,7 @@ class Orders::Create < ApplicationOperation
     validate(params) do
       assign_special_attributes
       contract.save
+      NewOrderPropogateJob.perform_later(model.id)
     end
   end
 
