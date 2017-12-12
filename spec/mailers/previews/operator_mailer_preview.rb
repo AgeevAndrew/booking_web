@@ -14,7 +14,11 @@ class OperatorMailerPreview < ActionMailer::Preview
   private
 
   def order
-    Order.first
+    @order ||= Order.first
+  end
+
+  def order_token
+    @order_token ||= OrderToken.find_by(order_id: order.id)
   end
 
   def emails

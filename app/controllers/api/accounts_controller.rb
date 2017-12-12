@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AccountsController < ApplicationController
+class Api::AccountsController < Api::BaseController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
 
   respond_to :json
@@ -9,6 +9,7 @@ class AccountsController < ApplicationController
   # GET /accounts.json
   def index
     @accounts = Account.all
+    render :index
   end
 
   # GET /accounts/1

@@ -1,0 +1,8 @@
+ru:
+  orders:
+    accept:
+      header: 'Заказ №%{num} успешно активирован'
+      title: 'Состав заказа:'
+      address: 'Адрес доставки:'
+    cancel:
+      header: 'Заказ №%{num} отменен'

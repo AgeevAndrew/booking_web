@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProductsController < ApplicationController
+class Api::ProductsController < Api::BaseController
   include ActionController::MimeResponds
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 

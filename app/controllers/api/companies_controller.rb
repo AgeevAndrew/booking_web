@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CompaniesController < ApplicationController
+class Api::CompaniesController < Api::BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
 
   # GET /companies

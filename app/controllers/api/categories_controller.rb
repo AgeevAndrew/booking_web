@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CategoriesController < ApplicationController
+class Api::CategoriesController < Api::BaseController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   respond_to :json

@@ -1,0 +1,8 @@
+en:
+  orders:
+    accept:
+      header: 'The order #%{num} has been successfully activated'
+      title: 'Composition:'
+      address: 'Delivery address:'
+    cancel:
+      header: 'The order #%{num} has been cancelled'

@@ -6,8 +6,6 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_timezone
 
-  respond_to :json
-
   private
 
   def set_locale

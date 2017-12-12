@@ -1,19 +1,35 @@
 # frozen_string_literal: true
 
 class OrdersController < ApplicationController
-  def index
-    respond Orders::Index, location: nil
-  end
-
-  def create
-    respond Orders::Create, location: nil
-  end
+  before_action :set_order, :set_order_token
 
   def accept
-    respond Orders::Accept, location: nil
+    if @order_token.present?
+      @order.accept! && @order.save
+      @order_token.destroy
+      render :accept
+    else
+      render plain: 'Unauthorized', status: :unauthorized
+    end
   end
 
   def cancel
-    respond Orders::Cancel, location: nil
+    if @order_token.present?
+      @order.cancel! && @order.save
+      @order_token.destroy
+      render :cancel
+    else
+      render plain: 'Unauthorized', status: :unauthorized
+    end
+  end
+
+  private
+
+  def set_order
+    @order = Order.find params[:id]
+  end
+
+  def set_order_token
+    @order_token = OrderToken.find_by(order_id: params[:id], token: params[:token])
   end
 end

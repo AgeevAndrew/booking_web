@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  scope "/api", defaults: { format: :json } do
+  concern :app_api do
     resources :companies
     resources :products
     resources :categories
@@ -14,5 +14,14 @@ Rails.application.routes.draw do
       post :accept, on: :member
       post :cancel, on: :member
     end
+  end
+
+  namespace :api, defaults: { format: :json } do
+    concerns :app_api
+  end
+
+  resources :orders, only: [] do
+    get :accept, on: :member
+    get :cancel, on: :member
   end
 end

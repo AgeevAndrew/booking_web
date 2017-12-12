@@ -1,4 +1,6 @@
-class AddressesController < ApplicationController
+# frozen_string_literal: true
+
+class Api::AddressesController < Api::BaseController
   before_action :set_address, only: [:show, :edit, :update, :destroy]
 
   # GET /addresses
