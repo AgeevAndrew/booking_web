@@ -51,6 +51,10 @@ gem 'mailgun_rails'
 gem 'redis', '~> 3.0'
 gem 'sidekiq'
 
+gem "react_on_rails", "10.0.0"
+gem "webpacker", "~> 3.0"
+gem 'mini_racer', platforms: :ruby
+
 group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
