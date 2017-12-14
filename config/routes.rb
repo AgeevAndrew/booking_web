@@ -3,7 +3,11 @@
 Rails.application.routes.draw do
   concern :app_api do
     resources :companies
-    resources :products
+
+    resources :products do
+      patch :visibility_change, on: :member
+    end
+
     resources :categories
     resources :accounts, except: :update do
       post 'update', on: :member

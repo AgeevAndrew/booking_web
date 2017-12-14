@@ -2,7 +2,7 @@
 
 class Api::ProductsController < Api::BaseController
   include ActionController::MimeResponds
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: [:show, :edit, :update, :destroy, :visibility_change]
 
   respond_to :json
 
@@ -69,6 +69,10 @@ class Api::ProductsController < Api::BaseController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def visibility_change
+    respond Products::VisibilityChange, location: nil
   end
 
   private

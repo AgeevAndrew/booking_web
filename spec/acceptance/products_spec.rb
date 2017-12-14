@@ -25,4 +25,28 @@ RSpec.resource 'Products', acceptance: true do
       expect(status).to eq(200)
     end
   end
+
+  patch '/api/products/:id/visibility_change' do
+    let(:product) { create(:product) }
+
+    let(:id) { product.id }
+
+    parameter :id, required: true
+    parameter :active, required: true
+
+    example 'Activate' do
+      do_request(active: true)
+      expect(status).to eq(204)
+    end
+
+    example 'Deactivate' do
+      do_request(active: false)
+      expect(status).to eq(204)
+    end
+
+    example 'Deactivate (errors)' do
+      do_request(active: nil)
+      expect(status).to eq(422)
+    end
+  end
 end

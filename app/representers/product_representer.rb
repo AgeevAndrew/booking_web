@@ -10,4 +10,5 @@ class ProductRepresenter < ApplicationRepresenter
   property :photo
   property :main_options
   property :additional_info
+  property :active
 end
