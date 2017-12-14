@@ -63,6 +63,9 @@ test:
 production:
   <<: *default
 
+staging:
+  <<: *default
+
   # Production depends on precompilation of packs prior to booting for performance.
   compile: false
 
