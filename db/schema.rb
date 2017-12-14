@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171214005806) do
+ActiveRecord::Schema.define(version: 20171214015041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,9 @@ ActiveRecord::Schema.define(version: 20171214005806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+# Could not dump table "company_schedules" because of following StandardError
+#   Unknown type 'time with time zone' for column 'time_start'
 
   create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -114,6 +117,7 @@ ActiveRecord::Schema.define(version: 20171214005806) do
     t.integer "position", limit: 2, null: false
   end
 
+  add_foreign_key "company_schedules", "companies"
   add_foreign_key "order_tokens", "orders"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"

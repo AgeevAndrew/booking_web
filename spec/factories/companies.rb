@@ -38,5 +38,17 @@ FactoryGirl.define do
         { 'cost' => cost, 'free_shipping' => free_shipping, 'pickup_discount' => pickup_discount, 'period' => period }
       end
     end
+
+    trait :with_schedule do
+      after(:build) do |company|
+        company.schedules << build(:company_schedule, week_day: 'sun')
+        company.schedules << build(:company_schedule, week_day: 'mon')
+        company.schedules << build(:company_schedule, week_day: 'tue')
+        company.schedules << build(:company_schedule, week_day: 'wed')
+        company.schedules << build(:company_schedule, week_day: 'thu')
+        company.schedules << build(:company_schedule, week_day: 'dri')
+        company.schedules << build(:company_schedule, week_day: 'sat')
+      end
+    end
   end
 end

@@ -4,7 +4,7 @@ require 'acceptance_helper'
 
 RSpec.resource 'Companies', acceptance: true do
   get '/api/companies/:id' do
-    let(:company) { create(:company) }
+    let(:company) { create(:company, :with_schedule) }
     let(:id) { company.id }
 
     parameter :id, required: true
