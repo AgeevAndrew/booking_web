@@ -19,6 +19,7 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 gem 'figaro'
+gem 'draper'
 
 gem 'micromachine'
 gem "reform"
@@ -51,6 +52,12 @@ gem 'mailgun_rails'
 gem 'redis', '~> 3.0'
 gem 'sidekiq'
 
+# Emails
+gem 'inky-rb', require: 'inky'
+# Stylesheet inlining for email **
+gem 'premailer-rails'
+
+# React
 gem "react_on_rails", "10.0.0"
 gem "webpacker", "~> 3.0"
 gem 'mini_racer', platforms: :ruby

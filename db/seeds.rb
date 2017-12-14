@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+OrderToken.delete_all
 OrderProduct.delete_all
 Order.delete_all
 Product.delete_all
@@ -422,8 +423,11 @@ Product.create(
 	  order_id: Order.first.id,
 	  product_id: Product.first.id,
 	  main_option: 'beef',
+		total_cost: 230,
 	  ingredients: [
 	    qty: 2,
 	    name: '🥗 salad',
 	  ],
 	)
+
+	OrderToken.create(order_id: Order.first.id, token: SecureRandom.urlsafe_base64(256))

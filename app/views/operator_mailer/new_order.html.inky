@@ -1,0 +1,65 @@
+<container>
+  <br>
+  <row>
+    <columns>
+      <%= image_tag 'chixx_logo_black@1x.png' %>
+    </columns>
+  </row>
+
+  <center>
+    <h2><%= t('.title', num: @order.num) %></h2>
+    <br>
+    <row>
+      <columns>
+        <small>Название</small>
+      </columns>
+      <columns>
+        <small>Кол-во</small>
+      </columns>
+      <columns>
+        <small>Стоимость</small>
+      </columns>
+    </row>
+    <% @order.order_products.each do |product| %>
+      <row>
+        <columns>
+          <%= product.product.title %>
+        </columns>
+        <columns>
+          <%= product.qty %>
+        </columns>
+        <columns>
+          <%= product.total_cost %>
+        </columns>
+      </row>
+    <% end %>
+  </center>
+  <br>
+
+  <row>
+    <columns>
+    <% if @order.pickup %>
+      <p><%= t('.pickup', discount: (@order.total_cost / 10.0).round(2)) %></p>
+    <% else %>
+      <p><%= t('.delivery', delivery_cost: @order.delivery_cost) %></p>
+    <% end %>
+    <p><strong><%= t('.total', cost: @order.total_cost) %></strong></h4>
+    <br>
+    <p><%= t('.customer', name: @order.account.name) %></p>
+    <p><%= t('.address', location: @order.decorate.address_inline) %></p>
+    </columns>
+  </row>
+  <row>
+    <columns>
+      <center>
+        <button class='success expanded' href='<%= accept_order_url(@order.id, token: @order_token.token) %>'><%= t('.activate')%></button>
+      </center>
+    </columns>
+    <columns>
+      <center>
+        <button class='alert expanded' href='<%= cancel_order_url(@order.id, token: @order_token.token) %>'><%= t('.cancel')%></button>
+      </center>
+    </columns>
+  </row>
+
+</container>
