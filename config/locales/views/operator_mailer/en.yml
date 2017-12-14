@@ -8,6 +8,6 @@ en:
       pickup: 'Discount: %{discount} ₽'
       delivery: 'Delivery cost: %{delivery_cost} ₽'
       total: 'Total Cost: %{cost} ₽'
-      customer: 'Customer: %{name} ₽'
+      customer: 'Customer: %{name} (%{phone})'
       delivery_time: 'Delivery time: %{time} ₽'
       address: 'Delivery address: %{location}'

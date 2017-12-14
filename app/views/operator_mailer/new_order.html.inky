@@ -45,8 +45,10 @@
     <% end %>
     <p><strong><%= t('.total', cost: @order.total_cost) %></strong></h4>
     <br>
-    <p><%= t('.customer', name: @order.account.name) %></p>
-    <p><%= t('.address', location: @order.decorate.address_inline) %></p>
+    <p><%= t('.customer', name: @order.account.name, phone: @order.account.phone) %></p>
+    <% unless @order.pickup %>
+      <p><%= t('.address', location: @order.decorate.address_inline) %></p>
+    <% end %>
     </columns>
   </row>
   <row>
