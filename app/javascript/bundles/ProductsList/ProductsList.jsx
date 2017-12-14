@@ -7,9 +7,11 @@ class ProductsList extends React.Component {
 
 
   render() {
+    const { products } = this.props
+
     return (
       <div>
-        {this.props.products.length}
+        {products.length}
         <table>
           <thead>
             <tr>
@@ -22,8 +24,8 @@ class ProductsList extends React.Component {
           </thead>
           <tbody>
             {
-              this.props.products.map((product, i)=> (
-                <Product i={i} {...product}/>
+              products.map(product => (
+                <Product key={product.id} {...product}/>
               ))
             }
           </tbody>

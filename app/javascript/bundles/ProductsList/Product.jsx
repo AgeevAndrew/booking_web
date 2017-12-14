@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Product = (props) => (
-  <tr key={props.i}>
+  <tr>
     <td>{props.id}</td>
     <td>{props.title}</td>
     <td>{props.brief}</td>
