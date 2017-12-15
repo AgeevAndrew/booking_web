@@ -62,6 +62,9 @@ gem "react_on_rails", "10.0.0"
 gem "webpacker", "~> 3.0"
 gem 'mini_racer', platforms: :ruby
 
+# Auth
+gem 'devise', '~> 4.3.0'
+
 group :development, :test do
   gem 'awesome_print'
   gem 'better_errors'
@@ -96,6 +99,7 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'letter_opener'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
