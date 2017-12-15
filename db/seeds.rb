@@ -602,5 +602,4 @@ Product.create(
 	#   ],
 	# )
 
-
-	OrderToken.create(order_id: Order.first.id, token: SecureRandom.urlsafe_base64(256))
+# OrderToken.create(order_id: Order.first.id, token: SecureRandom.urlsafe_base64(256))
