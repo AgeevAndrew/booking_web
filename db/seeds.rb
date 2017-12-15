@@ -31,61 +31,61 @@ Category.create(name: 'Супы', icon_type: 'icon_soup', description: '')
 Category.create(name: 'Напитки', icon_type: 'icon_drinks', description: '')
 Category.create(name: 'Наборы', icon_type: 'icon_set', description: '')
 
+Company.create(name: 'ИП Свиридов Ф.Т.',
+							 categories: Category.pluck(:id),
+							 description: "ChiXX – это команда единомышленников, которые любят и умеют готовить.\nНаша цель – предложить Вам лучшие рецепты из самых деликатесных частей курицы. Все наши блюда готовятся вручную, вкусно, быстро и с душой. Используем только свежие продукты и очень внимательно относимся к процессу приготовления.\nМы уверены, что наш проект поможет Вам разнообразить привычную палитру готовых блюд, которая предлагается в нашем городе.\nЗакажите прямо сейчас и в кратчайшие сроки восхитительные блюда окажутся на Вашем столе!\nМы открыли новое кафе по адресу: ул. Ленинградская, 28г. Приходите и насладитесь нашими восхотительными блюдами в приятной и дружеской атмосфере!",
+							 delivery: { cost: 150, free_shipping: 800, pickup_discount: 10, period: { start: '12:00 +10', end: '19:30 +10' } },
+							 contact_info: { phone: '+7 (4212) 77-60-25', email: 'info@chixx.ru', geotag: ["48.469463,135.071622"], geotag_cafe: ["48.483257,135.094393"] })
+
 CompanySchedule.create(
 	id: 1,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'sun',
 	time_start: '13:00:00+10',
 	time_end: '21:00:00+10'
 )
 CompanySchedule.create(
 	id: 2,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'mon',
 	time_start: nil,
 	time_end: nil
 )
 CompanySchedule.create(
 	id: 3,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'tue',
 	time_start: '12:00:00+10',
 	time_end: '21:00:00+10'
 )
 CompanySchedule.create(
 	id: 4,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'wed',
 	time_start: '12:00:00+10',
 	time_end: '21:00:00+10'
 )
 CompanySchedule.create(
 	id: 5,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'thu',
 	time_start: '12:00:00+10',
 	time_end: '21:00:00+10'
 )
 CompanySchedule.create(
 	id: 6,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'fri',
 	time_start: '12:00:00+10',
 	time_end: '21:00:00+10'
 )
 CompanySchedule.create(
 	id: 7,
-  company_id: Company.first.id,
+ company_id: Company.first.id,
 	week_day: 'sat',
 	time_start: '12:00:00+10',
 	time_end: '21:00:00+10'
-)
-
-Company.create(name: 'ИП Свиридов Ф.Т.',
-							 categories: Category.pluck(:id),
-							 description: "ChiXX – это команда единомышленников, которые любят и умеют готовить.\nНаша цель – предложить Вам лучшие рецепты из самых деликатесных частей курицы. Все наши блюда готовятся вручную, вкусно, быстро и с душой. Используем только свежие продукты и очень внимательно относимся к процессу приготовления.\nМы уверены, что наш проект поможет Вам разнообразить привычную палитру готовых блюд, которая предлагается в нашем городе.\nЗакажите прямо сейчас и в кратчайшие сроки восхитительные блюда окажутся на Вашем столе!\nМы открыли новое кафе по адресу: ул. Ленинградская, 28г. Приходите и насладитесь нашими восхотительными блюдами в приятной и дружеской атмосфере!",
-							 delivery: { cost: 150, free_shipping: 800, pickup_discount: 10, period: { start: '12:00 +10', end: '19:30 +10' } },
-							 contact_info: { phone: '+7 (4212) 77-60-25', email: 'info@chixx.ru', geotag: ["48.469463,135.071622"], geotag_cafe: ["48.483257,135.094393"] })
+							 )
 
 Product.create(
 	category_id: Category.first.id,
