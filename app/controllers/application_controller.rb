@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  include ReactOnRails::Controller
+
   protect_from_forgery with: :exception
   before_action :authenticate_user!, unless: proc { |c| c.controller_path.start_with?('api') }
   skip_before_action :verify_authenticity_token

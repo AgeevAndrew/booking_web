@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import { HELLO_WORLD_NAME_UPDATE } from '../constants/helloWorldConstants';
+import { HELLO_WORLD_NAME_UPDATE } from 'constants/helloWorldConstants';
 
 const name = (state = '', action) => {
   switch (action.type) {
@@ -10,6 +9,5 @@ const name = (state = '', action) => {
   }
 };
 
-const helloWorldReducer = combineReducers({ name });
 
-export default helloWorldReducer;
+export default name;
