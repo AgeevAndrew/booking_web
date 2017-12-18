@@ -2,6 +2,7 @@
 
 class OrdersController < ApplicationController
   before_action :set_order, :set_order_token
+  skip_before_action :authenticate_user!
 
   def accept
     if @order_token.present?
