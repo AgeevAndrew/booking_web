@@ -28,6 +28,7 @@ production:
   <<: *default
   database: booking_web
   password: booker-web
+  host: localhost
   variables:
     tcp_keepalives_idle: 60
     tcp_keepalives_interval: 60
