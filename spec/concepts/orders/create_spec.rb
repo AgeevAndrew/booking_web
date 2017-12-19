@@ -77,6 +77,18 @@ module Orders
           qty * product.main_options[0]['cost'].to_f + qty * product.additional_info[0]['cost'].to_f
         end
 
+        context 'discount' do
+          context 'pickup' do
+            let(:pickup) { true }
+
+            it { expect(subject.discount).to eq result_cost * company.delivery['pickup_discount'] / 100.0 }
+          end
+
+          context 'shipping' do
+            it { expect(subject.discount).to eq 0 }
+          end
+        end
+
         context 'delivery_cost' do
           context 'free_shipping' do
             let(:company) { create(:company, :free_shipping) }

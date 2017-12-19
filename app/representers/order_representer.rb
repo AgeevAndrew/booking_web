@@ -8,6 +8,7 @@ class OrderRepresenter < ApplicationRepresenter
   property :address_info
   property :total_cost
   property :delivery_cost
+  property :discount
   property :delivery_time
   property :pickup
   property :status, getter: ->(represented:, **) { represented.status.name }

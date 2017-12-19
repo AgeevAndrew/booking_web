@@ -2,7 +2,7 @@
   <br>
   <row>
     <columns>
-      <%= image_tag 'chixx_logo_black@1x.png' %>
+      <%= email_image_tag 'chixx_logo_black@1x.png' %>
     </columns>
   </row>
 
@@ -21,17 +21,32 @@
       </columns>
     </row>
     <% @order.order_products.each do |product| %>
+
       <row>
         <columns>
-          <%= product.product.title %>
+          <strong><%= product.product.title %></strong>
         </columns>
         <columns>
-          <%= product.qty %>
+          <strong><%= product.qty %></strong>
         </columns>
         <columns>
-          <%= product.total_cost %>
+          <strong><%= product.total_cost %></strong>
         </columns>
       </row>
+
+      <% product.ingredients.each do |ingredient| %>
+      <row>
+        <columns>
+          <p class="text-right">+<%= ingredient['name'] %></p>
+        </columns>
+        <columns>
+          <%= ingredient['qty'] %>
+        </columns>
+        <columns>
+          <%= ingredient['total_cost'] %>
+        </columns>
+      </row>
+      <% end %>
     <% end %>
   </center>
   <br>
@@ -39,13 +54,13 @@
   <row>
     <columns>
     <% if @order.pickup %>
-      <p><%= t('.pickup', discount: (@order.total_cost / 10.0).round(2)) %></p>
+      <p><%= t('.pickup', discount: @order.discount) %></p>
     <% else %>
       <p><%= t('.delivery', delivery_cost: @order.delivery_cost) %></p>
     <% end %>
-    <p><strong><%= t('.total', cost: @order.total_cost) %></strong></h4>
+    <p><strong><%= t('.total', cost: (@order.total_cost + @order.delivery_cost)) %></strong></h4>
     <br>
-    <p><%= t('.customer', name: @order.account.name, phone: @order.account.phone) %></p>
+    <p><%= t('.customer', name: @order.account.name, phone: "<a href='tel:#{@order.account.phone}'>#{@order.account.phone}</a>").html_safe %></p>
     <% unless @order.pickup %>
       <p><%= t('.address', location: @order.decorate.address_inline) %></p>
     <% end %>

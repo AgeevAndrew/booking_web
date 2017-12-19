@@ -25,15 +25,16 @@ class Orders::Create < ApplicationOperation
 
   def assign_special_attributes
     assign_products_cost
-    model.total_cost = order_cost
+    model.total_cost = order_cost * discount
     model.delivery_cost = delivery_cost
+    model.discount = order_cost - model.total_cost
     model.address_info = contract.address || {}
   end
 
   def order_cost
     @order_cost ||= contract.order_products.map do |op|
                       op.model.total_cost
-                    end.sum * discount
+                    end.sum
   end
 
   def assign_products_cost
