@@ -14,7 +14,7 @@ class NewOrderPropogateJob < ApplicationJob
   attr_reader :order
 
   def operators
-    # order.company.contact_info['email']
+    return order.company.contact_info['email'] if Rails.env.production?
     ['arkhipovky@arink-group.ru', 'bodakovda@arink-group.ru']
   end
 

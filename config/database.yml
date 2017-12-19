@@ -24,8 +24,11 @@ staging:
     tcp_keepalives_interval: 60
     tcp_keepalives_count: 100
 
-# production:
-#   <<: *default
-#   database: booking_web_production
-#   username: booking_web
-#   password: <%= ENV['BOOKING_WEB_DATABASE_PASSWORD'] %>
+production:
+  <<: *default
+  database: booking_web
+  password: booker-web
+  variables:
+    tcp_keepalives_idle: 60
+    tcp_keepalives_interval: 60
+    tcp_keepalives_count: 100
