@@ -1,0 +1,20 @@
+
+[Unit]
+Description=Puma Background Worker
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=deployer
+WorkingDirectory=/home/deployer/apps/booking_web/current
+ExecStart=/bin/bash -lc 'bundle exec puma -e staging'
+
+RestartSec=1
+Restart=on-failure
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=railsWeb
+
+[Install]
+WantedBy=multi-user.target

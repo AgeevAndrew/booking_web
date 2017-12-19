@@ -1,0 +1,13 @@
+en:
+  operator_mailer:
+    new_order:
+      subject: 'New order #%{num}'
+      title: 'New order #%{num}'
+      activate: Activate
+      cancel: Cancel
+      pickup: 'Discount: %{discount} ₽'
+      delivery: 'Delivery cost: %{delivery_cost} ₽'
+      total: 'Total Cost: %{cost} ₽'
+      customer: 'Customer: %{name} (%{phone})'
+      delivery_time: 'Delivery time: %{time} ₽'
+      address: 'Delivery address: %{location}'

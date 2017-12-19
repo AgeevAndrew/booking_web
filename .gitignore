@@ -13,7 +13,14 @@
 !/log/.keep
 !/tmp/.keep
 
+/spec/examples.txt
+
 /node_modules
 /yarn-error.log
 
+/doc/api
+
 .byebug_history
+/public/packs
+/public/packs-test
+/node_modules

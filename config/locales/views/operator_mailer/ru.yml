@@ -1,0 +1,13 @@
+ru:
+  operator_mailer:
+    new_order:
+      subject: Новый заказ №%{num}
+      title: Новый заказ №%{num}
+      activate: Подтвердить
+      cancel: Отменить
+      pickup: 'Скидка за самовывоз: %{discount} ₽'
+      delivery: 'Стоимость доставки: %{delivery_cost} ₽'
+      total: 'Итого к оплате: %{cost} ₽'
+      customer: 'Клиент: %{name} (%{phone})'
+      delivery_time: 'Время доставки: %{time} ₽'
+      address: 'Адрес доставки: %{location}'

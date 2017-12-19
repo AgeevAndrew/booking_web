@@ -6,9 +6,16 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'app-bundle' %>
+    <%= redux_store_hydration_data %>
+
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= link_to('sign_out', destroy_user_session_path, method: :delete) if user_signed_in? %>
+
     <%= yield %>
   </body>
 </html>
