@@ -42,7 +42,7 @@ threads threads_count, threads_count
 
 bind 'unix:///home/deployer/apps/booking_web/shared/tmp/sockets/booking_web-puma.sock'
 
-workers 3
+workers 2
 
 on_worker_boot do
   ActiveSupport.on_load(:active_record) do
