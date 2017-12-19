@@ -66,6 +66,7 @@ namespace :deploy do
       # invoke 'puma:restart'
       sudo 'service booking_web restart'
       sudo 'service booking_sidekiq restart'
+      sudo 'service nginx restart'
     end
   end
 
