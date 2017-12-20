@@ -1,4 +1,4 @@
-import { PRODUCT_EDIT, PRODUCT_SWITCH_ACTIVE } from 'constants/productsConstants'
+import { PRODUCT_SWITCH_ACTIVE } from 'constants/productsConstants'
 
 const products = (productsList = [], action) => {
   switch (action.type) {

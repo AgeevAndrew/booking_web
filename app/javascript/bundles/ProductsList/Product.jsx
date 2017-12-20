@@ -14,8 +14,4 @@ const Product = ({ product, dispatch }) => (
   </tr>
 )
 
-
-
-import { connect } from 'react-redux';
-
 export default Product
