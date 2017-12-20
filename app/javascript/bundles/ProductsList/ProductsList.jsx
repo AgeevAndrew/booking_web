@@ -21,7 +21,6 @@ class ProductsList extends React.Component {
               <td>Description</td>
               <td>Photo</td>
               <td>Active</td>
-              <td>Edit</td>
             </tr>
           </thead>
           <tbody>
