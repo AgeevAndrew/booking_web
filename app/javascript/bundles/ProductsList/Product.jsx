@@ -1,5 +1,7 @@
 import React from 'react'
-import SwitchActive from './SwitchActive'
+import { updateProductActivity } from 'actions/productsActionCreators'
+import { connect } from 'react-redux'
+import { getProduct } from 'selectors/products'
 
 const Product = ({ product, dispatch }) => (
   <tr>
@@ -9,9 +11,19 @@ const Product = ({ product, dispatch }) => (
     <td>{product.description}</td>
     <td>{product.photo}</td>
     <td>
-      <SwitchActive product={product}  />
+      <button
+        onClick={ e => dispatch(updateProductActivity(product)) }
+        className={product.active ? 'on' : 'off'}>
+          { product.active ? 'On' : 'Off' }
+      </button>
     </td>
   </tr>
 )
 
-export default Product
+const mapStateToProps = (state, ownProps) => (
+  {
+    product: getProduct(state, ownProps)
+  }
+)
+
+export default connect(mapStateToProps, null)(Product)

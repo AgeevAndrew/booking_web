@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-
+import map from 'lodash/map'
+import { getArrayProducts } from 'selectors/products'
 import Product from './Product'
+import { connect } from 'react-redux';
 
 class ProductsList extends React.Component {
 
@@ -25,9 +27,9 @@ class ProductsList extends React.Component {
           </thead>
           <tbody>
             {
-              products.map(product => (
-                <Product key={product.id} product={ product }/>
-              ))
+              map(products, (product => (
+                <Product key={product.id} id={product.id} />
+              )))
             }
           </tbody>
         </table>
@@ -36,7 +38,6 @@ class ProductsList extends React.Component {
   }
 }
 
-import { connect } from 'react-redux';
-const mapStateToProps = (state) => ({ products: state.products });
+const mapStateToProps = (state, ownProps) => ({ products: getArrayProducts(state, ownProps) });
 
 export default connect(mapStateToProps, null)(ProductsList);
