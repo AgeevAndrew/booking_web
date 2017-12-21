@@ -1,4 +1,8 @@
 booking_mailgun_api_key: 'key-c1e1ceed2371213407a37d13c20cb782'
 redis_url: 'redis://localhost:6379/3'
+admin_mails:
+  - bodakovda@arink-group.ru
+  - ageevaa@arink-group.ru
+  - arkhipovky@arink-group.ru
 production:
   redis_url: 'redis://pub-redis-15669.eu-central-1-1.1.ec2.redislabs.com:15669'

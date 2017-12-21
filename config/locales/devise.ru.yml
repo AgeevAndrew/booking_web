@@ -13,10 +13,12 @@ ru:
       not_found_in_database: "Неверный %{authentication_keys} или пароль."
       timeout: "Ваш сеанс закончился. Пожалуйста, войдите в систему снова."
       unauthenticated: "Вам необходимо войти в систему или зарегистрироваться."
-      unconfirmed: "Вы должны подтвердить вашу учётную запись."
+      unconfirmed: "Ваша учетная запись еще не подверждена администратором."
     mailer:
       confirmation_instructions:
-        subject: "Инструкции по подтверждению учётной записи."
+        subject: "В системе зарегистрирован новый пользователь."
+        new_user: "Зарегистрирован новый пользователь %{user}"
+        confirm: "Активировать учетную запись!"
       reset_password_instructions:
         subject: "Инструкции по восстановлению пароля."
       unlock_instructions:
