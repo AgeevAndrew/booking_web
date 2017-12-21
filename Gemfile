@@ -50,6 +50,7 @@ gem 'apitome', git: 'git@github.com:jejacks0n/apitome.git', branch: 'master'
 # services
 gem 'mailgun_rails'
 gem 'redis', '~> 3.0'
+gem "sentry-raven"
 gem 'sidekiq'
 
 # Emails

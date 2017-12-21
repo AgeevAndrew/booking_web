@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   skip_before_action :verify_authenticity_token
   before_action :set_locale
   before_action :set_timezone
+  before_action :set_raven_context
 
   private
 
@@ -21,5 +22,10 @@ class ApplicationController < ActionController::Base
     header_timezone = request.headers['User-TimeZone']
     timezone = LocalTimeZone.time_zones.include?(header_timezone) ? header_timezone : 'Vladivostok'
     Time.zone = ActiveSupport::TimeZone.new(timezone)
+  end
+
+  def set_raven_context
+    Raven.user_context(opeartor: current_user&.id) # or anything else in session
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end
