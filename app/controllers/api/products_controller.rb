@@ -3,6 +3,7 @@
 class Api::ProductsController < Api::BaseController
   include ActionController::MimeResponds
   before_action :set_product, only: [:show, :edit, :update, :destroy, :visibility_change]
+  before_action :authenticate_user!, only: [:index]
 
   respond_to :json
 
