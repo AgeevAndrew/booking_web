@@ -26,4 +26,4 @@ const mapStateToProps = (state, ownProps) => (
   }
 )
 
-export default connect(mapStateToProps, null)(Product)
+export default connect(mapStateToProps)(Product)

@@ -40,4 +40,4 @@ class ProductsList extends React.Component {
 
 const mapStateToProps = (state, ownProps) => ({ products: getArrayProducts(state, ownProps) });
 
-export default connect(mapStateToProps, null)(ProductsList);
+export default connect(mapStateToProps)(ProductsList);
