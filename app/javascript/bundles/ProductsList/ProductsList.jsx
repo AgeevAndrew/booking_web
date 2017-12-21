@@ -28,7 +28,7 @@ class ProductsList extends React.Component {
           <tbody>
             {
               map(products, (product => (
-                <Product key={product.id} id={product.id} />
+                <Product key={product.id} productId={product.id} />
               )))
             }
           </tbody>

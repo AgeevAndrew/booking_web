@@ -1,1 +1,1 @@
-export const getProductId = (state, props) => props.id
+export const getProductId = (state, props) => props.productId
