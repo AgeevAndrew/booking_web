@@ -3,6 +3,7 @@
 class Api::ProductsController < Api::BaseController
   include ActionController::MimeResponds
   before_action :set_product, only: [:show, :edit, :update, :destroy, :visibility_change]
+  before_action :authenticate_user!, only: [:update, :visibility_change]
 
   respond_to :json
 
@@ -83,6 +84,6 @@ class Api::ProductsController < Api::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:category_id, :company_id, :title, :brief, :description, :photo, :main_options, :additional_info)
+      params.require(:product).permit(:category_id, :company_id, :title, :brief, :description, :photo, :main_options, :additional_info, :active)
     end
 end

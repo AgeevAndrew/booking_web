@@ -1,13 +1,29 @@
 import React from 'react'
+import { updateProductActivity } from 'actions/productsActionCreators'
+import { connect } from 'react-redux'
+import { getProduct } from 'selectors/products'
 
-const Product = (props) => (
+const Product = ({ product, dispatch }) => (
   <tr>
-    <td>{props.id}</td>
-    <td>{props.title}</td>
-    <td>{props.brief}</td>
-    <td>{props.description}</td>
-    <td>{props.photo}</td>
+    <td>{product.id}</td>
+    <td>{product.title}</td>
+    <td>{product.brief}</td>
+    <td>{product.description}</td>
+    <td>{product.photo}</td>
+    <td>
+      <button
+        onClick={ e => dispatch(updateProductActivity(product)) }
+        className={product.active ? 'on' : 'off'}>
+          { product.active ? 'On' : 'Off' }
+      </button>
+    </td>
   </tr>
 )
 
-export default Product
+const mapStateToProps = (state, ownProps) => (
+  {
+    product: getProduct(state, ownProps)
+  }
+)
+
+export default connect(mapStateToProps)(Product)

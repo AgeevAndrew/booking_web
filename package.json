@@ -5,13 +5,19 @@
     "@rails/webpacker": "^3.1.1",
     "babel-preset-react": "^6.24.1",
     "coffeescript": "1.12.7",
+    "cross-fetch": "^1.1.1",
+    "humps": "^2.0.1",
+    "lodash": "^4.17.4",
+    "normalizr": "^3.2.4",
     "prop-types": "^15.6.0",
+    "query-string": "^5.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-on-rails": "^10.0.2",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "webpack-dev-server": "^2.9.7"
