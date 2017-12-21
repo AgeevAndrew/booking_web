@@ -2,6 +2,7 @@
 
 class Api::AccountsController < Api::BaseController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:index]
 
   respond_to :json
 
