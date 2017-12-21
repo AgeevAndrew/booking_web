@@ -148,6 +148,8 @@ GEM
     faker (1.8.4)
       i18n (~> 0.5)
     faker-russian (0.0.6)
+    faraday (0.13.1)
+      multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
     figaro (1.1.1)
       thor (~> 0.14)
@@ -215,6 +217,7 @@ GEM
       libv8 (~> 5.9)
     minitest (5.10.3)
     multi_json (1.12.2)
+    multipart-post (2.0.0)
     mustache (1.0.5)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -348,6 +351,8 @@ GEM
     selenium-webdriver (3.6.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    sentry-raven (2.7.1)
+      faraday (>= 0.7.6, < 1.0)
     shellany (0.0.1)
     sidekiq (5.0.4)
       concurrent-ruby (~> 1.0)
@@ -462,6 +467,7 @@ DEPENDENCIES
   rspec_api_documentation
   sass-rails (~> 5.0)
   selenium-webdriver
+  sentry-raven
   sidekiq
   spring
   spring-watcher-listen (~> 2.0.0)
