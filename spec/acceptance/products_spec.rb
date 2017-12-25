@@ -27,6 +27,12 @@ RSpec.resource 'Products', acceptance: true do
   end
 
   patch '/api/products/:id/visibility_change' do
+    header 'Authorization', :auth_header
+    let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
+
+    let(:user) { create(:user, password: password) }
+    let(:password) { Faker::Internet.password(8, 12) }
+
     let(:product) { create(:product) }
 
     let(:id) { product.id }

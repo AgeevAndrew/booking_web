@@ -81,7 +81,11 @@ module Orders
           context 'pickup' do
             let(:pickup) { true }
 
-            it { expect(subject.discount).to eq result_cost * company.delivery['pickup_discount'] / 100.0 }
+            it do
+              expect(subject.discount).to be_within(0.001).of(
+                result_cost * company.delivery['pickup_discount'] / 100.0,
+              )
+            end
           end
 
           context 'shipping' do

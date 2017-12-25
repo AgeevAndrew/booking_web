@@ -20,5 +20,13 @@ FactoryGirl.define do
         { name: Faker::Food.unique.ingredient, cost: Faker::Number.unique.number(2) },
       ]
     end
+
+    trait :actived do
+      active true
+    end
+
+    trait :deactived do
+      active false
+    end
   end
 end
