@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class OrdersController < ApplicationController
+class OrdersController < BaseController
   before_action :set_order, :set_order_token
   skip_before_action :authenticate_user!
 

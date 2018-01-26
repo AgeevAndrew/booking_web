@@ -1,13 +1,13 @@
-import React from 'react';
-import { Provider } from 'react-redux';
+import React from 'react'
+import { Provider } from 'react-redux'
 
 import getStore from 'store/getStore'
-import ProductsList from './ProductsList';
+import ProductsList from './ProductsList'
 
-const ProductsListApp = (props) => (
+const ProductsListApp = () =>
   <Provider store={getStore()}>
-    <ProductsList />
+    <ProductsList/>
   </Provider>
-);
 
-export default ProductsListApp;
+
+export default ProductsListApp

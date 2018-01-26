@@ -8,8 +8,9 @@ Rails.application.routes.draw do
   concern :app_api do
     resources :companies
 
-    resources :products do
-      patch :visibility_change, on: :member
+    resources :products, except: :update do
+      post :visibility_change, on: :member
+      post 'update', on: :member
     end
 
     resources :categories

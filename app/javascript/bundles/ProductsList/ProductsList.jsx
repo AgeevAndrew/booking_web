@@ -1,43 +1,39 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React from 'react'
 import map from 'lodash/map'
-import { getArrayProducts } from 'selectors/products'
 import Product from './Product'
-import { connect } from 'react-redux';
+import Categories from './Categories'
+import { Segment, Item, Grid } from 'semantic-ui-react'
 
 class ProductsList extends React.Component {
-
-
   render() {
     const { products } = this.props
-
     return (
-      <div>
-        {products.length}
-        <table>
-          <thead>
-            <tr>
-              <td>Id</td>
-              <td>Title</td>
-              <td>Brief</td>
-              <td>Description</td>
-              <td>Photo</td>
-              <td>Active</td>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              map(products, (product => (
-                <Product key={product.id} productId={product.id} />
-              )))
-            }
-          </tbody>
-        </table>
-      </div>
+      <Segment style={{ paddingLeft: '10%', paddingRight: '10%' }} vertical>
+        <Grid>
+          <Grid.Column width={4}>
+            <Categories/>
+          </Grid.Column>
+          <Grid.Column width={12}>
+            <Item.Group>
+                {map(products, (product) => <Product key={product.id} productId={product.id}/>)}
+              </Item.Group>
+          </Grid.Column>
+        </Grid>
+      </Segment>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({ products: getArrayProducts(state, ownProps) });
+import { connect } from 'react-redux'
+import { getArrayActiveProducts } from 'selectors/products'
+import PropTypes from 'prop-types'
 
-export default connect(mapStateToProps)(ProductsList);
+ProductsList.propTypes = {
+  products: PropTypes.array.isRequired,
+}
+
+const mapStateToProps = (state, props) => ({
+  products: getArrayActiveProducts(state, props),
+})
+
+export default connect(mapStateToProps)(ProductsList)
