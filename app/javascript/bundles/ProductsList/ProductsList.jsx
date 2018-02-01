@@ -8,7 +8,7 @@ class ProductsList extends React.Component {
   render() {
     const { products } = this.props
     return (
-      <Segment style={{ paddingLeft: '10%', paddingRight: '10%' }} vertical>
+      <Segment style={{ paddingLeft: '10%', paddingRight: '10%' }}>
         <Grid>
           <Grid.Column width={4}>
             <Categories/>
