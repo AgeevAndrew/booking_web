@@ -23,12 +23,8 @@ RSpec.describe Api::ProductsController, type: :routing do
       expect(:post => "/api/products").to route_to("api/products#create", "format"=>:json)
     end
 
-    it "routes to #update via PUT" do
-      expect(:put => "/api/products/1").to route_to("api/products#update", :id => "1", "format"=>:json)
-    end
-
-    it "routes to #update via PATCH" do
-      expect(:patch => "/api/products/1").to route_to("api/products#update", :id => "1", "format"=>:json)
+    it "routes to #update via POST" do
+      expect(:post => "/api/products/1/update").to route_to("api/products#update", :id => "1", "format"=>:json)
     end
 
     it "routes to #destroy" do

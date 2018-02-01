@@ -26,7 +26,13 @@ RSpec.resource 'Products', acceptance: true do
     end
   end
 
-  patch '/api/products/:id/visibility_change' do
+  post '/api/products/:id/visibility_change' do
+    header 'Authorization', :auth_header
+    let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
+
+    let(:user) { create(:user, password: password) }
+    let(:password) { Faker::Internet.password(8, 12) }
+
     let(:product) { create(:product) }
 
     let(:id) { product.id }
@@ -36,16 +42,67 @@ RSpec.resource 'Products', acceptance: true do
 
     example 'Activate' do
       do_request(active: true)
-      expect(status).to eq(204)
+      expect(status).to eq(201)
     end
 
     example 'Deactivate' do
       do_request(active: false)
-      expect(status).to eq(204)
+      expect(status).to eq(201)
     end
 
     example 'Deactivate (errors)' do
       do_request(active: nil)
+      expect(status).to eq(422)
+    end
+  end
+
+  post '/api/products/:id/update' do
+    header 'Authorization', :auth_header
+    let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
+
+    let(:user) { create(:user, password: password) }
+    let(:password) { Faker::Internet.password(8, 12) }
+
+    let(:product) { create(:product) }
+
+    let(:id) { product.id }
+
+    parameter :id, required: true
+    parameter :company_id, required: true
+    parameter :category_id, required: true
+    parameter :title, required: true
+    parameter :description, required: true
+    parameter :brief, required: true
+    parameter :photo, required: true
+    parameter :main_options, required: true
+    parameter :additional_info, required: true
+
+    let(:company_id) { product.company_id }
+    let(:category_id) { product.category_id }
+    let(:title) { Faker::Food.dish }
+    let(:description) { Faker::Lorem.paragraph }
+    let(:brief) { Faker::Lorem.sentence(3, true, 4) }
+    let(:photo) { Faker::Internet.url }
+    let(:main_options) {
+      [
+        { 'cost' => Faker::Number.unique.number(2), 'name' => Faker::Food.unique.measurement },
+        { 'cost' => Faker::Number.unique.number(2), 'name' => Faker::Food.unique.measurement },
+      ]
+    }
+    let(:additional_info) {
+      [
+        { 'name' => Faker::Food.unique.ingredient, 'cost' => Faker::Number.unique.number(2) },
+        { 'name' => Faker::Food.unique.ingredient, 'cost' => Faker::Number.unique.number(2) },
+      ]
+    }
+
+    example 'Update' do
+      do_request(active: true)
+      expect(status).to eq(201)
+    end
+
+    example 'Update (errors)' do
+      do_request(title: nil)
       expect(status).to eq(422)
     end
   end

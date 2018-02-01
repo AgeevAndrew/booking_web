@@ -16,7 +16,15 @@ class Categories::Find < ApplicationOperation
   end
 
   def process(*)
-    @result = Category.all
+    @result = Category.where(id: active_category_ids)
     @result = @result.where(id: model.categories) if model.present?
+  end
+
+  private
+
+  def active_category_ids
+    result = Product.actives.select(:category_id)
+    result = result.where(company_id: model.id) if model.present?
+    result
   end
 end

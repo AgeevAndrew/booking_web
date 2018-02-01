@@ -1,6 +1,6 @@
-class ProductsController < ApplicationController
+class ProductsController < BaseController
   def index
-    @products = Product.order(:id).as_json
-    redux_store('SharedReduxStore', props: { products: @products })
+    _, operation = Products::Index.run params
+    redux_store('SharedReduxStore', props: operation.to_json )
   end
 end

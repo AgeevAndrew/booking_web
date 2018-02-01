@@ -2,20 +2,21 @@
 <html>
   <head>
     <title>BookingWeb</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'app-bundle' %>
     <%= redux_store_hydration_data %>
-
+    <meta name="viewport" content="width=500, initial-scale=0.7, maximum-scale=1.0">
   </head>
 
   <body>
+    <%= react_component("NavBarApp", props: { logedin: user_signed_in? }) %>
+    <%= react_component("ErrorsApp") %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= link_to('sign_out', destroy_user_session_path, method: :delete) if user_signed_in? %>
-
     <%= yield %>
   </body>
 </html>
