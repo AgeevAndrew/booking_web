@@ -551,77 +551,77 @@ Product.create(
 	main_options: [{ name: 'Beer сет', cost: 1810 }],
 	)
 
-# 	Address.create(
-# 	  city: 'Астрахань',
-# 	  code: '71',
-# 	  floor: '4',
-# 	  house: '144',
-# 	  title: 'work',
-# 	  entrance: '4',
-# 	  office: '90',
-# 	  street: 'Комарова пр.',
-# 	)
-#
-# 	Address.create(
-# 	  city: 'Санкт-Петербург',
-# 	  code: '75',
-# 	  floor: '6',
-# 	  house: '100',
-# 	  title: 'home',
-# 	  entrance: '2',
-# 	  office: '13',
-# 	  street: 'пр. Южная',
-# 	)
-#
-# 	Account.create(
-# 	  id: 'eb5378e4-48e6-4d03-b954-d00739b8c8ff',
-# 	  name: 'Ilene Pearline Boyle',
-# 	  phone: '(409) 941-2819',
-# 	  email: 'domenick@padberg.io',
-# 	  address_ids: Address.pluck(:id),
-# 	  created_at: '2017-10-17T04:42:52.790Z',
-# 	  updated_at: '2017-10-17T04:42:52.790Z',
-# 	)
-#
-# 	Order.create(
-# 	  # id: SecureRandom.uuid,
-# 	  account_id: Account.first.id,
-# 	  address_info: Address.first,
-# 	  company_id: Company.first.id,
-# 	  status_id: Statuses::NEW,
-# 	  delivery_time: '15:00',
-# 	  total_cost: 230,
-# 	)
-#
-# 	OrderProduct.create(
-# 	  order_id: Order.first.id,
-# 	  product_id: Product.first.id,
-# 	  main_option: 'beef',
-# 		total_cost: 230,
-# 	  ingredients: [
-# 	    qty: 2,
-# 	    name: '🥗 salad',
-# 			total_cost: 100,
-# 	  ],
-# 	)
-#
-# 	OrderProduct.create(
-# 	  order_id: Order.first.id,
-# 	  product_id: Product.second.id,
-# 	  main_option: 'XL - 325 гр',
-# 		total_cost: 590,
-# 	  ingredients: [
-# 	    {
-# 				qty: 5,
-# 	    	name: '🌶 Халапеньо',
-# 				total_cost: 50,
-# 			},
-# 			{
-# 				qty: 2,
-# 	    	name: '🥗 Салат Коул слоу (200 гр)',
-# 				total_cost: 150,
-# 			},
-# 		],
-# 	)
+	Address.create(
+	  city: 'Астрахань',
+	  code: '71',
+	  floor: '4',
+	  house: '144',
+	  title: 'work',
+	  entrance: '4',
+	  office: '90',
+	  street: 'Комарова пр.',
+	)
+
+	Address.create(
+	  city: 'Санкт-Петербург',
+	  code: '75',
+	  floor: '6',
+	  house: '100',
+	  title: 'home',
+	  entrance: '2',
+	  office: '13',
+	  street: 'пр. Южная',
+	)
+
+	Account.create(
+	  id: 'eb5378e4-48e6-4d03-b954-d00739b8c8ff',
+	  name: 'Ilene Pearline Boyle',
+	  phone: '(409) 941-2819',
+	  email: 'domenick@padberg.io',
+	  address_ids: Address.pluck(:id),
+	  created_at: '2017-10-17T04:42:52.790Z',
+	  updated_at: '2017-10-17T04:42:52.790Z',
+	)
+
+	Order.create(
+	  # id: SecureRandom.uuid,
+	  account_id: Account.first.id,
+	  address_info: Address.first,
+	  company_id: Company.first.id,
+	  status_id: Statuses::NEW,
+	  delivery_time: '15:00',
+	  total_cost: 230,
+	)
+
+	OrderProduct.create(
+	  order_id: Order.first.id,
+	  product_id: Product.first.id,
+	  main_option: 'beef',
+		total_cost: 230,
+	  ingredients: [
+	    qty: 2,
+	    name: '🥗 salad',
+			total_cost: 100,
+	  ],
+	)
+
+	OrderProduct.create(
+	  order_id: Order.first.id,
+	  product_id: Product.second.id,
+	  main_option: 'XL - 325 гр',
+		total_cost: 590,
+	  ingredients: [
+	    {
+				qty: 5,
+	    	name: '🌶 Халапеньо',
+				total_cost: 50,
+			},
+			{
+				qty: 2,
+	    	name: '🥗 Салат Коул слоу (200 гр)',
+				total_cost: 150,
+			},
+		],
+	)
 #
 # OrderToken.create(order_id: Order.first.id, token: SecureRandom.urlsafe_base64(256))

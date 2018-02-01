@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
 class OrdersController < BaseController
-  before_action :set_order, :set_order_token
-  skip_before_action :authenticate_user!
+  before_action :set_order, :set_order_token, only: %i[accept cancel]
+  skip_before_action :authenticate_user!, except: [:index]
+
+  def index
+    present Orders::Filter
+    ap @operation.to_json
+    ap current_user
+    redux_store('SharedReduxStore', props: @operation.to_json)
+  end
 
   def accept
     if @order_token.present?
