@@ -21,39 +21,36 @@ class ProductEditForm extends React.Component {
     const { product } = this.props
     return (
       <Item.Content>
-          <Item.Header>
-            <Input name='title' defaultValue={product.title} onChange={this.handleChange}/>
-          </Item.Header>
-          <Item.Meta>
-            <Input name='brief' fluid defaultValue={product.brief} onChange={this.handleChange}/>
-          </Item.Meta>
           <Item.Description>
             <Form>
-              <TextArea name='description'
-                        autoHeight
-                        defaultValue={product.description}
-                        onChange={this.handleChange}/>
-            </Form>
-            <div>
+              <Form.Input size='large' name='title' defaultValue={product.title} onChange={this.handleChange}/>
+              <Form.TextArea name='brief'
+                autoHeight
+                defaultValue={product.brief}
+                onChange={this.handleChange}/>
+              <Form.TextArea name='description'
+                autoHeight
+                defaultValue={product.description}
+                onChange={this.handleChange}/>
+
               {map(product.mainOptions, (mo, index) =>
-                <div key={index}>
-                  <Input index={index}
-                         name='name'
-                         defaultValue={mo.name}
-                         onChange={this.handleChangeMainOption}/>
-                  -
-                  <Input index={index}
-                         name='cost'
-                         type='number'
-                         step='0.01'
-                         labelPosition='left'
-                         defaultValue={mo.cost}
-                         onChange={this.handleChangeMainOption}>
-                     <Label basic>₽</Label>
+                <Form.Group widths='equal' key={index}>
+                  <Form.Input index={index}
+                    name='name'
+                    defaultValue={mo.name}
+                    onChange={this.handleChangeMainOption}/>
+                  <Form.Input index={index}
+                    name='cost'
+                    type='number'
+                    step='0.01'
+                    labelPosition='left'
+                    defaultValue={mo.cost}
+                    onChange={this.handleChangeMainOption}>
                     <input/>
-                  </Input>
-                </div>)}
-            </div>
+                    <Label basic>₽</Label>
+                  </Form.Input>
+                </Form.Group>)}
+            </Form>
           </Item.Description>
           <Item.Extra>
             <Button floated='right' color='green' onClick={this.handleSubmit}>
