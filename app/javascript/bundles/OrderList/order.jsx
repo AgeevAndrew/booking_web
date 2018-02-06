@@ -1,23 +1,34 @@
 import React from 'react'
-import { Segment, Header, Button } from 'semantic-ui-react'
+import { Segment, Header, Button, Label } from 'semantic-ui-react'
 import { addressString } from 'shared/decorators/address'
 
 class Order extends React.Component {
   openModal = () => {
-    const { order } = this.props
+    const { toggle, order } = this.props
     toggle(order)
   }
-  address = () => {
-    const { addressInfo } = this.props.order
-    addressString(addressInfo, { hideCity: true })
+  colorLabel = () => {
+    const { status } = this.props.order
+    switch (status) {
+      case 'Новый':
+        return 'orange'
+      case 'Отменен':
+        return 'red'
+      case 'Подтвержден':
+        return 'green'
+      default:
+      return 'grey'
+    }
   }
   render() {
     const { order } = this.props
     return (
       <Segment>
+        <Label corner='right' size='massive' color={this.colorLabel()}></Label>
         <Header content={`Заказ №${order.num} на сумму ${order.totalCost}`}/>
-        <span>{addressString(order.addressInfo, { hideCity: true })}</span>
-        <Button onClick={this.openModal} content="Show"/>
+        <p>{addressString(order.addressInfo, { hideCity: true })}</p>
+        <p><a href={`tel:+74951234567`}>+74951234567</a></p>
+        <Button onClick={this.openModal} content='Show'/>
       </Segment>
     )
   }
@@ -31,6 +42,7 @@ import PropTypes from 'prop-types'
 
 Order.propTypes = {
   order: PropTypes.object.isRequired,
+  toggle: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, props) => ({

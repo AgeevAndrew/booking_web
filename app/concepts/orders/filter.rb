@@ -7,10 +7,12 @@ module Orders
     Facade = Struct.new(
       :orders,
       :order_products,
+      :products,
+      :accounts,
     )
 
     def represented
-      Facade.new(orders, order_products)
+      Facade.new(orders, order_products, products, accounts)
     end
 
     private
@@ -24,6 +26,14 @@ module Orders
 
     def order_products
       OrderProduct.where(order_id: orders.map(&:id))
+    end
+
+    def products
+      Product.where(id: order_products.map(&:product_id))
+    end
+
+    def accounts
+      Account.where(id: orders.map(&:account_id))
     end
   end
 end

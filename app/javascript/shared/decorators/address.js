@@ -3,7 +3,6 @@ import compact from 'lodash/compact'
 
 export const addressString = (address, options) => {
   const { city, street, house, office, code, floor, entrance } = address
-
   const addressArray = [
     options && options.hideCity ? null : trim(city),
     trim(street),
