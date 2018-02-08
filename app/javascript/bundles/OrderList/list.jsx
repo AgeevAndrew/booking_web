@@ -8,10 +8,10 @@ class List extends React.Component {
   render() {
     const { orders } = this.props
     return (
-      <Container text>
+      <div>
         {map(orders, (order) => <Order key={order.id} orderId={order.id}/>)}
         <OrderModal/>
-      </Container>
+      </div>
     )
   }
 }
