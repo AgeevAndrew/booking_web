@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     concerns :app_api
   end
 
-  resources :orders, only: [] do
+  resources :orders, only: [:index] do
     get :accept, on: :member
     get :cancel, on: :member
   end

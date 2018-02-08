@@ -3,6 +3,22 @@
 require 'acceptance_helper'
 
 RSpec.resource 'Orders', acceptance: true do
+  get '/orders', document: false do
+    header 'Authorization', :auth_header
+    let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
+
+    let(:user) { create(:user, password: password, company: order.company) }
+    let(:password) { Faker::Internet.password(8, 12) }
+
+    let(:order) { create(:order, :with_products) }
+
+    example 'Index' do
+      do_request
+      ap response_body
+      expect(status).to eq 200
+    end
+  end
+
   get '/api/orders' do
     let!(:account) { create(:account, :with_addresses) }
     let(:account_id) { account.id }

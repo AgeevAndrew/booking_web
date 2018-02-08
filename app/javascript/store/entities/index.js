@@ -8,6 +8,8 @@ export const initialState = {
   categories: {},
   products: {},
   errors: {},
+  orders: {},
+  orderProducts: {},
 }
 
 function mergeEntities(state, entities) {
