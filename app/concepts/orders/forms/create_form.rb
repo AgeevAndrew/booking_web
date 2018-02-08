@@ -73,7 +73,7 @@ module Orders::Forms
 
     validates :company_id, presence: true
     validates :account_id, presence: true
-    validates :address_id, presence: true, unless: :pickup
+    validates :address_id, presence: true
     # TODO, Решить проблему с таймзонами
     # Как посчитать валидно ли датавремя доставки, если приложение работает с разными таймзонами
     # Компания указывает время (и только время) работы со своими таймзонами
@@ -96,12 +96,24 @@ module Orders::Forms
     validate :address_presence
     def address_presence
       return if address_id.blank?
-      errors.add(:address_id, :invalid) if address.blank?
+      if address.blank? || (pickup && !company_addresses?) || (!pickup && !account_addresses?)
+        errors.add(:address_id, :invalid)
+      end
     end
 
     def address
       return if account.blank?
       @address ||= Address.find_by(id: address_id)
+    end
+
+    def company_addresses?
+      return false if company.blank?
+      company.address_ids.include?(address_id)
+    end
+
+    def account_addresses?
+      return false if account.blank?
+      account.address_ids.include?(address_id)
     end
 
     def company

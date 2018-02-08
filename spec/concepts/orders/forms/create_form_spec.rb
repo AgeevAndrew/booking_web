@@ -62,13 +62,45 @@ module Orders::Forms
 
           context 'pickup option' do
             let(:pickup) { true }
-            it { expect(subject[:address_id]).not_to include "can't be blank" }
+            it { expect(subject[:address_id]).to include "can't be blank" }
           end
         end
 
         context 'invalid' do
           let(:address_id) { -1 }
           it { expect(subject[:address_id]).to include "is invalid" }
+
+          context 'wrong address' do
+            let(:pickup) { true }
+            let(:address_id) { create(:address).id }
+            it { expect(subject[:address_id]).to include 'is invalid' }
+          end
+
+          context 'pickup' do
+            let(:pickup) { true }
+            let(:address_id) { account.address_ids[0] }
+
+            it { expect(subject[:address_id]).to include 'is invalid' }
+
+            context 'valid address' do
+              let(:address_id) { company.address_ids[0] }
+
+              it { expect(subject[:address_id]).not_to include 'is invalid' }
+            end
+          end
+
+          context 'delivery' do
+            let(:pickup) { false }
+            let(:address_id) { company.address_ids[0] }
+
+            it { expect(subject[:address_id]).to include 'is invalid' }
+
+            context 'valid address' do
+              let(:address_id) { account.address_ids[0] }
+
+              it { expect(subject[:address_id]).not_to include 'is invalid' }
+            end
+          end
         end
       end
 

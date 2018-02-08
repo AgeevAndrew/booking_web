@@ -80,6 +80,7 @@ module Orders
         context 'discount' do
           context 'pickup' do
             let(:pickup) { true }
+            let(:address_id) { company.address_ids[0] }
 
             it do
               expect(subject.discount).to be_within(0.001).of(
@@ -102,6 +103,8 @@ module Orders
 
           context 'pickup' do
             let(:pickup) { true }
+            let(:address_id) { company.address_ids[0] }
+
             it { expect(subject.delivery_cost).to eq 0 }
           end
 
@@ -118,6 +121,7 @@ module Orders
 
           context 'with pickup discount' do
             let(:pickup) { true }
+            let(:address_id) { company.address_ids[0] }
             let(:discount) { 10 }
             let(:company) { create(:company, :delivery, pickup_discount: discount) }
 
