@@ -1,37 +1,32 @@
 import React from 'react'
-import { Card, Label, Grid } from 'semantic-ui-react'
+import { Card, List, Statistic } from 'semantic-ui-react'
+import map from 'lodash/map'
 import { currency } from 'shared/decorators/currency'
 
 class Product extends React.Component {
   render() {
-    const { orderProduct, product } = this.props
-    console.log(orderProduct);
-    console.log(product);
+    const { orderProduct } = this.props
     return (
-      <Card fluid>
+      <Card fluid color='grey'>
         <Card.Content>
           <Card.Header>
-            {orderProduct.productTitle}
+            {orderProduct.qty}&nbsp;x&nbsp;{orderProduct.productTitle}
+            <Statistic floated='right' size='mini'>
+              <Statistic.Value><strong>{currency(orderProduct.totalCost)}</strong></Statistic.Value>
+            </Statistic>
           </Card.Header>
           <Card.Meta>
             {orderProduct.mainOption}
           </Card.Meta>
           <Card.Description>
-            <Grid columns={3}>
-              <Grid.Row>
-                <Grid.Column>
-                  &nbsp;
-                </Grid.Column>
-                <Grid.Column>
-                  {orderProduct.qty}
-                </Grid.Column>
-                <Grid.Column floated='right'>
-                  <Label size='massive' circular>{currency(orderProduct.totalCost)}</Label>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-
-
+            <List divided verticalAlign='middle'>
+              {map(orderProduct.ingredients, (ingredient, index) =>
+                <List.Item key={index}>
+                  <List.Content floated='right' content={currency(ingredient.totalCost)}/>
+                  <List.Content content={ingredient.name}/>
+                </List.Item>
+              )}
+            </List>
           </Card.Description>
         </Card.Content>
       </Card>

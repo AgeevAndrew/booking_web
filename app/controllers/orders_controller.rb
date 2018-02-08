@@ -6,8 +6,6 @@ class OrdersController < BaseController
 
   def index
     present Orders::Filter
-    ap @operation.to_json
-    ap current_user
     redux_store('SharedReduxStore', props: @operation.to_json)
   end
 

@@ -18,7 +18,7 @@ export default (state = initialState, action) => {
     case actionTypes.FAILURE:
       return { ...state, submitting: false }
     case actionTypes.SUCCESS:
-      return { ...state, submitting: false }
+      return { ...state, open: false, submitting: false }
     default:
       return state
   }

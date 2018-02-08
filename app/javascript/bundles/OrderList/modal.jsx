@@ -1,9 +1,11 @@
 import React from 'react'
-import { Header, Modal, Button, Icon } from 'semantic-ui-react'
+import { Header, Modal, Button, Icon, Label } from 'semantic-ui-react'
 import { addressString } from 'shared/decorators/address'
 import map from 'lodash/map'
 import Product from './product'
 import { currency } from 'shared/decorators/currency'
+import { statusColor } from 'shared/decorators/order_status'
+import { dateTimeFormat } from 'shared/decorators/date_time'
 
 class ModalOrder extends React.Component {
   handleClose = () => {
@@ -23,54 +25,61 @@ class ModalOrder extends React.Component {
   renderActions = () => {
     const { submitting } = this.props
     return (
-      <div className='ui two buttons'>
-        <Button basic color='red' disabled={submitting} onClick={this.handleDecline}>
+      <Button.Group>
+        <Button color='red' disabled={submitting} onClick={this.handleDecline}>
           <Icon name='remove'/>Отменить
         </Button>
-        <Button basic color='green' disabled={submitting} onClick={this.handleConfirm}>
+        <Button.Or/>
+        <Button color='green' disabled={submitting} onClick={this.handleConfirm}>
           <Icon name='checkmark'/>Подтвердить
         </Button>
-      </div>
+      </Button.Group>
     )
   }
 
   renderPickup = () => {
-    const { discount } = this.props.order
+    const { discount, deliveryTime } = this.props.order
     return (
-      <p>Скидка за самовывоз: {currency(discount)}</p>
+      <div>
+        <p>Скидка за самовывоз: {currency(discount)}</p>
+        <p>Время самовывоза: {dateTimeFormat(deliveryTime)}</p>
+      </div>
     )
   }
 
   renderDeliveryInfo = () => {
-    const { addressInfo, deliveryCost } = this.props.order
+    const { addressInfo, deliveryCost, deliveryTime } = this.props.order
     return (
       <div>
         <p>Стоимость доставки: {currency(deliveryCost)}</p>
         <p>Адрес доставки: {addressInfo && addressString(addressInfo, { hideCity: false })}</p>
+        <p>Время доставки: {dateTimeFormat(deliveryTime)}</p>
       </div>
     )
   }
 
   render() {
     const { order, open, account } = this.props
-    console.log(order);
     return (
       <Modal open={open} closeIcon onClose={this.handleClose}>
-        <Modal.Header>{`Заказ №${order.num}`}</Modal.Header>
+        <Modal.Header>
+          {`Заказ №${order.num}`}
+          <Label tag color={statusColor(order.status)} attached='top right' content={order.status}/>
+        </Modal.Header>
         <Modal.Content>
           <Modal.Description>
             <Header>Детали заказа</Header>
-
             {map(order.orderProducts, (product) =>
               <Product key={product.id} orderProductId={product.id} productId={product.productId}/>)}
-
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
+          <div>
           <p><strong>Итого к оплате: {currency(order.totalCost || 0)}</strong></p>
           {order.pickup ? this.renderPickup() : this.renderDeliveryInfo()}
           {account &&
             <p>Клиент: {account.name}, тел. <a href={`tel:${account.phone}`}>{account.phone}</a></p>}
+          </div>
           {order.status === 'Новый' ? this.renderActions() : ''}
         </Modal.Actions>
       </Modal>

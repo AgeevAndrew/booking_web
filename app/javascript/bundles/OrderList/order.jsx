@@ -1,34 +1,22 @@
 import React from 'react'
-import { Segment, Header, Button, Label } from 'semantic-ui-react'
-import { addressString } from 'shared/decorators/address'
+import { Segment, Header, Label } from 'semantic-ui-react'
+import { currency } from 'shared/decorators/currency'
+import { statusColor } from 'shared/decorators/order_status'
 
 class Order extends React.Component {
   openModal = () => {
     const { toggle, order } = this.props
     toggle(order)
   }
-  colorLabel = () => {
-    const { status } = this.props.order
-    switch (status) {
-      case 'Новый':
-        return 'orange'
-      case 'Отменен':
-        return 'red'
-      case 'Подтвержден':
-        return 'green'
-      default:
-      return 'grey'
-    }
-  }
+
   render() {
     const { order } = this.props
     return (
-      <Segment>
-        <Label corner='right' size='massive' color={this.colorLabel()}></Label>
-        <Header content={`Заказ №${order.num} на сумму ${order.totalCost}`}/>
-        <p>{addressString(order.addressInfo, { hideCity: true })}</p>
-        <p><a href={`tel:+74951234567`}>+74951234567</a></p>
-        <Button onClick={this.openModal} content='Show'/>
+      <Segment onClick={this.openModal}>
+        <Header>
+          {`Заказ №${order.num} на сумму ${currency(order.totalCost)}`}
+        </Header>
+        <Label corner='right' size='large' color={statusColor(order.status)}></Label>
       </Segment>
     )
   }

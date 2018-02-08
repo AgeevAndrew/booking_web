@@ -1,5 +1,6 @@
 import React from 'react'
 import map from 'lodash/map'
+import { Container } from 'semantic-ui-react'
 import Order from './order'
 import OrderModal from './modal'
 
@@ -7,10 +8,10 @@ class List extends React.Component {
   render() {
     const { orders } = this.props
     return (
-      <div>
+      <Container text>
         {map(orders, (order) => <Order key={order.id} orderId={order.id}/>)}
         <OrderModal/>
-      </div>
+      </Container>
     )
   }
 }
