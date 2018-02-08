@@ -17,6 +17,11 @@
     <%= react_component("ErrorsApp") %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <div class='ui container'>
+      <div class='overlay'>
+        <%= react_component('SideMenu') %>
+      </div>
+      <%= yield %>
+    </div>
   </body>
 </html>
