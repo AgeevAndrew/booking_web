@@ -96,12 +96,24 @@ module Orders::Forms
     validate :address_presence
     def address_presence
       return if address_id.blank?
-      errors.add(:address_id, :invalid) if address.blank?
+      if address.blank? || (pickup && !company_addresses?) || (!pickup && !account_addresses?)
+        errors.add(:address_id, :invalid)
+      end
     end
 
     def address
       return if account.blank?
       @address ||= Address.find_by(id: address_id)
+    end
+
+    def company_addresses?
+      return false if company.blank?
+      company.address_ids.include?(address_id)
+    end
+
+    def account_addresses?
+      return false if account.blank?
+      account.address_ids.include?(address_id)
     end
 
     def company
