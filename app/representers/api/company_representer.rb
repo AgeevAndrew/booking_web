@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CompanyRepresenter < ApplicationRepresenter
+class Api::CompanyRepresenter < ApplicationRepresenter
   property :id
   property :name
   property :categories
@@ -10,6 +10,6 @@ class CompanyRepresenter < ApplicationRepresenter
   property :created_at
   property :updated_at
 
-  collection :address_ids
+  collection :addresses
   collection :schedules, decorator: CompanyScheduleRepresenter
 end
