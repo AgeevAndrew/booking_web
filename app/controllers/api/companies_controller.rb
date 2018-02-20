@@ -13,7 +13,7 @@ class Api::CompaniesController < Api::BaseController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    render json: CompanyRepresenter.represent(@company)
+    render json: Api::CompanyRepresenter.represent(@company)
   end
 
   # GET /companies/new
