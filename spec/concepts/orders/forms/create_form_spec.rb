@@ -14,6 +14,7 @@ module Orders::Forms
         pickup: pickup,
         delivery_time: delivery_time,
         order_products: products,
+        device: device,
       }
     end
 
@@ -26,6 +27,7 @@ module Orders::Forms
     let(:delivery_time) { Time.now }
     let(:pickup) { nil }
     let(:products) { nil }
+    let(:device) { nil }
 
     let(:form) { described_class.new(model) }
     let(:form_validate) { form.validate(params) }
@@ -34,6 +36,17 @@ module Orders::Forms
       before { form_validate }
       subject do
         form.errors.messages
+      end
+
+      context 'device' do
+        context 'valid' do
+          let(:device) { 'android' }
+          it { expect(subject[:device]).not_to include 'is not included in the list' }
+        end
+        context 'invalid' do
+          let(:device) { 'windows_phone' }
+          it { expect(subject[:device]).to include 'is not included in the list' }
+        end
       end
 
       context 'company_id' do

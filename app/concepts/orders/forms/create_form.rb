@@ -15,6 +15,7 @@ module Orders::Forms
     property :address_id, virtual: true
     property :delivery_time
     property :pickup, default: false
+    property :device
 
     collection :order_products, populate_if_empty: OrderProduct do
       include Disposable::Twin::Property::Hash
@@ -82,6 +83,7 @@ module Orders::Forms
     #          с 22:00 до 08:00 время лондонское (гринвич)
     # Библиотека business_time индиферентна к таймзонам (в конфиг не засунешь свою зону, только системная)
     validates :delivery_time, presence: true # , inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
+    validates :device, inclusion: { in: %w(android iphone) }, allow_nil: true
 
     validate :company_presence
     def company_presence

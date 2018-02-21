@@ -10,4 +10,6 @@ en:
       total: 'Total Cost: %{cost} ₽'
       customer: 'Customer: %{name} (%{phone})'
       delivery_time: 'Delivery time: %{time} ₽'
-      address: 'Delivery address: %{location}'
+      address_type_pickup: 'Pickup'
+      address_type_delivery: 'Delivery'
+      address: 'Address: %{location}'
