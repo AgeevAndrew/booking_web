@@ -1,6 +1,11 @@
+# frozen_string_literal: true
+
 class ProductsController < BaseController
-  def index
-    _, operation = Products::Index.run params
-    redux_store('SharedReduxStore', props: operation.to_json )
+  def index; end
+
+  private
+
+  def store_facade
+    Store::Facades::ProductsFacade
   end
 end
