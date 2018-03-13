@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180125084503) do
+ActiveRecord::Schema.define(version: 20180221054821) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20180125084503) do
     t.jsonb "contact_info", default: "{}", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "address_ids", default: [], null: false, array: true
   end
 
 # Could not dump table "company_schedules" because of following StandardError
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20180125084503) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "discount", precision: 18, scale: 2, default: "0.0", null: false
+    t.string "device"
     t.index ["account_id"], name: "index_orders_on_account_id"
     t.index ["company_id"], name: "index_orders_on_company_id"
     t.index ["status_id"], name: "index_orders_on_status_id"

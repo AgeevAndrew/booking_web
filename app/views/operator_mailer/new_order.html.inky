@@ -61,9 +61,8 @@
     <p><strong><%= t('.total', cost: (@order.total_cost + @order.delivery_cost)) %></strong></h4>
     <br>
     <p><%= t('.customer', name: @order.account.name, phone: "<a href='tel:#{@order.account.phone}'>#{@order.account.phone}</a>").html_safe %></p>
-    <% unless @order.pickup %>
-      <p><%= t('.address', location: @order.decorate.address_inline) %></p>
-    <% end %>
+    <p><strong><%= @order.pickup ? t('.address_type_pickup') : t('.address_type_delivery') %></strong></p>
+    <p><%= t('.address', location: @order.decorate.address_inline) %></p>
     </columns>
   </row>
   <row>

@@ -8,6 +8,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 require 'sidekiq/testing'
+require 'request_helper'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -42,6 +43,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Acceptance::Helpers, type: :acceptance
   config.include Concepts::Helpers, type: :concept
+  config.include Request::AuthHelpers, type: :request
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.before(:each, type: :acceptance) do

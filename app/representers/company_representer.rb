@@ -10,5 +10,6 @@ class CompanyRepresenter < ApplicationRepresenter
   property :created_at
   property :updated_at
 
+  collection :address_ids
   collection :schedules, decorator: CompanyScheduleRepresenter
 end

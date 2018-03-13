@@ -5,6 +5,7 @@ FactoryGirl.define do
     name Faker::Company.name
     categories [Faker::Number.between(1, 10), Faker::Number.between(11, 20), Faker::Number.between(21, 30)]
     description Faker::Company.catch_phrase
+    address_ids { [create(:address).id] }
     delivery do
       {
         'cost' => Faker::Number.number(3).to_i,
