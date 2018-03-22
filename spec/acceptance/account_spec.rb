@@ -65,4 +65,28 @@ RSpec.resource 'Account', acceptance: true do
       expect(status).to eq(422)
     end
   end
+
+  post '/api/accounts/:id/register_device' do
+    parameter :id, required: true
+    parameter :company_id, required: true
+    parameter :device_type, required: true
+    parameter :registration_token, required: true
+
+    # default_params
+    let(:id) { create(:account).id }
+    let(:company_id) { create(:company).id }
+    let(:device_type) { Faker::Lorem.word }
+    let(:registration_token) { Faker::Crypto.md5 }
+
+    example 'Register device' do
+      do_request
+      expect(status).to eq(201)
+    end
+
+    example 'Register device (errors)' do
+      do_request(registration_token: nil)
+      expect(status).to eq(422)
+    end
+  end
+
 end

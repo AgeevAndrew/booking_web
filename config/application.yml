@@ -1,4 +1,6 @@
 booking_mailgun_api_key: 'key-c1e1ceed2371213407a37d13c20cb782'
+firebase_cloud_messaging_key: 'key=AAAA7Hp_1S8:APA91bFI2lwRSjJAYTGvyRbYcf03r0_f87rzkMlDJ2B0yilHGZQnVim9IgElSQBc56Wn4FspE2ZA2vrMjoTPzo_eYOu_X2oshzJM0gm7O2akGOGQ10zEQWJBWzb_-nqOl16hLK_mRa1q'
+firebase_cloud_messaging_sender_id: '1015667479855'
 redis_url: 'redis://localhost:6379/3'
 admin_mails:
   - bodakovda@arink-group.ru

@@ -48,6 +48,10 @@ class Api::AccountsController < Api::BaseController
     # end
   end
 
+  def register_device
+    respond Accounts::Devices::RegisterDevice, location: nil
+  end
+
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
