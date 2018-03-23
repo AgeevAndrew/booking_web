@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :accounts, except: :update do
       post 'update', on: :member
-
+      post 'register_device', on: :member
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
     resources :orders, only: [:index, :create] do
