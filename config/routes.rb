@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "products#index"
   get 'products', to: 'products#index'
+  resources :push_messages, only: [:index]
 
   concern :app_api do
     resources :companies
+
+    resources :push_messages, only: [:create]
 
     resources :products, except: :update do
       post :visibility_change, on: :member

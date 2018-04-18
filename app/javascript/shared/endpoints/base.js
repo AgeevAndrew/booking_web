@@ -29,7 +29,7 @@ function handleResponse(response) {
           }))
     )
   }
-  throw response
+  return Promise.resolve({ success: false, json: {}, location: headers.get('Location') })
 }
 
 function handleError(error) {
