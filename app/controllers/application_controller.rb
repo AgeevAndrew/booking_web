@@ -9,8 +9,13 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   before_action :set_timezone
   before_action :set_raven_context
+  before_action :merge_current_user!
 
   private
+
+  def merge_current_user!
+    params.merge!(current_user: current_user)
+  end
 
   def set_locale
     header_locale = request.headers['User-Locale']
