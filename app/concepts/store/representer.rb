@@ -10,5 +10,6 @@ module Store
     collection :orders, decorator: OrderRepresenter
     collection :order_products, decorator: OrderProductRepresenter
     collection :accounts, decorator: AccountRepresenter
+    collection :push_messages, decorator: PushMessageRepresenter
   end
 end

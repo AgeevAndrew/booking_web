@@ -17,7 +17,7 @@ module Store::Facades
 
     extend ::EmptyResponse
 
-    empty_response :categories, :addresses, :orders, :products, :order_products, :accounts
+    empty_response :categories, :addresses, :orders, :products, :order_products, :accounts, :push_messages
 
     private
 

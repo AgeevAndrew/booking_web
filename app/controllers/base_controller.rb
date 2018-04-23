@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
 class BaseController < ApplicationController
-  before_action :merge_current_user!
   before_action :set_store
 
   private
-
-  def merge_current_user!
-    params.merge!(current_user: current_user)
-  end
 
   def set_store
     params[:store_facade] = store_facade

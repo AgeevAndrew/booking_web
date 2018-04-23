@@ -10,6 +10,7 @@ export const initialState = {
   errors: {},
   orders: {},
   orderProducts: {},
+  pushMessages: {},
 }
 
 function mergeEntities(state, entities) {
