@@ -7,4 +7,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :company, optional: true
+
+  delegate :id, to: :company, prefix: true, allow_nil: true
 end

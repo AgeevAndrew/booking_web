@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221054821) do
+ActiveRecord::Schema.define(version: 20180330013509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 20180221054821) do
 
 # Could not dump table "company_schedules" because of following StandardError
 #   Unknown type 'time with time zone' for column 'time_start'
+
+  create_table "devices", force: :cascade do |t|
+    t.string "device_type"
+    t.text "registration_token"
+    t.bigint "company_id"
+    t.uuid "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_devices_on_account_id"
+    t.index ["company_id"], name: "index_devices_on_company_id"
+  end
 
   create_table "order_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.bigint "product_id", null: false
@@ -115,6 +126,17 @@ ActiveRecord::Schema.define(version: 20180221054821) do
     t.index ["company_id"], name: "index_products_on_company_id"
   end
 
+  create_table "push_messages", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "title"
+    t.text "body"
+    t.integer "success"
+    t.integer "failure"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_push_messages_on_company_id"
+  end
+
   create_table "statuses", force: :cascade do |t|
     t.string "name", null: false
     t.integer "position", limit: 2, null: false
@@ -148,5 +170,6 @@ ActiveRecord::Schema.define(version: 20180221054821) do
   add_foreign_key "order_tokens", "orders"
   add_foreign_key "products", "categories"
   add_foreign_key "products", "companies"
+  add_foreign_key "push_messages", "companies"
   add_foreign_key "users", "companies"
 end

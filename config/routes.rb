@@ -4,9 +4,12 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "products#index"
   get 'products', to: 'products#index'
+  resources :push_messages, only: [:index]
 
   concern :app_api do
     resources :companies
+
+    resources :push_messages, only: [:create]
 
     resources :products, except: :update do
       post :visibility_change, on: :member
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
     resources :categories
     resources :accounts, except: :update do
       post 'update', on: :member
-
+      post 'register_device', on: :member
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
     resources :orders, only: [:index, :create] do

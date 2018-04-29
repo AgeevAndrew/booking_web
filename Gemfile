@@ -84,6 +84,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'rspec_api_documentation'
   gem 'selenium-webdriver'
+  gem 'webmock'
 end
 
 group :development do
