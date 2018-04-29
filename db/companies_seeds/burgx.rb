@@ -24,7 +24,7 @@ ActiveRecord::Base.transaction do
   company.update(categories: categories,
   							 description: "В Burgx вас всегда ждет уютная, гостеприимная атмосфера. это сочные и сильные бургеры только из 100% натуральной мраморной говядины. \nБургерная Burgx - это натуральные и качественные бургеры по демократичным ценам, для широкой аудитории!",
   							 delivery: { cost: 150, free_shipping: 800, pickup_discount: 10, period: { start: '12:00 +10', end: '19:30 +10' } },
-  							 contact_info: { phone: '+7 (4212) 699-207', email: 'info@noxfox.ru', geotag: ["48.483257,135.094393"], geotag_cafe: ["48.483257,135.094393"] },
+  							 contact_info: { phone: '+7 (4212) 699-207', email: 'booking@noxfox.ru', geotag: ["48.483257,135.094393"], geotag_cafe: ["48.483257,135.094393"] },
                  address_ids: company_addresses)
 
   company_id = company.id
