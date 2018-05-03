@@ -11,7 +11,7 @@ module Store::Facades
     end
 
     def products
-      Product.where(company_id: companies.map(&:id)).all
+      Product.without_deleted.where(company_id: companies.map(&:id)).all
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180330013509) do
+ActiveRecord::Schema.define(version: 20180502022344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20180330013509) do
 
   create_table "order_tokens", force: :cascade do |t|
     t.uuid "order_id", null: false
-    t.string "token", limit: 342, null: false
+    t.uuid "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_tokens_on_order_id"
@@ -121,6 +121,7 @@ ActiveRecord::Schema.define(version: 20180330013509) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "active", default: true, null: false
+    t.datetime "deleted_at"
     t.index ["category_id", "company_id"], name: "index_products_on_category_id_and_company_id"
     t.index ["category_id"], name: "index_products_on_category_id"
     t.index ["company_id"], name: "index_products_on_company_id"
