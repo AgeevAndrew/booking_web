@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20180502022344) do
 
   create_table "order_tokens", force: :cascade do |t|
     t.uuid "order_id", null: false
-    t.uuid "token"
+    t.string "token", limit: 342, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_tokens_on_order_id"
