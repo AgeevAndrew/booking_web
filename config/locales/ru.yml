@@ -1,4 +1,7 @@
 ru:
+  time:
+    formats:
+      default: ! '%d.%m.%Y %H:%M'
   errors: &errors
     format: '<strong>%{attribute}:</strong> %{message}'
     messages:
