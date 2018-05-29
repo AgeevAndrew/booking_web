@@ -14,6 +14,7 @@ dependencies:
 database:
   override:
     - createdb booking_web_test
+    - psql -c "CREATE EXTENSION IF NOT EXISTS pgcrypto;" -d booking_web_test
     - bundle exec rake db:migrate
 
 test:
