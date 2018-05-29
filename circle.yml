@@ -1,0 +1,33 @@
+machine:
+  ruby:
+    version: 2.4.4
+  environment:
+    PATH: "${PATH}:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
+
+dependencies:
+  cache_directories:
+    - "client/node_modules"
+    - ~/.cache/yarn
+
+database:
+  override:
+    - createdb torg_test
+    - bundle exec rake db:migrate
+
+test:
+  override:
+    - yarn run build:client
+    - yarn run build:server
+    - bundle exec rspec
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - bundle exec rake docs:generate
+      - RAILS_ENV=development bundle exec cap production deploy
+  staging:
+    branch: develop
+    commands:
+      - bundle exec rake docs:generate
+      - RAILS_ENV=development bundle exec cap staging deploy
