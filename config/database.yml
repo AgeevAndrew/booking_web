@@ -12,6 +12,7 @@ development:
 
 test:
   <<: *default
+  username: postgres
   database: booking_web_test
 
 staging:
