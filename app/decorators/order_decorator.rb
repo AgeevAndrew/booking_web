@@ -8,6 +8,9 @@ class OrderDecorator < ApplicationDecorator
       address_info['city'],
       address_info['street'],
       address_info['house'] && ["д. #{address_info['house']}", address_info['office']].compact.join(' - '),
-    ].join ', '
+      address_info['entrance'].presence && "подъезд. #{address_info['entrance']}",
+      address_info['floor'].presence && "этаж #{address_info['floor']}",
+      address_info['code'].presence && "код домофона #{address_info['code']}",
+    ].compact.join ', '
   end
 end

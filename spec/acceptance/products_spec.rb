@@ -106,4 +106,23 @@ RSpec.resource 'Products', acceptance: true do
       expect(status).to eq(422)
     end
   end
+
+  delete '/api/products/:id' do
+    header 'Authorization', :auth_header
+    let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
+
+    let(:user) { create(:user, password: password) }
+    let(:password) { Faker::Internet.password(8, 12) }
+
+    let(:product) { create(:product) }
+
+    let(:id) { product.id }
+
+    parameter :id, required: true
+
+    example 'Delete' do
+      do_request
+      expect(status).to eq 204
+    end
+  end
 end

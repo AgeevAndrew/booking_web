@@ -1,21 +1,19 @@
 import React from 'react'
-import { Item, Dimmer, Loader, Segment } from 'semantic-ui-react'
+import { Card, Dimmer, Loader, Image } from 'semantic-ui-react'
 import ProductShowForm from './ProductShowForm'
 import ProductEditForm from './ProductEditForm'
 
 const Product = ({ product, row }) => {
-  const ItemContent = product.id === row.id ? ProductEditForm : ProductShowForm
+  const CardContent = product.id === row.id ? ProductEditForm : ProductShowForm
 
   return (
-      <Item as={Segment}>
-        <Dimmer active={row.isSendFrom && product.id === row.id} inverted>
-          <Loader/>
-        </Dimmer>
-
-        <Item.Image size='large' src={product.photo}/>
-        <ItemContent productId={product.id}/>
-      </Item>
-
+    <Card fluid>
+      <Dimmer active={row.isSendFrom && product.id === row.id} inverted>
+        <Loader/>
+      </Dimmer>
+      <Image size='huge' centered src={product.photo}/>
+      <CardContent productId={product.id}/>
+    </Card>
   )
 }
 

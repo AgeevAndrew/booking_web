@@ -3,7 +3,7 @@
 class Api::ProductsController < Api::BaseController
   include ActionController::MimeResponds
   before_action :set_product, only: [:show, :edit, :update, :destroy, :visibility_change]
-  before_action :authenticate_user!, only: [:update, :visibility_change]
+  before_action :authenticate_user!, only: [:update, :visibility_change, :destroy]
 
   respond_to :json
 
@@ -57,11 +57,7 @@ class Api::ProductsController < Api::BaseController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    @product.destroy
-    respond_to do |format|
-      format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond Products::Delete, location: nil
   end
 
   def visibility_change
