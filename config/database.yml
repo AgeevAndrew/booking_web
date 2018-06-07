@@ -8,6 +8,7 @@ default: &default
 
 development:
   <<: *default
+  username: postgres
   database: booking_web_development
 
 test:

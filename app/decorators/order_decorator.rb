@@ -13,4 +13,8 @@ class OrderDecorator < ApplicationDecorator
       address_info['code'].presence && "код домофона #{address_info['code']}",
     ].compact.join ', '
   end
+
+  def delivery_localtime(zone = 'UTC')
+    delivery_time.in_time_zone(zone)
+  end
 end
