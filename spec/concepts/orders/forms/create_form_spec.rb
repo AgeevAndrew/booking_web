@@ -15,6 +15,7 @@ module Orders::Forms
         delivery_time: delivery_time,
         order_products: products,
         device: device,
+        note: note,
       }
     end
 
@@ -28,6 +29,7 @@ module Orders::Forms
     let(:pickup) { nil }
     let(:products) { nil }
     let(:device) { nil }
+    let(:note) { nil }
 
     let(:form) { described_class.new(model) }
     let(:form_validate) { form.validate(params) }

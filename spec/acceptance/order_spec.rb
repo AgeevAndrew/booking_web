@@ -36,6 +36,7 @@ RSpec.resource 'Orders', acceptance: true do
     let(:main_option) { product.main_options[0]['name'] }
     let(:qty) { 1 }
     let(:ingredient_name) { product.additional_info[0]['name'] }
+    let(:note) { Faker::Lorem.sentence }
 
     let(:order_products) do
       [
@@ -55,6 +56,7 @@ RSpec.resource 'Orders', acceptance: true do
     parameter :delivery_time, required: true
     parameter :pickup
     parameter :order_products, required: true
+    parameter :note
 
     example 'Create' do
       do_request
