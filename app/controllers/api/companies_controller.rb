@@ -2,7 +2,7 @@
 
 class Api::CompaniesController < Api::BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :delivery_time_change]
 
   # GET /companies
   # GET /companies.json
@@ -63,6 +63,10 @@ class Api::CompaniesController < Api::BaseController
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def delivery_time_change
+    respond Companies::DeliveryTimeChange, location: nil
   end
 
   private

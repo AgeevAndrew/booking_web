@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :push_messages, only: [:index]
 
   concern :app_api do
-    resources :companies
+    resources :companies do
+      post :delivery_time_change, on: :member
+    end
 
     resources :push_messages, only: [:create]
 
