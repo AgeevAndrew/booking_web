@@ -15,3 +15,6 @@ ru:
       address_type_delivery: 'Доставка'
       address: 'Адрес: %{location}'
       device: 'Заказано с %{device}'
+    cancel_order:
+      subject: 'Отмена заказа №%{num}'
+      title: Заказ №%{num} был отменен заказчиком.

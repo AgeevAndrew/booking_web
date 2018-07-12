@@ -53,6 +53,9 @@
 
   <row>
     <columns>
+    <% if @order.note.present? %>
+      <p><i><%= @order.note %></i></p>
+    <% end %>
     <% if @order.pickup %>
       <p><%= t('.pickup', discount: @order.discount) %></p>
       <p><%= t('.pickup_time', time: I18n.l(@order.delivery_localtime('Vladivostok'))) %></p>

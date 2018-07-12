@@ -16,6 +16,7 @@ class Api::AccountsController < Api::BaseController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+    return render json: {}, status: :not_found if @account.blank?
   end
 
   # GET /accounts/new
@@ -65,7 +66,7 @@ class Api::AccountsController < Api::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
-      @account = Account.find(params[:id])
+      @account = Account.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

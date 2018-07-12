@@ -15,3 +15,6 @@ en:
       address_type_delivery: 'Delivery'
       address: 'Address: %{location}'
       device: 'Ordered by %{device}'
+    cancel_order:
+      subject: 'Cancelled order #%{num}'
+      title: 'The order #%{num} has been cancelled by customer.'
