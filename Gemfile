@@ -64,12 +64,10 @@ gem "webpacker", "~> 3.0"
 gem 'mini_racer', platforms: :ruby
 
 # Auth
-gem 'devise', '~> 4.3.0'
+gem 'devise', '~> 4.4.0'
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'better_errors'
-  gem "binding_of_caller"
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'capybara', '~> 2.13'
   gem 'database_cleaner'
