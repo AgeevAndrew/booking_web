@@ -8,5 +8,10 @@
 
   <center>
     <h2><%= t('.title', num: @order.num) %></h2>
+    <br>
+    <%= render 'order_products' %>
   </center>
+  <br>
+  <%= render 'summary' %>
+
 </container>

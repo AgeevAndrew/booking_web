@@ -9,68 +9,11 @@
   <center>
     <h2><%= t('.title', num: @order.num) %></h2>
     <br>
-    <row>
-      <columns>
-        <small>Название</small>
-      </columns>
-      <columns>
-        <small>Кол-во</small>
-      </columns>
-      <columns>
-        <small>Стоимость</small>
-      </columns>
-    </row>
-    <% @order.order_products.each do |product| %>
-
-      <row>
-        <columns>
-          <strong><%= product.product.title %></strong>
-        </columns>
-        <columns>
-          <strong><%= product.qty %></strong>
-        </columns>
-        <columns>
-          <strong><%= product.total_cost %></strong>
-        </columns>
-      </row>
-
-      <% product.ingredients.each do |ingredient| %>
-      <row>
-        <columns>
-          <p class="text-right">+<%= ingredient['name'] %></p>
-        </columns>
-        <columns>
-          <%= ingredient['qty'] %>
-        </columns>
-        <columns>
-          <%= ingredient['total_cost'] %>
-        </columns>
-      </row>
-      <% end %>
-    <% end %>
+    <%= render 'order_products' %>
   </center>
   <br>
 
-  <row>
-    <columns>
-    <% if @order.note.present? %>
-      <p><i><%= @order.note %></i></p>
-    <% end %>
-    <% if @order.pickup %>
-      <p><%= t('.pickup', discount: @order.discount) %></p>
-      <p><%= t('.pickup_time', time: I18n.l(@order.delivery_localtime('Vladivostok'))) %></p>
-    <% else %>
-      <p><%= t('.delivery', delivery_cost: @order.delivery_cost) %></p>
-      <p><%= t('.delivery_time', time: I18n.l(@order.delivery_localtime('Vladivostok'))) %></p>
-    <% end %>
-    <p><strong><%= t('.total', cost: (@order.total_cost + @order.delivery_cost)) %></strong></h4>
-    <br>
-    <p><%= t('.customer', name: @order.account.name, phone: "<a href='tel:#{@order.account.phone}'>#{@order.account.phone}</a>").html_safe %></p>
-    <p><strong><%= @order.pickup ? t('.address_type_pickup') : t('.address_type_delivery') %></strong></p>
-    <p><%= t('.address', location: @order.decorate.address_inline) %></p>
-    <p><small><%= t('.device', device: @order.device) %></small></p>
-    </columns>
-  </row>
+  <%= render 'summary' %>
   <row>
     <columns>
       <center>

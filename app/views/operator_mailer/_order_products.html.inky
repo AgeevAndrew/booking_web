@@ -1,0 +1,39 @@
+<row>
+  <columns>
+    <small>Название</small>
+  </columns>
+  <columns>
+    <small>Кол-во</small>
+  </columns>
+  <columns>
+    <small>Стоимость</small>
+  </columns>
+</row>
+<% @order.order_products.each do |product| %>
+
+  <row>
+    <columns>
+      <strong><%= product.product.title %></strong>
+    </columns>
+    <columns>
+      <strong><%= product.qty %></strong>
+    </columns>
+    <columns>
+      <strong><%= product.total_cost %></strong>
+    </columns>
+  </row>
+
+  <% product.ingredients.each do |ingredient| %>
+  <row>
+    <columns>
+      <p class="text-right">+<%= ingredient['name'] %></p>
+    </columns>
+    <columns>
+      <%= ingredient['qty'] %>
+    </columns>
+    <columns>
+      <%= ingredient['total_cost'] %>
+    </columns>
+  </row>
+  <% end %>
+<% end %>

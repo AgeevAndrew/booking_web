@@ -10,5 +10,7 @@ class Orders::Cancel < ApplicationOperation
   def process(*)
     model.cancel!
     model.save
+
+    CancelOrderPropogateJob.perform_later(model.id)
   end
 end
