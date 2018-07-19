@@ -2,7 +2,7 @@
 
 class Api::CompaniesController < Api::BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index, :delivery_time_change]
 
   # GET /companies
   # GET /companies.json
@@ -13,7 +13,11 @@ class Api::CompaniesController < Api::BaseController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    render json: Api::CompanyRepresenter.represent(@company)
+    if @company.present?
+      render json: Api::CompanyRepresenter.represent(@company)
+    else
+      render json: {}, status: :not_found
+    end
   end
 
   # GET /companies/new
@@ -65,10 +69,14 @@ class Api::CompaniesController < Api::BaseController
     end
   end
 
+  def delivery_time_change
+    respond Companies::DeliveryTimeChange, location: nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
-      @company = Company.find(params[:id])
+      @company = Company.find_by(id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -7,6 +7,10 @@ class Order < ApplicationRecord
 
   has_many :order_products, dependent: :destroy
 
+  def cancel?
+    status_id == Statuses::CANCELLED
+  end
+
   def accept!
     confirmation.trigger(:accept)
   end

@@ -5,6 +5,10 @@ en:
       title: 'New order #%{num}'
       activate: Activate
       cancel: Cancel
+    cancel_order:
+      subject: 'Cancelled order #%{num}'
+      title: 'The order #%{num} has been cancelled by customer.'
+    summary:
       pickup: 'Discount: %{discount} ₽'
       delivery: 'Delivery cost: %{delivery_cost} ₽'
       total: 'Total Cost: %{cost} ₽'

@@ -11,6 +11,16 @@ class OperatorMailerPreview < ActionMailer::Preview
     OperatorMailer.new_order(emails, order.id)
   end
 
+  def cancel_order_ru
+    I18n.locale = :ru
+    OperatorMailer.cancel_order(emails, order.id)
+  end
+
+  def cancel_order_en
+    I18n.locale = :en
+    OperatorMailer.cancel_order(emails, order.id)
+  end
+
   private
 
   def order

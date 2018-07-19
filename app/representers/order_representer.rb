@@ -14,5 +14,6 @@ class OrderRepresenter < ApplicationRepresenter
   property :status, getter: ->(represented:, **) { represented.status.name }
   property :created_at
   property :updated_at
+  property :note
   collection :order_products, decorator: OrderProductRepresenter
 end

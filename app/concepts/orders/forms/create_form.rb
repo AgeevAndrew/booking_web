@@ -16,6 +16,7 @@ module Orders::Forms
     property :delivery_time
     property :pickup, default: false
     property :device
+    property :note
 
     collection :order_products, populate_if_empty: OrderProduct do
       include Disposable::Twin::Property::Hash

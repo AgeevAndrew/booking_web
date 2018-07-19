@@ -5,6 +5,10 @@ ru:
       title: Новый заказ №%{num}
       activate: Подтвердить
       cancel: Отменить
+    cancel_order:
+      subject: 'Отмена заказа №%{num}'
+      title: Заказ №%{num} был отменен заказчиком.
+    summary:
       pickup: 'Скидка за самовывоз: %{discount} ₽'
       delivery: 'Стоимость доставки: %{delivery_cost} ₽'
       total: 'Итого к оплате: %{cost} ₽'

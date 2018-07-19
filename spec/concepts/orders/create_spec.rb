@@ -18,6 +18,7 @@ module Orders
         address_id: address_id,
         pickup: pickup,
         delivery_time: delivery_time,
+        note: note,
         qty: qty,
         order_products: [{
           product_id: product_id,
@@ -47,6 +48,7 @@ module Orders
     end
     let(:pickup) { false }
     let(:qty) { 1 }
+    let(:note) { Faker::Lorem.sentence }
     let(:ingredient_name) { product.additional_info[0]['name'] }
 
     describe '#process' do
@@ -72,6 +74,7 @@ module Orders
         it { expect(subject.account_id).to eq account_id }
         it { expect(subject.status_id).to eq Statuses::NEW }
         it { expect(subject.address_info['id']).to eq address_id }
+        it { expect(subject.note).to eq note }
 
         let(:result_cost) do
           qty * product.main_options[0]['cost'].to_f + qty * product.additional_info[0]['cost'].to_f
