@@ -11,8 +11,6 @@ class NewOrderPropogateJob < ApplicationJob
 
   private
 
-  attr_reader :order
-
   def make_token
     OrderToken.create(order_id: order.id, token: SecureRandom.urlsafe_base64(256))
   end
