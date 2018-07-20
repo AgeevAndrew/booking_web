@@ -11,6 +11,7 @@ export const initialState = {
   orders: {},
   orderProducts: {},
   pushMessages: {},
+  company: {},
 }
 
 function mergeEntities(state, entities) {
