@@ -57,8 +57,8 @@ ActiveRecord::Schema.define(version: 20180705010916) do
     t.integer "address_ids", default: [], null: false, array: true
   end
 
-# Could not dump table "company_schedules" because of following StandardError
-#   Unknown type 'time with time zone' for column 'time_start'
+# Could not dump table "company_schedules" because of following NoMethodError
+#   undefined method `reject!' for nil:NilClass
 
   create_table "devices", force: :cascade do |t|
     t.string "device_type"
