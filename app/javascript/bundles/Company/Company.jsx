@@ -1,10 +1,13 @@
 import React from 'react'
-import { Container, Card, Item, Header, Segment, List, Popup } from 'semantic-ui-react'
+import { Container, Card, Item, Header, Segment, List, Popup, Table, Reveal, Icon, Image } from 'semantic-ui-react'
+import Schedules from './Schedules'
+import ModalScheduler from './Modal'
 import './company.css'
+
 
 class Company extends React.Component {
     render() {
-        const { company} = this.props
+        const { company } = this.props
         return (
             <Container text>
                 <Segment>
@@ -13,10 +16,10 @@ class Company extends React.Component {
                     <Header as='h3'>Категории</Header>
                     {company.categories.map(elem => {
                         return (
-                            <p>{elem}</p>
+                            <p key={elem}>{elem}</p>
                         )
                     })}
-                    <Card.Group centered className='center'>
+                    <Card.Group className='center'>
                         <Card color='yellow'>
                             <Card.Content>
                                 <Card.Header>Контакты</Card.Header>
@@ -46,17 +49,33 @@ class Company extends React.Component {
                             <Card.Content>
                                 <Card.Header>Доставка</Card.Header>
                                 <Card.Description>
-                                    <p>Цена: <strong>{company.delivery.cost}</strong></p>
-                                    <p>Начиная с: <strong>{company.delivery.period.start}</strong>
-                                        по <strong>{company.delivery.period.end}</strong></p>
-                                    <p>Сумма бесплатной доставки: <strong>{company.delivery.freeShipping}</strong></p>
-                                    <p>Скида за самовывоз: <strong>{company.delivery.pickupDiscount}</strong></p>
+                                    <List>
+                                        <List.Item>
+                                            <Popup trigger={<List.Icon name='ruble'/>} content='Цена доставки'/>
+                                            <List.Content><strong>{company.delivery.cost}</strong></List.Content>
+                                        </List.Item>
+                                        <List.Item>
+                                            <Popup trigger={<List.Icon name='clock'/>} content='Время доставки'/>
+                                            <List.Content><strong>{company.delivery.period.start}</strong>
+                                                &nbsp; - <strong>{company.delivery.period.end}</strong></List.Content>
+                                        </List.Item>
+                                        <List.Item>
+                                            <Popup trigger={<List.Icon name='gift'/>} content='Бесплатная доставка от'/>
+                                            <List.Content><strong>{company.delivery.freeShipping}</strong></List.Content>
+                                        </List.Item>
+                                        <List.Item>
+                                            <Popup trigger={<List.Icon name='car'/>} content='Скидка за самовывоз'/>
+                                            <List.Content><strong>{company.delivery.pickupDiscount}</strong></List.Content>
+                                        </List.Item>
+                                    </List>
                                 </Card.Description>
                             </Card.Content>
                         </Card>
                     </Card.Group>
                     <Header>Время работы</Header>
+                    <Schedules { ...company } />
                 </Segment>
+                <ModalScheduler/>
             </Container>
         )
     }
@@ -65,7 +84,7 @@ import { connect } from 'react-redux'
 import { getArrayCompany } from '../../selectors/companies'
 import PropTypes from 'prop-types'
 Company.propTypes = {
-    company: PropTypes.array,
+    company: PropTypes.object,
 }
 
 const mapStateToProps = (state, props) => {

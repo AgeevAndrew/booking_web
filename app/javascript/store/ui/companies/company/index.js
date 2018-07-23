@@ -1,4 +1,6 @@
-const initialState = {
+import schedules from './modal'
+import { combineReducers } from 'redux'
+export const initialSate = {
     name: '',
     categories: '',
     description: '',
@@ -17,10 +19,10 @@ const initialState = {
         freeShipping: '',
         pickupDiscount: '',
     },
-    shedules: {},
+    schedules: schedules.initialState,
 }
+export default combineReducers({
+    schedules,
+})
 
-export default (state = initialState, action) => {
-    const { type, order } = action
-    return state
-}
+
