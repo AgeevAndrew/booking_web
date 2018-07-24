@@ -9,7 +9,6 @@ class Schedules extends Component {
     }
     render () {
         const { schedules } = this.props
-
         return (
                 <Table celled>
                     <Table.Header>

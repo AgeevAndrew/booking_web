@@ -4,14 +4,14 @@ class CompaniesController < BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :delivery_time_change]
 
-  # GET /company
-  # GET /company.json
+  # GET /companies
+  # GET /companies.json
   def index
     @companies = Company.all
   end
 
-  # GET /company/1
-  # GET /company/1.json
+  # GET /companies/1
+  # GET /companies/1.json
   def show
     if @company.present?
       render json: Api::CompanyRepresenter.represent(@company)
@@ -20,17 +20,17 @@ class CompaniesController < BaseController
     end
   end
 
-  # GET /company/new
+  # GET /companies/new
   def new
     @company = Company.new
   end
 
-  # GET /company/1/edit
+  # GET /companies/1/edit
   def edit
   end
 
-  # POST /company
-  # POST /company.json
+  # POST /companies
+  # POST /companies.json
   def create
     @company = Company.new(company_params)
 
@@ -45,8 +45,8 @@ class CompaniesController < BaseController
     end
   end
 
-  # PATCH/PUT /company/1
-  # PATCH/PUT /company/1.json
+  # PATCH/PUT /companies/1
+  # PATCH/PUT /companies/1.json
   def update
     respond_to do |format|
       if @company.update(company_params)
@@ -59,8 +59,8 @@ class CompaniesController < BaseController
     end
   end
 
-  # DELETE /company/1
-  # DELETE /company/1.json
+  # DELETE /companies/1
+  # DELETE /companies/1.json
   def destroy
     @company.destroy
     respond_to do |format|
