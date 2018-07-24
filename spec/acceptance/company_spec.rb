@@ -3,7 +3,7 @@
 require 'acceptance_helper'
 
 RSpec.resource 'Companies', acceptance: true do
-  get '/api/companies/:id' do
+  get '/api/company/:id' do
     let(:company) { create(:company, :with_schedule) }
     let(:id) { company.id }
 
@@ -20,7 +20,7 @@ RSpec.resource 'Companies', acceptance: true do
     end
   end
 
-  post '/api/companies/:id/delivery_time_change' do
+  post '/api/company/:id/delivery_time_change' do
     header 'Authorization', :auth_header
     let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
 

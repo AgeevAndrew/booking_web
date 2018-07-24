@@ -23,7 +23,7 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
-    create_table :companies do |t|
+    create_table :company do |t|
       t.string :name, null: false
       t.column :categories, 'integer[]', null: false, default: '{}'
       t.text :description

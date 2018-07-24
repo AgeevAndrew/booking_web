@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Form, Button } from 'semantic-ui-react'
+import { getHumanNameWeekDay } from './helpers'
 
 class ModalSchedules extends Component {
     handleClose = () => {
@@ -9,19 +10,28 @@ class ModalSchedules extends Component {
         const { change } = this.props
         change(schedules)
     }
+    handleChange = (e, { name, value }) => this.props.edit(name, value)
 
     render() {
         const { schedules, open } = this.props
         return (
             <Modal open={open} closeIcon onClose={this.handleClose}>
                 <Modal.Header>
-                    {schedules.weekDay}
+                    {getHumanNameWeekDay(schedules.weekDay)}
                 </Modal.Header>
                 <Modal.Content>
                     <Form>
                         <Form.Group widths='equal'>
-                            <Form.Input fluid label='Время начала' value={schedules.timeStart} placeholder='Время начала'/>
-                            <Form.Input fluid label='Время окончания' value={schedules.timeEnd} placeholder='Время окончания'/>
+                            <Form.Input fluid label='Время начала'
+                                        name='timeStart'
+                                        defaultValue={schedules.timeStart}
+                                        onChange={this.handleChange}
+                                        placeholder='Время начала'/>
+                            <Form.Input fluid label='Время окончания'
+                                        name='timeEnd'
+                                        defaultValue={schedules.timeEnd}
+                                        onChange={this.handleChange}
+                                        placeholder='Время окончания'/>
                         </Form.Group>
                         <Form.Field
                             id='form-button-control-public'
@@ -39,7 +49,7 @@ class ModalSchedules extends Component {
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import { close, change } from 'store/ui/companies/company/modal/actions'
+import { close, change, edit } from 'store/ui/company/modal/actions'
 
 ModalSchedules.propTypes = {
     schedules: PropTypes.object.isRequired,
@@ -47,6 +57,7 @@ ModalSchedules.propTypes = {
     submitting: PropTypes.bool.isRequired,
     close: PropTypes.func.isRequired,
     change: PropTypes.func.isRequired,
+    edit: PropTypes.func.isRequired,
 }
 
 ModalSchedules.defaultProps = {
@@ -54,7 +65,7 @@ ModalSchedules.defaultProps = {
 }
 
 const mapStateToProps = (state, props) => {
-    const { schedules } = state.ui.companies.company
+    const { schedules } = state.ui.company
     return {
         schedules: schedules.schedules,
         open: schedules.open,
@@ -62,6 +73,6 @@ const mapStateToProps = (state, props) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({close, change}, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ close, change, edit }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalSchedules)

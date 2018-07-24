@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-    const { type, schedules } = action
+    const { type, schedules, key, value } = action
     switch (type) {
         case actionTypes.OPEN:
             return { ...state, schedules, open: true }
@@ -19,6 +19,10 @@ export default (state = initialState, action) => {
             return { ...state, submiting: false }
         case actionTypes.SUCCESS:
             return { ...state, open: false, submiting: false }
+        case actionTypes.EDIT:
+            const sched = state.schedules
+            sched[key] = value
+            return { ...state, schedules: sched }
         default:
             return state
     }

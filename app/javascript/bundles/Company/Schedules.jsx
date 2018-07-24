@@ -1,40 +1,15 @@
 import React, { Component } from 'react'
 import { Table, Icon } from 'semantic-ui-react'
+import { getHumanNameWeekDay } from './helpers'
 
 class Schedules extends Component {
     openModal = (elem) => {
         const { toggle } = this.props
-        console.log(elem)
         toggle(elem)
     }
     render () {
         const { schedules } = this.props
-        schedules.sort((a, b) => {
-            if (a.id < b.id){
-                return -1
-            } else if (a.id > b.id ) {
-                return 1
-            }
-            return 0
-        })
-        const getHumanNameWeekDay = (weekDay) => {
-            switch (weekDay) {
-                case 'sun':
-                    return 'Воскресенье'
-                case 'mon':
-                    return 'Понедельник'
-                case 'tue':
-                    return 'Вторник'
-                case 'wed':
-                    return 'Среда'
-                case 'thu':
-                    return 'Четверг'
-                case 'fri':
-                    return 'Пятница'
-                case 'sat':
-                    return 'Суббота'
-            }
-        }
+
         return (
                 <Table celled>
                     <Table.Header>
@@ -70,8 +45,8 @@ class Schedules extends Component {
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { getSchedules } from 'selectors/companies'
-import { toggle } from 'store/ui/companies/company/modal/actions'
+import { getArraySchedules } from 'selectors/companySchedules'
+import { toggle } from 'store/ui/company/modal/actions'
 import PropTypes from 'prop-types'
 
 Schedules.propTypes = {
@@ -79,7 +54,7 @@ Schedules.propTypes = {
     toggle: PropTypes.func.isRequired,
 }
 const mapStateToProps = (state, props) => ({
-    schedules: getSchedules(state, props),
+    schedules: getArraySchedules(state, props),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators( { toggle }, dispatch)

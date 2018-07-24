@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20180705010916) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "companies", force: :cascade do |t|
+  create_table "company", force: :cascade do |t|
     t.string "name", null: false
     t.integer "categories", default: [], null: false, array: true
     t.text "description"
@@ -168,10 +168,10 @@ ActiveRecord::Schema.define(version: 20180705010916) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "company_schedules", "companies"
+  add_foreign_key "company_schedules", "company"
   add_foreign_key "order_tokens", "orders"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "companies"
-  add_foreign_key "push_messages", "companies"
-  add_foreign_key "users", "companies"
+  add_foreign_key "products", "company"
+  add_foreign_key "push_messages", "company"
+  add_foreign_key "users", "company"
 end

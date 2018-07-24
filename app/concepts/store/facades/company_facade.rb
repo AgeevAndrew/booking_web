@@ -5,5 +5,12 @@ module Store::Facades
     def companies
       Company.where(id: @params[:id])
     end
+    def company_schedule
+      CompanySchedule.where(company_id: @params[:id]).order(:id)
+    end
+
+    def categories
+      Category.where(id: companies.map(&:categories)).all
+    end
   end
 end

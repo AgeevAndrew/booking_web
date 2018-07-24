@@ -2,6 +2,6 @@
 
 class AddAddressIdsToCompany < ActiveRecord::Migration[5.1]
   def change
-    add_column :companies, :address_ids, 'integer[]', null: false, default: []
+    add_column :company, :address_ids, 'integer[]', null: false, default: []
   end
 end

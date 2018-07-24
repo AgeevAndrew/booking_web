@@ -10,7 +10,7 @@ namespace :db do
       end
     end
 
-    desc "Seed all companies from scratch"
+    desc "Seed all company from scratch"
     task :all do
       Rake::Task["db:seed"].invoke
       task_names.each do |company|

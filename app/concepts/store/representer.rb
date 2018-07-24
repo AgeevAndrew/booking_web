@@ -4,6 +4,7 @@ module Store
   class Representer < ApplicationRepresenter
     collection :current_users, decorator: UserRepresenter
     collection :companies, decorator: CompanyRepresenter
+    collection :company_schedule, decorator: CompanyScheduleRepresenter
     collection :categories, decorator: CategoryRepresenter
     collection :products, decorator: ProductRepresenter
     collection :addresses, decorator: AddressRepresenter
