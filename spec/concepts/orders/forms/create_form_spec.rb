@@ -70,10 +70,10 @@ module Orders::Forms
             it { expect(subject[:address_id]).to include "can't be blank" }
           end
 
-          context 'delivery option' do
-            let(:pickup) { false }
-            it { expect(subject[:address_id]).to include "can't be blank" }
-          end
+          # context 'delivery option' do
+          #   let(:pickup) { false }
+          #   it { expect(subject[:address_id]).to include "can't be blank" }
+          # end
 
           context 'pickup option' do
             let(:pickup) { true }
