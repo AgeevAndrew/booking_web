@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class CompaniesController < BaseController
-  respond_to :html, :xml, :json
-  before_action :authenticate_user!, only: [:show, :delivery_time_change]
+  before_action :authenticate_user!, only: [:delivery_time_change]
+  respond_to :json
   def show; end
 
   def delivery_time_change
