@@ -50,7 +50,7 @@ class CreateCompanies < ActiveRecord::Migration[5.1]
       t.decimal :total_cost, null: false
       t.decimal :delivery_cost, null: false, default: 0
       t.boolean :pickup, null: false, default: false
-      t.column :delivery_time, 'datetime', null: true
+      t.column :delivery_time, 'datetime', null: false
 
       t.timestamps
     end
