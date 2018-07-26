@@ -14,6 +14,7 @@ ru:
       total: 'Итого к оплате: %{cost} ₽'
       customer: 'Клиент: %{name} (%{phone})'
       delivery_time: 'Время доставки: %{time}'
+      delivery_soon: 'На ближайшее время'
       pickup_time: 'Время самовывоза: %{time}'
       address_type_pickup: 'Самовывоз'
       address_type_delivery: 'Доставка'
