@@ -14,7 +14,7 @@ en:
       total: 'Total Cost: %{cost} ₽'
       customer: 'Customer: %{name} (%{phone})'
       delivery_time: 'Delivery time: %{time}'
-      delivery_soon: 'For the near future'
+      delivery_soon: 'As soon as possible'
       pickup_time: 'Pickup time: %{time}'
       address_type_pickup: 'Pickup'
       address_type_delivery: 'Delivery'
