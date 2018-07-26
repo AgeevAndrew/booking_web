@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180705010916) do
+ActiveRecord::Schema.define(version: 20180725234529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20180705010916) do
     t.decimal "total_cost", null: false
     t.decimal "delivery_cost", default: "0.0", null: false
     t.boolean "pickup", default: false, null: false
-    t.datetime "delivery_time", null: false
+    t.datetime "delivery_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "discount", precision: 18, scale: 2, default: "0.0", null: false

@@ -13,11 +13,7 @@ class CompaniesController < BaseController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    if @company.present?
-      render json: Api::CompanyRepresenter.represent(@company)
-    else
-      render json: {}, status: :not_found
-    end
+    render json: Api::CompanyRepresenter.represent(@company)
   end
 
   # GET /companies/new
@@ -76,7 +72,7 @@ class CompaniesController < BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
-      @company = Company.find_by(id: params[:id])
+      @company = Company.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -27,3 +27,6 @@
 
 dump.rdb
 .DS_Store
+
+/.idea
+.idea/
