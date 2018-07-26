@@ -12,7 +12,7 @@ export const initialState = {
   orderProducts: {},
   pushMessages: {},
   company: {},
-  companyShedules: {},
+  companySchedules: {},
 }
 
 function mergeEntities(state, entities) {
@@ -29,16 +29,12 @@ export default (state = initialState, action = null) => {
   switch (type) {
     case actionTypes.MERGE_ENTITIES:
       return mergeEntities(state, entities)
-
-      case actionTypes.UPSERT_ENTITY:
-        return { ...state, [key]: { ...state[key], [entity[idAttribute]]: entity } }
-
+    case actionTypes.UPSERT_ENTITY:
+      return { ...state, [key]: { ...state[key], [entity[idAttribute]]: entity } }
     case actionTypes.REMOVE_ENTITY:
       return { ...state, [key]: omit(state[key], id) }
-
     case actionTypes.DISMISS_ENTITIES:
       return { ...state, [key]: {} }
-
     default:
       return state
   }

@@ -25,5 +25,5 @@ export const normalizeEntities = (storeProps) =>
     addresses: [address],
     pushMessages: [pushMessage],
     companies: [company],
-    companySchedule: [companySchedules],
+    companySchedules: [companySchedules],
 })

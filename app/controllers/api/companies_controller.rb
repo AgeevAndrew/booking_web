@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CompaniesController < BaseController
+class Api::CompaniesController < Api::BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:index, :delivery_time_change]
 
@@ -13,7 +13,11 @@ class CompaniesController < BaseController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    render json: Api::CompanyRepresenter.represent(@company)
+    if @company.present?
+      render json: Api::CompanyRepresenter.represent(@company)
+    else
+      render json: {}, status: :not_found
+    end
   end
 
   # GET /companies/new

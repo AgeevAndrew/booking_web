@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Card, Item, Header, Segment, List, Popup, Table, Reveal, Icon, Image } from 'semantic-ui-react'
+import { Container, Card, Header, Segment, List, Popup } from 'semantic-ui-react'
 import Schedules from './Schedules'
 import ModalScheduler from './Modal'
 import { map } from 'lodash'
@@ -17,7 +17,7 @@ class Company extends React.Component {
                     <Header as='h3'>Категории</Header>
                         { map(categories, (elem) => {
                            return (
-                               <Segment>{elem.name}</Segment>
+                               <Segment key={elem.id}>{elem.name}</Segment>
                            )
                         })
                         }
@@ -105,20 +105,19 @@ class Company extends React.Component {
         )
     }
 }
+
 import { connect } from 'react-redux'
-import { getArrayCompany } from '../../selectors/companies'
+import { getDataCompany } from '../../selectors/companies'
 import PropTypes from 'prop-types'
-import {getCategories} from '../../selectors/entities';
+import { getCategories } from '../../selectors/entities'
 Company.propTypes = {
     company: PropTypes.object,
     categories: PropTypes.object,
 }
 
-const mapStateToProps = (state, props) => {
-    return {
-        company: getArrayCompany(state, props),
+const mapStateToProps = (state, props) => ({
+        company: getDataCompany(state, props),
         categories: getCategories(state, props),
-    }
-}
+})
 
 export default connect(mapStateToProps)(Company)

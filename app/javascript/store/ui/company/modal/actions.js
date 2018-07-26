@@ -1,5 +1,5 @@
 import * as actionTypes from './constants'
-import * as entitiesActions from 'store/entities/actions'
+import { upsertEntity } from '../../../entities/actions'
 import SchedulesEndpoint from 'shared/endpoints/SchedulesEndpoint'
 
 export const toggle = (schedules) => ({
@@ -20,7 +20,7 @@ export const change = (schedules) => (dispatch) => {
     const params = { week_day: schedules.weekDay, time_start: schedules.timeStart, time_end: schedules.timeEnd }
     SchedulesEndpoint.change(schedules.companyId, params).then((response) => {
         if (response.success) {
-            dispatch(entitiesActions.upsertEntity('companySchedules', { schedules }, schedules.id))
+            dispatch(upsertEntity('companySchedules', { ...schedules }))
             dispatch(success())
         } else {
             dispatch(failure())

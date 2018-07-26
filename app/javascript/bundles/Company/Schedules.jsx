@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table, Icon } from 'semantic-ui-react'
-import { getHumanNameWeekDay } from './helpers'
+import { getHumanNameWeekDay } from '../../shared/decorators/weekDays'
 
 class Schedules extends Component {
     openModal = (elem) => {
@@ -19,17 +19,17 @@ class Schedules extends Component {
                         </Table.Row>
                     </Table.Header>
                     <Table.Body>
-                        {schedules.map((key) => {
+                        {schedules.map((elem) => {
                             return (
-                                <Table.Row key={key.id} onClick={() => this.openModal(key)}>
-                                    <Table.Cell>{getHumanNameWeekDay(key.weekDay)}</Table.Cell>
+                                <Table.Row key={elem.id} onClick={() => this.openModal(elem)}>
+                                    <Table.Cell>{getHumanNameWeekDay(elem.weekDay)}</Table.Cell>
                                     <Table.Cell className='workCell'>
-                                        {key.timeStart}
+                                        {elem.timeStart}
                                         &nbsp;
                                         <Icon className='editIcon' name='pencil'/>
                                     </Table.Cell>
                                     <Table.Cell className='workCell'>
-                                        {key.timeEnd}
+                                        {elem.timeEnd}
                                         &nbsp;
                                         <Icon className='editIcon' name='pencil'/>
                                     </Table.Cell>

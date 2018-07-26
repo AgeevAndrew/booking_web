@@ -5,7 +5,8 @@ module Store::Facades
     def companies
       Company.where(id: @params[:id])
     end
-    def company_schedule
+
+    def company_schedules
       CompanySchedule.where(company_id: @params[:id]).order(:id)
     end
 

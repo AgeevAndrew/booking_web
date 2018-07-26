@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Modal, Form, Button, Message, Icon } from 'semantic-ui-react'
-import { getHumanNameWeekDay } from './helpers'
+import { getHumanNameWeekDay } from '../../shared/decorators/weekDays'
 
 class ModalSchedules extends Component {
     handleClose = () => {
         this.props.close()
     }
-    handleConfirm = (schedules) => {
-        const { change } = this.props
+    handleConfirm = () => {
+        const { change, schedules } = this.props
         change(schedules)
     }
     handleChange = (e, { name, value }) => this.props.edit(name, value)
@@ -28,7 +28,7 @@ class ModalSchedules extends Component {
                     {getHumanNameWeekDay(schedules.weekDay)}
                 </Modal.Header>
                 <Modal.Content>
-                    { error ? this.getErrorMessage(error) : ''}
+                    { error && this.getErrorMessage(error) }
                     <Form>
                         <Form.Group widths='equal'>
                             <Form.Input fluid label='Время начала'
@@ -45,7 +45,7 @@ class ModalSchedules extends Component {
                         <Form.Field
                             id='form-button-control-public'
                             control={Button}
-                            onClick={() => this.handleConfirm(schedules)}
+                            onClick={this.handleConfirm}
                             content='Отправить'
                         />
                     </Form>
@@ -68,11 +68,6 @@ ModalSchedules.propTypes = {
     change: PropTypes.func.isRequired,
     edit: PropTypes.func.isRequired,
     error: PropTypes.string.isRequired,
-}
-
-ModalSchedules.defaultProps = {
-    open: false,
-    error: '',
 }
 
 const mapStateToProps = (state, props) => {
