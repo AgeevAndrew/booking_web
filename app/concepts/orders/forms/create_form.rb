@@ -83,7 +83,7 @@ module Orders::Forms
     # Примеры: с 10:00 до 18:00 время хабаровское или
     #          с 22:00 до 08:00 время лондонское (гринвич)
     # Библиотека business_time индиферентна к таймзонам (в конфиг не засунешь свою зону, только системная)
-    validates :delivery_time, presence: true, if: :pickup # , inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
+    # validates :delivery_time  , inclusion: { in: proc { |r| r.delivery_period }, message: :invalid }
 
     validates :device, inclusion: { in: %w(android iphone) }, allow_nil: true
 

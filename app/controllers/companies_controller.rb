@@ -3,8 +3,14 @@
 class CompaniesController < BaseController
   before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, only: [:delivery_time_change]
-  respond_to :html, :json
-  def show; end
+  respond_to :json
+  def show
+    if @company.present?
+      render :show
+    else
+      render json: {}, status: :not_found
+    end
+  end
 
   def delivery_time_change
     respond Companies::DeliveryTimeChange, location: nil

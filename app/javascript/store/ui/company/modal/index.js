@@ -6,6 +6,8 @@ const initialState = {
     submitting: false,
 }
 
+const ERROR_STR = 'Ошибка при сохранении времени работы'
+
 export default (state = initialState, action) => {
     const { type, schedules, key, value } = action
     switch (type) {
@@ -16,7 +18,7 @@ export default (state = initialState, action) => {
         case actionTypes.BEGIN:
             return { ...state, submiting: true }
         case actionTypes.FAILURE:
-            return { ...state, submiting: false }
+            return { ...state, submiting: false, error: ERROR_STR }
         case actionTypes.SUCCESS:
             return { ...state, open: false, submiting: false }
         case actionTypes.EDIT:
