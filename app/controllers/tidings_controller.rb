@@ -1,0 +1,3 @@
+class TidingsController < BaseController
+
+end
