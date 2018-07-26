@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Modal, Form, Button, Message, Icon } from 'semantic-ui-react'
-import { getHumanNameWeekDay } from '../../shared/decorators/weekDays'
+import { getHumanNameWeekDay } from '/shared/decorators/weekDays'
 
 class ModalSchedules extends Component {
     handleClose = () => {

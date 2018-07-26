@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Table, Icon } from 'semantic-ui-react'
-import { getHumanNameWeekDay } from '../../shared/decorators/weekDays'
+import { getHumanNameWeekDay } from '/shared/decorators/weekDays'
 
 class Schedules extends Component {
     openModal = (elem) => {

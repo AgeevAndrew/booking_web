@@ -13,11 +13,7 @@ class Api::CompaniesController < Api::BaseController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    if @company.present?
-      render json: Api::CompanyRepresenter.represent(@company)
-    else
-      render json: {}, status: :not_found
-    end
+    render json: Api::CompanyRepresenter.represent(@company)
   end
 
   # GET /companies/new
