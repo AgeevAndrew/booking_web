@@ -137,6 +137,12 @@ module Orders::Forms
           it { expect(subject[:delivery_time]).to include "can't be blank" }
         end
 
+        context 'delivery_time may be nil' do
+          let(:pickup) { false }
+          let(:delivery_time) { nil }
+          it { expect(subject[:delivery_time]).not_to include "can't be blank"}
+        end
+
         # context 'invalid' do
         #   let(:delivery_time) { Faker::Time.between(Time.zone.today, Time.zone.today, :midnight) }
         #   it { expect(subject[:delivery_time]).to include "is invalid" }
