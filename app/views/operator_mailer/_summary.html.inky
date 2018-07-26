@@ -5,7 +5,11 @@
   <% end %>
   <% if @order.pickup %>
     <p><%= t('.pickup', discount: @order.discount) %></p>
-    <p><%= t('.pickup_time', time: I18n.l(@order.delivery_localtime('Vladivostok'))) %></p>
+    <% if @order.delivery_time %>
+        <p><%= t('.pickup_time', time: I18n.l(@order.delivery_localtime('Vladivostok'))) %></p>
+    <% else %>
+        <p><%= t('.delivery_soon') %></p>
+    <% end %>
   <% else %>
     <p><%= t('.delivery', delivery_cost: @order.delivery_cost) %></p>
     <% if @order.delivery_time %>

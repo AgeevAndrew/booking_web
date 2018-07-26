@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
-  root to: "products#index"
-  get 'products', to: 'products#index'
-  resources :push_messages, only: [:index]
-
   concern :app_api do
     resources :companies do
       post :delivery_time_change, on: :member
@@ -32,6 +27,15 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     concerns :app_api
+  end
+
+  devise_for :users
+  root to: "products#index"
+  get 'products', to: 'products#index'
+  resources :push_messages, only: [:index]
+
+  resources :companies, only: [:show] do
+    post :delivery_time_change, on: :member
   end
 
   resources :orders, only: [:index] do

@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
-import { values, filter } from 'lodash'
+import values from 'lodash/values'
+import filter from 'lodash/filter'
 import { getPushMessages } from './entities'
 import { getPushMessageId } from './props'
 import { getQueryFilter } from './ui'

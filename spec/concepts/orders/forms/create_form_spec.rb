@@ -134,7 +134,7 @@ module Orders::Forms
         context 'blank' do
           let(:pickup) { true }
           let(:delivery_time) { nil }
-          it { expect(subject[:delivery_time]).to include "can't be blank" }
+          it { expect(subject[:delivery_time]).not_to include "can't be blank" }
         end
 
         context 'delivery_time may be nil' do

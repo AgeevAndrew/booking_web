@@ -42,7 +42,7 @@ class ModalOrder extends React.Component {
     return (
       <div>
         <p>Скидка за самовывоз: {currency(discount)}</p>
-        <p>Время самовывоза: {dateTimeFormat(deliveryTime)}</p>
+        <p>Время самовывоза: { deliveryTime ? dateTimeFormat(deliveryTime) : 'На ближайшее время' }</p>
       </div>
     )
   }
@@ -53,7 +53,7 @@ class ModalOrder extends React.Component {
       <div>
         <p>Стоимость доставки: {currency(deliveryCost)}</p>
         <p>Адрес доставки: {addressInfo && addressString(addressInfo, { hideCity: false })}</p>
-        <p>Время доставки: { deliveryTime ? dateTimeFormat(deliveryTime) : 'На ближайшее время'}</p>
+        <p>Время доставки: { deliveryTime ? dateTimeFormat(deliveryTime) : 'На ближайшее время' }</p>
       </div>
     )
   }

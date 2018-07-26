@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { values } from 'lodash'
+import values from 'lodash/values'
 import { getAccounts } from './entities'
 
 export const getArrayAccounts = createSelector(
