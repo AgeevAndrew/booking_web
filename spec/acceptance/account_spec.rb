@@ -89,4 +89,18 @@ RSpec.resource 'Account', acceptance: true do
     end
   end
 
+  delete '/api/accounts/:id' do
+    parameter :id, required: true
+
+    let(:id) { create(:account).id }
+
+    example_request 'Delete' do
+      expect(status).to eq 204
+    end
+
+    example 'Delete (not found)' do
+      do_request(id: SecureRandom.uuid)
+      expect(status).to eq(404)
+    end
+  end
 end
