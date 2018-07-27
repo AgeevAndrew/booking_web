@@ -12,5 +12,6 @@ module Store
     collection :order_products, decorator: OrderProductRepresenter
     collection :accounts, decorator: AccountRepresenter
     collection :push_messages, decorator: PushMessageRepresenter
+    collection :tidings, decorator: TidingRepresenter
   end
 end
