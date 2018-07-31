@@ -1,7 +1,7 @@
 class Tiding < ApplicationRecord
   belongs_to :company
 
-  enum category: [:promotions, :notifications, :events ]
+  enum category: [:promotions, :notifications, :events]
   enum active: [:off, :on]
 
   def activate!
@@ -14,10 +14,9 @@ class Tiding < ApplicationRecord
 
   def confirmation
     @confirmation ||= begin
-      fsm = MicroMachine.new(0)
-
-      fsm.when( :activate, active => 1)
-      fsm.when( :deactivate, active => 0)
+      fsm = MicroMachine.new(active || actives.key(1))
+      fsm.when( :activate, active => Tiding::actives.key(1))
+      fsm.when( :deactivate, active => Tiding::actives.key(0))
       fsm.on( :any) { self.active = confirmation.state }
 
       fsm

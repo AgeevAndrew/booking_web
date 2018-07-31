@@ -33,5 +33,6 @@ RSpec.describe Api::AccountsController, type: :routing do
       expect(:delete => "/api/accounts/1").to route_to("api/accounts#destroy", :id => "1", format: :json)
     end
 
+
   end
 end

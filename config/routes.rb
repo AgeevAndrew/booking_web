@@ -43,10 +43,9 @@ Rails.application.routes.draw do
     get :cancel, on: :member
   end
 
-  resources :tidings, only: [:index] do
-    post :create, on: :member
-    post :update, on: :member
-    post :destroy, on: :member
+  resources :tidings, only: [:index, :create, :destroy] do
     post :activate, on: :member
+    post :deactivate, on: :member
+    post :update, on: :member
   end
 end

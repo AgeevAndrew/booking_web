@@ -1,28 +1,31 @@
 # frozen_string_literal: true
 
 class TidingsController < BaseController
+  before_action :set_tiding, only: [:update, :destroy, :activate, :deactivate]
   before_action :store_facade, only: [:index]
+
+  respond_to :json
 
   def index; end
 
   def create
-      respond Tidings::Create, location: nil
+    respond Tidings::Create, location: nil
   end
 
   def update
-    respond_to do |format|
-      if @tiding.update(tiding_params)
-        format.json { render json: {}, status: :ok, location: @tiding }
-      else
-        format.json { render json: @tiding.errors, status: :unprocessable_entity }
-      end
+    if  @tiding
+      respond Tidings::Update, location: nil
+    else
+      head :not_found
     end
   end
 
   def destroy
-    @tiding.destroy
-    respond_to do |format|
-      format.json { render json: {}, status: :ok }
+    if @tiding
+      @tiding.destroy
+      head :no_content
+    else
+      head :not_found
     end
   end
 
@@ -41,7 +44,7 @@ class TidingsController < BaseController
   end
 
   def tiding_params
-    params.require(:tiding).permit(:category, :title, :body, :message, :active)
+    params.require(:tiding).permit(:category, :company_id, :title, :body, :message, :active)
   end
 
   def set_tiding

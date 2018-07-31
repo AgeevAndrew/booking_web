@@ -1,12 +1,7 @@
 # frozen_string_literal: true
 
-require 'disposable/twin/property/hash'
-require 'disposable/twin/parent'
-
 module Tidings::Forms
   class CreateForm < Reform::Form
-    include Disposable::Twin::Property::Hash
-    feature Disposable::Twin::Parent
 
     model Tiding
 
@@ -16,11 +11,16 @@ module Tidings::Forms
     property :body
     property :message
 
-    validates :company_id, presence: true
-    validates :category, presence: true
-    validates :title, presence: true
-    validates :body, presence: true
-    validates :message, presence:true
+    validates :company_id, :category, :title, :body, :message, presence: true
+    validates :category, inclusion: { in: Tiding.categories.keys }
 
+    validate :company_presence
+    def company_presence
+      errors.add(:company_id, :invalid) if company.blank?
+    end
+
+    def company
+      @company ||= Company.find_by(id: company_id)
+    end
   end
 end

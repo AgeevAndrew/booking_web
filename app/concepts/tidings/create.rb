@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Tidings
-  class Tidings::Create < ApplicationOperation
+  class Create < ApplicationOperation
     contract Forms::CreateForm
 
     representer TidingRepresenter
@@ -10,8 +10,8 @@ module Tidings
       model.reload
     end
 
-    def model!(params)
-      Tiding.new(params)
+    def model!(*)
+      Tiding.new(active: Tiding.actives.key(1))
     end
 
     def process(params)
@@ -19,5 +19,6 @@ module Tidings
         contract.save
       end
     end
+
   end
 end

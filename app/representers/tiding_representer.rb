@@ -3,6 +3,7 @@
 class TidingRepresenter < ApplicationRepresenter
   property :id
   property :category
+  property :company_id
   property :title
   property :body
   property :message
