@@ -8,3 +8,4 @@ export const getPushMessages = (state) => state.entities.pushMessages
 export const getCompany = (state) => state.entities.company
 export const getSchedules =  (state) => state.entities.companySchedules
 export const getTidings = (state) => state.entities.tidings
+export const getCurrentUsers = (state) => state.entities.currentUsers

@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
 import values from 'lodash/values'
-import { getTidings } from './entities'
+import { getTidings, getCurrentUsers } from './entities'
 import { getTidingId } from './props'
+
 
 export const getArrayTidings = createSelector(
     [getTidings],
@@ -11,4 +12,9 @@ export const getArrayTidings = createSelector(
 export const getTiding = createSelector(
     [getTidings, getTidingId],
     (tidings, tidingId) => tidings[tidingId]
+)
+
+export const getUsers = createSelector(
+    [getCurrentUsers],
+    (users) => values(users)[0]
 )

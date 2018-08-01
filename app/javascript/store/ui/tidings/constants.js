@@ -1,7 +1,7 @@
-const prefix = 'ui.tidings.modal.'
+const prefix = 'store.ui.tidings.'
+
 export const OPEN = `${prefix}OPEN`
 export const CLOSE = `${prefix}CLOSE`
 export const BEGIN = `${prefix}BEGIN`
 export const FAILURE = `${prefix}FAILURE`
 export const SUCCESS = `${prefix}SUCCESS`
-export const EDIT = `${prefix}EDIT`

@@ -2,27 +2,17 @@ import * as actionTypes from './constants'
 import * as entitiesActions from 'store/entities/actions'
 import TidingsEndpoint from 'shared/endpoints/tidings_endpoint'
 
-export const toggle = (tiding) => ({
+export const accordionToggle = (activeIndex) => ({
     type: actionTypes.OPEN,
-    tiding,
+    activeIndex,
 })
-
-export const close = () => ({
-    type: actionTypes.CLOSE,
-})
-
-export const edit = (key, value) => ({
-    type: actionTypes.EDIT,
-    key, value,
-})
-
 const begin = () => ({ type: actionTypes.BEGIN })
 const failure = () => ({ type: actionTypes.FAILURE })
 const success = () => ({ type: actionTypes.SUCCESS })
 
-export const update = (tiding) => (dispatch) => {
+export const activate = (index) => (dispatch) => {
     dispatch(begin())
-    TidingsEndpoint.update(tiding.id, tiding)
+    TidingsEndpoint.activate(index)
         .then((response) => {
             if (response.success) {
                 dispatch(entitiesActions.upsertEntity('tidings', { ...response.json }))
@@ -33,12 +23,25 @@ export const update = (tiding) => (dispatch) => {
         })
 }
 
-export const create = (tiding) => (dispatch) => {
+export const deactivate = (index) => (dispatch) => {
     dispatch(begin())
-    TidingsEndpoint.create(tiding)
+    TidingsEndpoint.deactivate(index)
         .then((response) => {
             if (response.success) {
                 dispatch(entitiesActions.upsertEntity('tidings', { ...response.json }))
+                dispatch(success())
+            } else {
+                dispatch(failure())
+            }
+        })
+}
+
+export const remove = (index) => (dispatch) => {
+    dispatch(begin())
+    TidingsEndpoint.delete(index)
+        .then((response) => {
+            if (response.success) {
+                dispatch(entitiesActions.removeEntity('tidings', index))
                 dispatch(success())
             } else {
                 dispatch(failure())

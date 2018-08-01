@@ -5,6 +5,7 @@ import errors from './errors'
 import orders from './orders'
 import pushMessages from './push_messages'
 import company from './company'
+import tidings from './tidings'
 
 export const initialState = {
   categories: categories.initialState,
@@ -13,6 +14,7 @@ export const initialState = {
   orders: orders.initialState,
   pushMessages: pushMessages.initialState,
   company: company.initialState,
+  tidings: company.initialState,
 }
 
 export default combineReducers({
@@ -22,4 +24,5 @@ export default combineReducers({
   orders,
   pushMessages,
   company,
+  tidings,
 })

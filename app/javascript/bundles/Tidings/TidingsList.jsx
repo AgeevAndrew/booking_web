@@ -1,38 +1,64 @@
 import React, { Component } from 'react'
-import { List, Container } from 'semantic-ui-react'
+import { List, Container, Button } from 'semantic-ui-react'
 import Tiding from './Tiding'
-import {ModalTiding} from './ModalTiding';
+import ModalTiding from './ModalTiding'
+import './style.css'
 
 class TidingsList extends Component {
+    handleCreate = () => {
+        const { toggle, users } = this.props
+        const newTiding = {
+            companyId: users.companyId,
+            category: '',
+            title: '',
+            body: '',
+            message: '',
+        }
+        toggle(newTiding)
+    }
     render() {
         const { tidings } = this.props
         return (
             <Container>
                 <List>
-                    {tidings.map((elem) => {
+                    { tidings.map((elem) => {
                        return (
-                           <List.Item>
-                                <Tiding key={elem.id} tidingId={elem.id}/>
+                           <List.Item key={elem.id}>
+                                <Tiding tidingId={elem.id}/>
                             </List.Item>
                        )
-                    })}
+                    }) }
                 </List>
                 <ModalTiding/>
+                <Button
+                    className='fixedButton'
+                    circular
+                    icon='add'
+                    color='green'
+                    onClick={ this.handleCreate }
+                />
             </Container>
         )
     }
 }
 
 import { connect } from 'react-redux'
-import { getArrayTidings } from 'selectors/tidings'
+import { getArrayTidings, getUsers } from 'selectors/tidings'
+import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
+import { toggle } from 'store/ui/tidings/modal/actions'
 
 TidingsList.propTypes = {
     tidings: PropTypes.array,
+    users: PropTypes.object,
+    toggle: PropTypes.func,
 }
 
 const mapStateToProps = (state, props) => ({
     tidings: getArrayTidings(state, props),
+    users: getUsers(state, props),
 })
 
-export default connect(mapStateToProps)(TidingsList)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ toggle }, dispatch)
+
+export default connect(mapStateToProps, mapDispatchToProps)(TidingsList)

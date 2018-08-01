@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-import { Modal, Form, Message, Icon } from 'semantic-ui-react'
+import { Modal, Form, Message, Icon, TextArea, Button, Dropdown } from 'semantic-ui-react'
 
-export class ModalTiding extends Component {
+class ModalTiding extends Component {
     handleClose = () => {
         this.props.close()
     }
+    handleConfirm = () => {
+        const { update, tiding } = this.props
+        update(tiding)
+    }
+    handleCreate = () => {
+        const { create, tiding } = this.props
+        create(tiding)
+    }
+    handleChange = (e, { name, value }) => this.props.edit(name, value)
     getErrorMessage = (text) => {
         return (
             <Message warning>
@@ -13,6 +22,39 @@ export class ModalTiding extends Component {
             </Message>
         )
     }
+    getButtonBlock = () => {
+        const { tiding } = this.props
+        if (tiding.id) {
+            return (
+                <Button.Group>
+                    <Button color='red'
+                            onClick={this.handleClose}
+                    >Отмена</Button>
+                    <Button.Or/>
+                    <Button color='blue'
+                            onClick={this.handleConfirm}
+                    >Сохранить</Button>
+                </Button.Group>
+            )
+        } else {
+            return (
+                <Button.Group>
+                    <Button color='red'
+                            onClick={this.handleClose}
+                    >Отмена</Button>
+                    <Button.Or/>
+                    <Button color='blue'
+                            onClick={this.handleCreate}
+                    >Создать</Button>
+                </Button.Group>
+            )
+        }
+    }
+    categories = [
+        { key: 1, text: 'Акции', value: 'promotions' },
+        { key: 2, text: 'Уведомления', value: 'notifications' },
+        { key: 3, text: 'Мероприятия', value: 'events' },
+    ]
     render() {
         const { tiding, open, error } = this.props
         return (
@@ -21,12 +63,43 @@ export class ModalTiding extends Component {
                         {tiding.title}
                     </Modal.Header>
                     <Modal.Content>
-                        {error && this.getErrorMessage(error)}
+                        { error && this.getErrorMessage(error) }
                         <Form>
-                            <Form.Group width='equal'>
-                                <p>tiding.body</p>
-                                <p>tiding.message</p>
-                            </Form.Group>
+                            <Form.Field>
+                            <Form.Input fluid label='Заголовок'
+                                        name='title'
+                                        defaultValue={tiding.title}
+                                        onChange={this.handleChange}
+                                        placeholder='Заголовок'/>
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Категория</label>
+                                <Dropdown fluid selection
+                                          options={ this.categories }
+                                          name='category'
+                                          onChange={ this.handleChange }
+                                          defaultValue={ tiding.category }
+                                />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Текст новости</label>
+                            <TextArea autoHeight
+                                      rows={3}
+                                      name='body'
+                                      onChange={this.handleChange}
+                                      defaultValue={tiding.body}
+                            />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Текст push-сообщения</label>
+                            <TextArea autoHeight
+                                      rows={3}
+                                      name='message'
+                                      onChange={this.handleChange}
+                                      defaultValue={tiding.message}
+                            />
+                            </Form.Field>
+                            { this.getButtonBlock() }
                         </Form>
                     </Modal.Content>
                 </Modal>
@@ -37,26 +110,29 @@ export class ModalTiding extends Component {
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
-import { close, update } from 'store/ui/tidings/modal/actions'
-import { getTiding } from '../../selectors/tidings'
+import { close, update, edit, create } from 'store/ui/tidings/modal/actions'
 
 ModalTiding.propTypes = {
     tiding: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired,
     submitting: PropTypes.bool.isRequired,
+    error: PropTypes.string.isRequired,
     close: PropTypes.func.isRequired,
     update: PropTypes.func.isRequired,
+    edit: PropTypes.func.isRequired,
+    create: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state, props) => {
-    const { tiding } = state.ui.tiding
+    const { modal } = state.ui.tidings
     return {
-        tiding: getTiding(state, props),
-        open: tiding.open,
-        submitting: tiding.submitting,
+        tiding: modal.tiding,
+        open: modal.open,
+        submitting: modal.submitting,
+        error: modal.error,
     }
 }
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ close, update }, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ close, update, edit, create }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalTiding)

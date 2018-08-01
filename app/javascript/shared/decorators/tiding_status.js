@@ -1,9 +1,9 @@
-export const tiding_status = (status) => {
+export const tidingStatus = (status) => {
     switch (status) {
         case 'on':
             return 'green'
         case 'off':
-            return 'red'
+            return 'grey'
         default:
             return 'grey'
     }
