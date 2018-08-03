@@ -46,6 +46,6 @@ Rails.application.routes.draw do
   resources :tidings, only: [:index, :create, :destroy] do
     post :activate, on: :member
     post :deactivate, on: :member
-    post :update, on: :member
+    post 'update', on: :member
   end
 end

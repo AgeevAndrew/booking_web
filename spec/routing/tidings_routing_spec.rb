@@ -13,7 +13,7 @@ RSpec.describe TidingsController, type: :routing do
     end
 
     it "routes to #update" do
-      expect(:post => "/tidings/1").to route_to("tidings#update", :id => "1")
+      expect(:post => "/tidings/1/update").to route_to("tidings#update", :id => "1")
     end
 
     it "routes to #delete" do

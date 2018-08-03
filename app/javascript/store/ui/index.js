@@ -14,7 +14,7 @@ export const initialState = {
   orders: orders.initialState,
   pushMessages: pushMessages.initialState,
   company: company.initialState,
-  tidings: company.initialState,
+  tidings: tidings.initialState,
 }
 
 export default combineReducers({

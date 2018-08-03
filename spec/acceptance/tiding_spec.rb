@@ -36,7 +36,7 @@ RSpec.resource 'Tidings', acceptance: true do
     end
   end
 
-  post '/tidings/:id' do
+  post '/tidings/:id/update' do
 
 
     parameter :category, required: true

@@ -6,15 +6,9 @@ import './style.css'
 
 class TidingsList extends Component {
     handleCreate = () => {
-        const { toggle, users } = this.props
-        const newTiding = {
-            companyId: users.companyId,
-            category: '',
-            title: '',
-            body: '',
-            message: '',
-        }
-        toggle(newTiding)
+        const { toggle, users, tiding } = this.props
+        tiding.companyId = users.companyId
+        toggle(tiding)
     }
     render() {
         const { tidings } = this.props
@@ -51,13 +45,18 @@ import { toggle } from 'store/ui/tidings/modal/actions'
 TidingsList.propTypes = {
     tidings: PropTypes.array,
     users: PropTypes.object,
+    tiding: PropTypes.object,
     toggle: PropTypes.func,
 }
 
-const mapStateToProps = (state, props) => ({
-    tidings: getArrayTidings(state, props),
-    users: getUsers(state, props),
-})
+const mapStateToProps = (state, props) => {
+    const { tiding } = state.ui.tidings.modal
+    return {
+        tidings: getArrayTidings(state, props),
+        tiding,
+        users: getUsers(state, props),
+    }
+}
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({ toggle }, dispatch)
 

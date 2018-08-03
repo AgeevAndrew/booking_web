@@ -1,7 +1,13 @@
 import * as actionTypes from './constants'
 
 const initialState = {
-    tiding: {},
+    tiding: {
+        companyId: '',
+        category: '',
+        title: '',
+        body: '',
+        message: '',
+    },
     open: false,
     submitting: false,
     error: '',

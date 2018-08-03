@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Segment, Header, Label, Accordion, Icon,
     Radio, Grid, Button, Container, Divider } from 'semantic-ui-react'
-import { tidingStatus } from '../../shared/decorators/tiding_status'
+import { tidingStatus } from 'shared/decorators/tiding_status'
 
 class Tiding extends Component {
     openModal = () => {
