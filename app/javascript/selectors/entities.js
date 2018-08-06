@@ -5,3 +5,5 @@ export const getOrders = (state) => state.entities.orders
 export const getOrderProducts = (state) => state.entities.orderProducts
 export const getAccounts = (state) => state.entities.accounts
 export const getPushMessages = (state) => state.entities.pushMessages
+export const getCompany = (state) => state.entities.company
+export const getSchedules =  (state) => state.entities.companySchedules

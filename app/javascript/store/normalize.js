@@ -10,6 +10,8 @@ const account = new schema.Entity('accounts')
 const currentUser = new schema.Entity('currentUsers')
 const address = new schema.Entity('addresses')
 const pushMessage = new schema.Entity('pushMessages')
+const company = new schema.Entity('company')
+const companySchedules = new schema.Entity('companySchedules')
 
 export const normalizeEntities = (storeProps) =>
   normalize(camelizeKeys(storeProps), {
@@ -22,4 +24,6 @@ export const normalizeEntities = (storeProps) =>
     currentUsers: [currentUser],
     addresses: [address],
     pushMessages: [pushMessage],
+    companies: [company],
+    companySchedules: [companySchedules],
 })

@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
-import { values, filter } from 'lodash'
+import values from 'lodash/values'
+import filter from 'lodash/filter'
 import { getProducts } from './entities'
 import { getProductId } from './props'
 import { getActiveCategoryId } from './ui'

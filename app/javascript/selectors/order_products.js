@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { values } from 'lodash'
+import values from 'lodash/values'
 import { getOrderProducts } from './entities'
 import { getOrderProductId } from './props'
 
