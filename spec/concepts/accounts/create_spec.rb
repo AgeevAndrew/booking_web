@@ -37,7 +37,7 @@ module Accounts
       end
 
       context 'fail' do
-        let(:name) { nil }
+        let(:phone) { nil }
         it { should be false }
       end
     end

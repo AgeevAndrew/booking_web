@@ -37,7 +37,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Create (errors)' do
-      do_request(name: nil)
+      do_request(phone: nil)
       expect(status).to eq(422)
     end
   end
@@ -61,7 +61,7 @@ RSpec.resource 'Account', acceptance: true do
     end
 
     example 'Update (errors)' do
-      do_request(name: nil)
+      do_request(phone: nil)
       expect(status).to eq(422)
     end
   end

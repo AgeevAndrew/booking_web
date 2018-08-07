@@ -30,7 +30,7 @@ module Accounts::Forms
         form.errors.messages
       end
 
-      %i[id name phone email].each do |field|
+      %i[id phone].each do |field|
         context field.to_s do
           let(field) { nil }
           it { expect(subject[field]).to include "can't be blank" }

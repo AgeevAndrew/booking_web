@@ -36,8 +36,13 @@ module Accounts
         it { should be true }
       end
 
-      context 'fail' do
+      context 'success without name' do
         let(:name) { nil }
+        it { should be true}
+      end
+
+      context 'fail' do
+        let(:phone) { nil }
         it { should be false }
       end
     end
