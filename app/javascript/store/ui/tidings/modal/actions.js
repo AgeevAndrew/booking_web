@@ -2,9 +2,10 @@ import * as actionTypes from './constants'
 import * as entitiesActions from 'store/entities/actions'
 import TidingsEndpoint from 'shared/endpoints/tidings_endpoint'
 
-export const toggle = (tiding) => ({
+export const toggle = (tiding, user) => ({
     type: actionTypes.OPEN,
     tiding,
+    user,
 })
 
 export const close = () => ({

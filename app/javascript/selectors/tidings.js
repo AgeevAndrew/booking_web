@@ -13,8 +13,3 @@ export const getTiding = createSelector(
     [getTidings, getTidingId],
     (tidings, tidingId) => tidings[tidingId]
 )
-
-export const getUsers = createSelector(
-    [getCurrentUsers],
-    (users) => values(users)[0]
-)

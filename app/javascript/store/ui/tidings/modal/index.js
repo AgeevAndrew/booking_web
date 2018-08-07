@@ -1,24 +1,30 @@
 import * as actionTypes from './constants'
 
 const initialState = {
-    tiding: {
-        companyId: '',
-        category: '',
-        title: '',
-        body: '',
-        message: '',
-    },
-    open: false,
-    submitting: false,
-    error: '',
+            tiding: {
+                id: null,
+                companyId: '',
+                category: '',
+                title: '',
+                body: '',
+                message: '',
+            },
+            open: false,
+            submitting: false,
+            error: '',
 }
 
 const ERROR_STR = 'При выполнении операции произошла ошибка'
 
 export default (state = initialState, action) => {
-    const { type, tiding, key, value } = action
+    const { type, key, value, user } = action
+    let { tiding } = action
     switch (type) {
         case actionTypes.OPEN:
+            if (!tiding) {
+                tiding = initialState.tiding
+                tiding.companyId = user.companyId
+            }
             return { ...state, tiding, open: true }
         case actionTypes.CLOSE:
             return { ...state, open: false }
