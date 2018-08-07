@@ -38,7 +38,7 @@ module Accounts
 
       context 'success without name' do
         let(:name) { nil }
-        it { should be true}
+        it { should be true }
       end
 
       context 'fail' do
