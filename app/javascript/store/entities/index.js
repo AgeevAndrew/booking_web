@@ -13,6 +13,7 @@ export const initialState = {
   pushMessages: {},
   company: {},
   companySchedules: {},
+  tidings: {},
 }
 
 function mergeEntities(state, entities) {

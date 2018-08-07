@@ -4,3 +4,4 @@ export const getOrderId = (state, props) => props.orderId
 export const getOrderProductId = (state, props) => props.orderProductId
 export const getAccountId = (state, props) => props.accountId
 export const getPushMessageId = (state, props) => props.pushMessageId
+export const getTidingId = (state, props) => props.tidingId

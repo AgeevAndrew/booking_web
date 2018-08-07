@@ -42,4 +42,10 @@ Rails.application.routes.draw do
     get :accept, on: :member
     get :cancel, on: :member
   end
+
+  resources :tidings, only: [:index, :create, :destroy] do
+    post :activate, on: :member
+    post :deactivate, on: :member
+    post 'update', on: :member
+  end
 end

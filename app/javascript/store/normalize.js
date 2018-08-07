@@ -12,6 +12,7 @@ const address = new schema.Entity('addresses')
 const pushMessage = new schema.Entity('pushMessages')
 const company = new schema.Entity('company')
 const companySchedules = new schema.Entity('companySchedules')
+const tidings = new schema.Entity('tidings')
 
 export const normalizeEntities = (storeProps) =>
   normalize(camelizeKeys(storeProps), {
@@ -26,4 +27,5 @@ export const normalizeEntities = (storeProps) =>
     pushMessages: [pushMessage],
     companies: [company],
     companySchedules: [companySchedules],
+    tidings: [tidings],
 })
