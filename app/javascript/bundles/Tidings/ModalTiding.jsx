@@ -6,12 +6,8 @@ class ModalTiding extends Component {
         this.props.close()
     }
     handleConfirm = () => {
-        const { update, tiding } = this.props
-        update(tiding)
-    }
-    handleCreate = () => {
-        const { create, tiding } = this.props
-        create(tiding)
+        const { update, create, tiding } = this.props
+        tiding.id ? update(tiding) : create(tiding)
     }
     handleChange = (e, { name, value }) => this.props.edit(name, value)
     getErrorMessage = (text) => {
@@ -23,8 +19,6 @@ class ModalTiding extends Component {
         )
     }
     getButtonBlock = () => {
-        const { tiding } = this.props
-        if (tiding.id) {
             return (
                 <Button.Group>
                     <Button color='red'
@@ -36,19 +30,6 @@ class ModalTiding extends Component {
                     >Сохранить</Button>
                 </Button.Group>
             )
-        } else {
-            return (
-                <Button.Group>
-                    <Button color='red'
-                            onClick={this.handleClose}
-                    >Отмена</Button>
-                    <Button.Or/>
-                    <Button color='blue'
-                            onClick={this.handleCreate}
-                    >Создать</Button>
-                </Button.Group>
-            )
-        }
     }
     categories = [
         { key: 1, text: 'Акции', value: 'promotions' },

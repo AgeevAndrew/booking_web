@@ -3,7 +3,6 @@ import * as actionTypes from './constants'
 const initialState = {
             tiding: {
                 id: null,
-                companyId: '',
                 category: '',
                 title: '',
                 body: '',
@@ -17,14 +16,11 @@ const initialState = {
 const ERROR_STR = 'При выполнении операции произошла ошибка'
 
 export default (state = initialState, action) => {
-    const { type, key, value, user } = action
+    const { type, key, value } = action
     let { tiding } = action
     switch (type) {
         case actionTypes.OPEN:
-            if (!tiding) {
-                tiding = initialState.tiding
-                tiding.companyId = user.companyId
-            }
+            if (!tiding) tiding = initialState.tiding
             return { ...state, tiding, open: true }
         case actionTypes.CLOSE:
             return { ...state, open: false }
