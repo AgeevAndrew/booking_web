@@ -11,7 +11,7 @@ module Tidings
     end
 
     def model!(*)
-      Tiding.new(active: Tiding.actives.key(1))
+      Tiding.new(active: :on, company_id: current_user.company_id)
     end
 
     def process(params)
@@ -19,6 +19,5 @@ module Tidings
         contract.save
       end
     end
-
   end
 end

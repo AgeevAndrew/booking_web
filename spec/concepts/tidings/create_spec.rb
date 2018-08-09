@@ -9,19 +9,16 @@ module Tidings
     let(:operation) { operation_run[1] }
     let(:contract_class) { operation.contract.class }
 
-    let(:model) { Tiding.new }
-
-    let(:tiding) { create(:tiding, company: company) }
-    let!(:company) { create(:company) }
-    let(:company_id) { company.id }
-    let(:category) { Tiding.categories.key(1) }
-    let(:params) do
+    let(:current_user) { create(:user) }
+    let(:company_id) { user.company_id }
+    let(:category) { 'promotions' }
+    let(:default_params) do
       {
-          company_id: company_id,
-          category: category,
-          title: title,
-          body: body,
-          message: message
+        current_user: current_user,
+        category: category,
+        title: title,
+        body: body,
+        message: message,
       }
     end
 
@@ -29,24 +26,27 @@ module Tidings
     let(:body) { Faker::Lorem.sentence }
     let(:message) { Faker::Lorem.sentence }
 
-    describe  '#result!' do
+    describe '#result!' do
+      let(:params) { default_params }
+
       it { expect { operation_run }.to change { Tiding.count }.by(1) }
       it { expect(contract_class).to be < Forms::CreateForm }
 
       context 'success' do
         it { expect(result).to eq true }
-        it { expect(operation.model.reload.company_id).to eq company.id }
-        it { expect(operation.model.reload.category).to eq Tiding.categories.key(1) }
+        it { expect(operation.model.reload.company_id).to eq current_user.company_id }
+        it { expect(operation.model.reload.category).to eq category }
         it { expect(operation.model.reload.title).to eq title }
         it { expect(operation.model.reload.body).to eq body }
         it { expect(operation.model.reload.message).to eq message }
-        it { expect(operation.model.reload.active).to eq Tiding.actives.key(1) }
+        it { expect(operation.model.reload.active).to eq 'on' }
       end
 
+      context 'Another company' do
+        let(:params) { default_params.merge(company_id: create(:company).id) }
 
-      context 'Invalid company' do
-       let(:company_id) { nil }
-        it { expect(result).to eq false }
+        it { expect(result).to eq true }
+        it { expect(operation.model.reload.company_id).to eq current_user.company_id }
       end
 
       context 'Invalid category' do
