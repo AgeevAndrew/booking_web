@@ -5,7 +5,7 @@ module Tidings::Forms
 
     model Tiding
 
-    property :company_id
+    property :company_id, writeable: false
     property :category
     property :title
     property :body
