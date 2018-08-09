@@ -6,8 +6,8 @@ import './style.css'
 
 class TidingsList extends Component {
     handleCreate = () => {
-        const { toggle, user } = this.props
-        toggle(null, user)
+        const { toggle } = this.props
+        toggle()
     }
     render() {
         const { tidings } = this.props
@@ -40,20 +40,17 @@ import { getArrayTidings } from 'selectors/tidings'
 import { bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { toggle } from 'store/ui/tidings/modal/actions'
-import { getUser } from 'selectors/user'
 
 TidingsList.propTypes = {
     tidings: PropTypes.array,
-    user: PropTypes.object,
     tiding: PropTypes.object,
     toggle: PropTypes.func,
 }
 
 const mapStateToProps = (state, props) => ({
         tidings: getArrayTidings(state, props),
-        user: getUser(state, props),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ toggle, getUser }, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators({ toggle }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(TidingsList)
