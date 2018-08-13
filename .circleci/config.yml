@@ -1,0 +1,88 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.5.1-node
+        environment:
+          BUNDLE_PATH: vendor/bundle
+          PGUSER: postgres
+          PGHOST: 127.0.0.1
+          RAILS_ENV: test
+      - image: circleci/postgres:10
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: booking_web_test
+          POSTGRES_PASSWORD: ''
+    steps:
+    - checkout
+    # Which version of bundler?
+    - run:
+        name: Which bundler?
+        command: bundle -v
+
+    # Restore bundle cache
+    - restore_cache:
+        keys:
+          - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+          - rails-demo-bundle-v2-
+
+    - run:
+        name: Bundle Install
+        command: bundle check || bundle install
+
+    # Store bundle cache
+    - save_cache:
+        key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
+
+    # Only necessary if app uses webpacker or yarn in some other way
+    - restore_cache:
+        keys:
+          - rails-demo-yarn-{{ checksum "yarn.lock" }}
+          - rails-demo-yarn-
+
+    - run:
+        name: Yarn Install
+        command: yarn install --cache-folder ~/.cache/yarn
+
+    # Store yarn / webpacker cache
+    - save_cache:
+        key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+        paths:
+          - ~/.cache/yarn
+
+    - run:
+        name: Wait for DB
+        command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+    - run:
+        name: Install database client
+        command: sudo apt-get update && sudo apt-get install postgresql-client-9.6
+
+    - run:
+        name: Create database extension pgcrypto
+        command: psql -c "CREATE EXTENSION pgcrypto;" -d booking_web_test
+
+    - run:
+        name: Database setup
+        command: bin/rails db:migrate
+    # Run rspec in parallel
+    - run:
+        name: Run rspec
+        command: bundle exec rspec
+    # Save test results for timing analysis
+    - store_test_results:
+        path: test_results
+
+    - deploy:
+        name: Genarate API Documentations And Deploy
+        command: |
+          if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+            bin/rails docs:generate
+            RAILS_ENV=development bundle exec cap staging deploy
+          fi
+          if [ "${CIRCLE_BRANCH}" == "master" ]; then
+            bin/rails docs:generate
+            RAILS_ENV=development bundle exec cap production deploy
+          fi
