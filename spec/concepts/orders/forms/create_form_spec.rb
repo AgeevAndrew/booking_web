@@ -67,16 +67,6 @@ module Orders::Forms
           let(:address_id) { nil }
 
           context 'delivery option' do
-            it { expect(subject[:address_id]).to include "can't be blank" }
-          end
-
-          context 'delivery option' do
-            let(:pickup) { false }
-            it { expect(subject[:address_id]).to include "can't be blank" }
-          end
-
-          context 'pickup option' do
-            let(:pickup) { true }
             it { expect(subject[:address_id]).not_to include "can't be blank" }
           end
         end
