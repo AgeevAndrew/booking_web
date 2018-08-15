@@ -89,7 +89,7 @@ RSpec.resource 'Tidings', acceptance: true do
       body = JSON.parse(response_body)
       expect(body["active"]).to eq "on"
     end
-    example 'Activate not_found', document: false do
+    example 'Activate not_found' do
       do_request(id: 0)
       expect(response_status).to eq 404
     end
@@ -103,7 +103,7 @@ RSpec.resource 'Tidings', acceptance: true do
       expect(response_status).to eq 204
     end
 
-    example 'Delete not found', document: false do
+    example 'Delete not found' do
       do_request(id: 0)
       expect(response_status).to eq 404
     end
