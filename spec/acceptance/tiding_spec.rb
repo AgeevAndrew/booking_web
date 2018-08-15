@@ -70,26 +70,30 @@ RSpec.resource 'Tidings', acceptance: true do
 
   post 'tidings/:id/activate', document: false do
     let(:company) { create (:company) }
-    let(:tiding) { create(:tiding, company: company) }
+    let(:tiding) { create(:tiding, company: company, active: 0) }
     let(:id) { tiding.id }
-    post 'tidings/:id/deactivate' do
-      example 'Deactivate first' do
-        do_request
-        expect(response_status).to eq 201
-        body = JSON.parse(response_body)
-        expect(body["active"]).to eq "off"
-      end
-      example 'Deactivate not_found' do
-        do_request(id: 0)
-        expect(response_status).to eq 404
-      end
-    end
     example_request 'Activate tiding' do
       expect(response_status).to eq 201
       body = JSON.parse(response_body)
       expect(body["active"]).to eq "on"
     end
     example 'Activate not_found' do
+      do_request(id: 0)
+      expect(response_status).to eq 404
+    end
+  end
+
+  post 'tidings/:id/deactivate', document: false do
+    let(:company) { create (:company) }
+    let(:tiding) { create(:tiding, company: company) }
+    let(:id) { tiding.id }
+    example 'Deactivate first' do
+      do_request
+      expect(response_status).to eq 201
+      body = JSON.parse(response_body)
+      expect(body["active"]).to eq "off"
+    end
+    example 'Deactivate not_found' do
       do_request(id: 0)
       expect(response_status).to eq 404
     end
@@ -109,7 +113,7 @@ RSpec.resource 'Tidings', acceptance: true do
     end
   end
 
-  get 'api/tidings?company_id=:company_id' do
+  get 'api/tidings' do
     parameter :company_id, required: true
     let(:company) { create(:company) }
     let!(:tiding) { create(:tiding, company: company) }
@@ -122,7 +126,6 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   get 'api/tidings/:id' do
-    parameter :id, required: true
     let(:company) { create(:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }
