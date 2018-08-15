@@ -66,8 +66,8 @@ class Api::AccountsController < Api::BaseController
 
   # DELETE /accounts/1/delete_orders
   def delete_orders
-    if Rails.env.staging?
-      Account.find(params[:id]).orders.destroy_all
+    unless Rails.env.production?
+      respond Accounts::DeleteOrders, location: nil
     end
   end
 
