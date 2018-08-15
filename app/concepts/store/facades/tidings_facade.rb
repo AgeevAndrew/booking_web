@@ -5,7 +5,7 @@ module Store::Facades
     def tidings
       Tiding
           .where(company_id: current_user.company_id)
-          .order(created_at: :desc)
+          .order(id: :desc)
     end
   end
 end

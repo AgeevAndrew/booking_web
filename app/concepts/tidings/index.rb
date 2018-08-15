@@ -14,8 +14,8 @@ module Tidings
 
     def model!(params)
       Tiding
-        .where(copmany_id: params[:company_id])
-        .order(created_at: :desc)
+        .where(company_id: params[:company_id])
+        .order(id: :desc)
     end
   end
 end

@@ -9,7 +9,7 @@ RSpec.resource 'Tidings', acceptance: true do
   let(:user) { create(:user, password: password) }
   let(:password) { Faker::Internet.password(8, 12) }
 
-  post '/tidings' do
+  post '/tidings', document: false do
 
     parameter :category, required: true
     parameter :company_id, required: true
@@ -36,7 +36,7 @@ RSpec.resource 'Tidings', acceptance: true do
     end
   end
 
-  post '/tidings/:id/update' do
+  post '/tidings/:id/update', document: false do
 
 
     parameter :category, required: true
@@ -49,7 +49,7 @@ RSpec.resource 'Tidings', acceptance: true do
 
     let(:company) { create(:company) }
     let(:tiding) { create(:tiding, company: company) }
-    let(:id) { tiding.id}
+    let(:id) { tiding.id }
     let(:company_id) { company.id }
     let(:category) { Tiding.categories.key(1) }
     let(:title) { Faker::Lorem.sentence }
@@ -68,7 +68,7 @@ RSpec.resource 'Tidings', acceptance: true do
 
   end
 
-  post 'tidings/:id/activate' do
+  post 'tidings/:id/activate', document: false do
     let(:company) { create (:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }
@@ -89,13 +89,13 @@ RSpec.resource 'Tidings', acceptance: true do
       body = JSON.parse(response_body)
       expect(body["active"]).to eq "on"
     end
-    example 'Activate not_found' do
+    example 'Activate not_found', document: false do
       do_request(id: 0)
       expect(response_status).to eq 404
     end
   end
 
-  delete 'tidings/:id' do
+  delete 'tidings/:id', document: false do
     let(:company) { create(:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }
@@ -103,7 +103,33 @@ RSpec.resource 'Tidings', acceptance: true do
       expect(response_status).to eq 204
     end
 
-    example 'Delete not found' do
+    example 'Delete not found', document: false do
+      do_request(id: 0)
+      expect(response_status).to eq 404
+    end
+  end
+
+  get 'api/tidings?company_id=:company_id' do
+    let(:company) { create(:company) }
+    let!(:tiding) { create(:tiding, company: company) }
+    let!(:tiding1) { create(:tiding, company: company) }
+    let!(:tiding2) { create(:tiding, company: company) }
+    let(:company_id) { company.id }
+    example_request 'Index' do
+      expect(response_status).to eq 200
+    end
+  end
+
+  get 'api/tidings/:id' do
+    let(:company) { create(:company) }
+    let(:tiding) { create(:tiding, company: company) }
+    let(:id) { tiding.id }
+
+    example_request 'Show' do
+      expect(response_status).to eq 200
+    end
+
+    example 'Show (not found)' do
       do_request(id: 0)
       expect(response_status).to eq 404
     end

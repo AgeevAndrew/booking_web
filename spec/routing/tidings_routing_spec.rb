@@ -27,5 +27,6 @@ RSpec.describe TidingsController, type: :routing do
     it "routes to #deactivate" do
       expect(:post => "/tidings/1/deactivate").to route_to("tidings#deactivate", :id => "1")
     end
+
   end
 end
