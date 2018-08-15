@@ -18,6 +18,7 @@ Rails.application.routes.draw do
     resources :accounts, except: :update do
       post 'update', on: :member
       post 'register_device', on: :member
+      delete 'delete_orders', on: :member
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
     resources :orders, only: [:index, :create] do
