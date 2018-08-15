@@ -52,8 +52,8 @@ module Accounts::Addresses
       end
 
       context 'fail' do
-        let(:title) { nil }
-        it { should be true }
+        let(:city) { nil }
+        it { is_expected.to be false }
       end
     end
   end
