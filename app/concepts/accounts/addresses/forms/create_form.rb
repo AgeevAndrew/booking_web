@@ -13,6 +13,6 @@ module Accounts::Addresses::Forms
     property :floor
     property :code
 
-    validates :title, :city, :street, :house, presence: true
+    validates :city, :street, :house, presence: true
   end
 end

@@ -38,7 +38,7 @@ module Accounts::Addresses::Forms
         form.errors.messages
       end
 
-      %i[title city street house].each do |field|
+      %i[city street house].each do |field|
         context field.to_s do
           let(field) { nil }
           it { expect(subject[field]).to include "can't be blank" }
