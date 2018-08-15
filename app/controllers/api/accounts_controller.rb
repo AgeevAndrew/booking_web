@@ -64,6 +64,11 @@ class Api::AccountsController < Api::BaseController
     end
   end
 
+  # DELETE /accounts/1/delete_orders
+  def delete_orders
+    respond Accounts::DeleteOrders, location: nil
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account
