@@ -12,17 +12,13 @@ module Tidings
     let(:company) { create(:company) }
     let!(:tiding) { create(:tiding, company: company) }
     let(:company_id) { company.id }
-    let(:params) do
-      {
-          company_id: company_id
-      }
-    end
+    let(:params) { { company_id: company_id } }
 
     describe  '#result!' do
-      subject { result }
+      it { expect { operation_run }.not_to change { Tiding.count } }
 
       context 'success' do
-        it { should be true }
+        it { expect(result).to eq true }
       end
     end
   end

@@ -110,6 +110,7 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   get 'api/tidings?company_id=:company_id' do
+    parameter :company_id, required: true
     let(:company) { create(:company) }
     let!(:tiding) { create(:tiding, company: company) }
     let!(:tiding1) { create(:tiding, company: company) }
@@ -121,6 +122,7 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   get 'api/tidings/:id' do
+    parameter :id, required: true
     let(:company) { create(:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }

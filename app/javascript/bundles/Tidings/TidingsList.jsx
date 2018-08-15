@@ -11,11 +11,6 @@ class TidingsList extends Component {
     }
     render() {
         const { tidings } = this.props
-        tidings.sort((first, second) => {
-          if (first.id < second.id) return 1
-          if (first.id > second.id) return -1
-          return 0
-        })
         return (
             <Container>
                 <List>
