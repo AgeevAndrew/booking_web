@@ -66,9 +66,7 @@ class Api::AccountsController < Api::BaseController
 
   # DELETE /accounts/1/delete_orders
   def delete_orders
-    unless Rails.env.production?
-      respond Accounts::DeleteOrders, location: nil
-    end
+    respond Accounts::DeleteOrders, location: nil
   end
 
   private
