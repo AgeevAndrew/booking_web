@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
   concern :app_api do
     resources :companies do
       post :delivery_time_change, on: :member
@@ -23,6 +24,8 @@ Rails.application.routes.draw do
       post :accept, on: :member
       post :cancel, on: :member
     end
+
+    resources :tidings, only: [:index, :show]
   end
 
   namespace :api, defaults: { format: :json } do

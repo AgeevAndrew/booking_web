@@ -17,11 +17,10 @@ const ERROR_STR = 'При выполнении операции произошл
 
 export default (state = initialState, action) => {
     const { type, key, value } = action
-    let { tiding } = action
+    const tiding = action.tiding || initialState.tiding
     switch (type) {
         case actionTypes.OPEN:
-            if (!tiding) tiding = initialState.tiding
-            return { ...state, tiding, open: true }
+            return { ...state, tiding, open: true, error: '' }
         case actionTypes.CLOSE:
             return { ...state, open: false }
         case actionTypes.BEGIN:
