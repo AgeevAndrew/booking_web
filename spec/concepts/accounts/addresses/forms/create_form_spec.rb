@@ -41,7 +41,7 @@ module Accounts::Addresses::Forms
       %i[title city street house].each do |field|
         context field.to_s do
           let(field) { nil }
-          it { expect(subject[field]).to include "can't be blank" }
+          it { expect(subject[field]).to include "can't be blank" } unless field == :title
         end
       end
     end

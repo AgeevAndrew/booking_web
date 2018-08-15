@@ -53,7 +53,7 @@ module Accounts::Addresses
 
       context 'fail' do
         let(:title) { nil }
-        it { should be false }
+        it { should be true }
       end
     end
   end
