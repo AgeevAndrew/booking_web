@@ -3,13 +3,13 @@
 require 'acceptance_helper'
 
 RSpec.resource 'Tidings', acceptance: true do
-  header 'Authorization', :auth_header
-  let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
 
+  let(:auth_header) { ActionController::HttpAuthentication::Basic.encode_credentials(user.email, password) }
   let(:user) { create(:user, password: password) }
   let(:password) { Faker::Internet.password(8, 12) }
 
   post '/tidings', document: false do
+    header 'Authorization', :auth_header
 
     parameter :category, required: true
     parameter :company_id, required: true
@@ -37,7 +37,7 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   post '/tidings/:id/update', document: false do
-
+    header 'Authorization', :auth_header
 
     parameter :category, required: true
     parameter :company_id, required: true
@@ -69,6 +69,8 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   post 'tidings/:id/activate', document: false do
+    header 'Authorization', :auth_header
+
     let(:company) { create (:company) }
     let(:tiding) { create(:tiding, company: company, active: 0) }
     let(:id) { tiding.id }
@@ -84,6 +86,8 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   post 'tidings/:id/deactivate', document: false do
+    header 'Authorization', :auth_header
+
     let(:company) { create (:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }
@@ -100,6 +104,8 @@ RSpec.resource 'Tidings', acceptance: true do
   end
 
   delete 'tidings/:id', document: false do
+    header 'Authorization', :auth_header
+
     let(:company) { create(:company) }
     let(:tiding) { create(:tiding, company: company) }
     let(:id) { tiding.id }
