@@ -32,7 +32,6 @@ export const update = (productForm) => (dispatch) => {
 
 export const create = (productForm) => (dispatch) => {
     dispatch(setSend())
-    console.log({ ...productForm })
     ProductsEndpoint.create({ ...productForm })
         .then((response) => {
             if (response.success) {
