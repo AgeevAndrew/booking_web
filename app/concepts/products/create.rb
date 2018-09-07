@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Products
-  class Update < ApplicationOperation
+  class Create < ApplicationOperation
     representer ProductRepresenter
 
     contract Forms::CreateForm
 
-    def model!(params)
-      Product.find params[:id]
+    def model!(*)
+      Product.new(company_id: current_user.company_id)
     end
 
     def process(params)

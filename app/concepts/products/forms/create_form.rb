@@ -15,6 +15,6 @@ module Products::Forms
     property :additional_info
     property :active
 
-    validates :id, :company_id, :category_id, :title, :description, :brief, :photo, :main_options, presence: true
+    validates :category_id, :title, :description, :brief, :main_options, presence: true
   end
 end

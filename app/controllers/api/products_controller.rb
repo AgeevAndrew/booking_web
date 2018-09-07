@@ -35,17 +35,7 @@ class Api::ProductsController < Api::BaseController
   # POST /products
   # POST /products.json
   def create
-    @product = Product.new(product_params)
-
-    respond_to do |format|
-      if @product.save
-        format.html { redirect_to @product, notice: 'Product was successfully created.' }
-        format.json { render :show, status: :created, location: @product }
-      else
-        format.html { render :new }
-        format.json { render json: @product.errors, status: :unprocessable_entity }
-      end
-    end
+    respond Products::Create, location: nil
   end
 
   # PATCH/PUT /products/1
