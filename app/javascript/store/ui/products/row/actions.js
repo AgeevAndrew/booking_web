@@ -9,15 +9,15 @@ export const setSend = () => ({ type: actionTypes.SEND_FORM })
 export const setFinish = () => ({ type: actionTypes.SEND_FINISH })
 
 export const openNew = () => ({
-    type: actionTypes.OPEN,
+  type: actionTypes.OPEN,
 })
 
 export const close = () => ({
-    type: actionTypes.CLOSE,
+  type: actionTypes.CLOSE,
 })
 
 export const increment = () => ({
-    type: actionTypes.INC,
+  type: actionTypes.INC,
 })
 
 export const update = (productForm) => (dispatch) => {
@@ -31,13 +31,14 @@ export const update = (productForm) => (dispatch) => {
 }
 
 export const create = (productForm) => (dispatch) => {
-    dispatch(setSend())
-    ProductsEndpoint.create({ ...productForm })
-        .then((response) => {
-            if (response.success) {
-                dispatch(upsertEntity('products', { ...response.json }))
-                dispatch(setFinish())
-                dispatch(close())
-            }
-        })
+  productForm.active = true
+  dispatch(setSend())
+  ProductsEndpoint.create({ ...productForm })
+    .then((response) => {
+      if (response.success) {
+        dispatch(upsertEntity('products', { ...response.json }))
+        dispatch(setFinish())
+        dispatch(close())
+      }
+    })
 }

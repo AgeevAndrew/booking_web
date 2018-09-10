@@ -12,3 +12,8 @@ export const getCategory = createSelector(
   [getCategories, getCategoryId],
   (categories, categoryId) => categories[categoryId]
 )
+
+export const getCategoriesSelector = createSelector(
+  [getCategories],
+  (categories) => values(categories).map((x) => ({ key: x.id, text: x.name, value: x.id }))
+)

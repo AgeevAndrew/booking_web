@@ -4,7 +4,7 @@ module Products
   class Update < ApplicationOperation
     representer ProductRepresenter
 
-    contract Forms::CreateForm
+    contract Forms::UpdateForm
 
     def model!(params)
       Product.find params[:id]
