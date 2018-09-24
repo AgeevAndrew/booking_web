@@ -1,4 +1,5 @@
 import * as actionTypes from './constants'
+import { initialMO } from './mainOptions'
 
 const initialState = {
   categoryId: '',
@@ -6,14 +7,14 @@ const initialState = {
   description: '',
   brief: '',
   photo: '',
-  mainOptions: [{ cost: '', name: '' }],
+  mainOptions: [initialMO],
   additionalInfo: [],
   isSendFrom: false,
   openNewForm: false,
 }
 
 export default (productForm = initialState, action) => {
-  const { type, key, value, form } = action
+  const { type, key, value, form, index } = action
   switch (type) {
     case actionTypes.INIT_FORM:
       return { ...form, isSendFrom: false, openNewForm: false }
@@ -31,6 +32,11 @@ export default (productForm = initialState, action) => {
       return { ...initialState }
     case actionTypes.INC:
       return { ...productForm, mainOptions: productForm.mainOptions.concat({ cost: '', name: '' }) }
+    case actionTypes.CHANGE_MO:
+      const newMO = [...productForm.mainOptions]
+      const item = { ...newMO[index], [key]: value }
+      return { ...productForm, mainOptions: [...productForm.mainOptions.slice(0, index),
+          item, ...productForm.mainOptions.slice(index + 1)] }
     default:
       return productForm
   }

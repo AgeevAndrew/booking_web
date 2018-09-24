@@ -49,7 +49,7 @@ module Products
 
     describe '#result!' do
       it { expect { operation_run }.not_to change { Product.count } }
-      it { expect(contract_class).to be < Forms::CreateForm }
+      it { expect(contract_class).to be < Forms::UpdateForm }
 
       context 'success' do
         it { expect(result).to eq true }

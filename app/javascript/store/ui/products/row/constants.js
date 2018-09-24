@@ -7,3 +7,4 @@ export const CANCEL_FORM = `${prefix}CANCELL_FORM`
 export const OPEN = `${prefix}OPEN`
 export const CLOSE = `${prefix}CLOSE`
 export const INC = `${prefix}INC`
+export const CHANGE_MO = `${prefix}CHANGE_MO`

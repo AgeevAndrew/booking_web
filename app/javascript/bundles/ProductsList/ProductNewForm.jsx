@@ -1,6 +1,7 @@
 import React from 'react'
 import map from 'lodash/map'
-import { Button, Item, Input, TextArea, Form, Label, Modal, Dropdown } from 'semantic-ui-react'
+import { Button, Form, Modal, Dropdown } from 'semantic-ui-react'
+import MainOption from './MainOption'
 
 class ProductNewForm extends React.Component {
   handleChange = (e, { name, value }) => this.props.change(name, value)
@@ -49,7 +50,7 @@ class ProductNewForm extends React.Component {
                           name='title'
                           defaultValue={productForm.title}
                           onChange={this.handleChange}
-                          placeholder='Название'/>
+              />
             </Form.Field>
             <Form.Field>
               <label>Категория</label>
@@ -68,33 +69,16 @@ class ProductNewForm extends React.Component {
                            name='description'
                            defaultValue={productForm.description}
                            onChange={this.handleChange}/>
-            {map(productForm.mainOptions, (mo, index) =>
-              <Form.Group widths='equal' key={index}>
-                <Form.Input index={index}
-                            name='name'
-                            defaultValue=''
-                            placeholder='Порция'
-                            onChange={this.handleChangeMainOption}/>
-                <Form.Input index={index}
-                            name='cost'
-                            type='number'
-                            step='0.01'
-                            labelPosition='left'
-                            defaultValue=''
-                            placeholder='Цена'
-                            onChange={this.handleChangeMainOption}>
-                  <input/>
-                    <Label basic>₽</Label>
-                </Form.Input>
-                <Button
+            {map(productForm.mainOptions, (mainOption, index) =>
+              <MainOption key={index} index={index}/>
+            )}
+            <Button
                   className='fixedButton'
                   circular
                   icon='add'
                   color='green'
                   onClick={ this.handleNewMain }
-                />
-              </Form.Group>
-            )}
+              />
             { this.getButtonBlock() }
             </Form>
         </Modal.Content>

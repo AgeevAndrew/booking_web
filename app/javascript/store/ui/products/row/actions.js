@@ -7,6 +7,7 @@ export const cancel = () => ({ type: actionTypes.CANCEL_FORM })
 export const change = (key, value) => ({ type: actionTypes.CHANGE_FORM, key, value })
 export const setSend = () => ({ type: actionTypes.SEND_FORM })
 export const setFinish = () => ({ type: actionTypes.SEND_FINISH })
+export const changeMO = (key, value, index) => ({ type: actionTypes.CHANGE_MO, key, value, index })
 
 export const openNew = () => ({
   type: actionTypes.OPEN,
