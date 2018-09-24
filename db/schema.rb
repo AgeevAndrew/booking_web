@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180725234529) do
+ActiveRecord::Schema.define(version: 20180814232600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
 
   create_table "accounts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "name", null: false
+    t.string "name"
     t.string "phone", null: false
     t.string "email"
     t.integer "address_ids", default: [], null: false, array: true
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20180725234529) do
   end
 
   create_table "addresses", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title"
     t.string "city", null: false
     t.string "street", null: false
     t.string "house", null: false
@@ -142,6 +142,18 @@ ActiveRecord::Schema.define(version: 20180725234529) do
   create_table "statuses", force: :cascade do |t|
     t.string "name", null: false
     t.integer "position", limit: 2, null: false
+  end
+
+  create_table "tidings", force: :cascade do |t|
+    t.bigint "company_id"
+    t.integer "category"
+    t.string "title"
+    t.text "body"
+    t.text "message"
+    t.integer "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_tidings_on_company_id"
   end
 
   create_table "users", force: :cascade do |t|

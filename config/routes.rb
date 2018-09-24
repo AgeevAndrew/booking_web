@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+
   concern :app_api do
     resources :companies do
       post :delivery_time_change, on: :member
@@ -17,12 +18,15 @@ Rails.application.routes.draw do
     resources :accounts, except: :update do
       post 'update', on: :member
       post 'register_device', on: :member
+      delete 'delete_orders', on: :member
       resources :addresses, only: [:index, :create, :update, :destroy]
     end
     resources :orders, only: [:index, :create] do
       post :accept, on: :member
       post :cancel, on: :member
     end
+
+    resources :tidings, only: [:index, :show]
   end
 
   namespace :api, defaults: { format: :json } do
@@ -41,5 +45,11 @@ Rails.application.routes.draw do
   resources :orders, only: [:index] do
     get :accept, on: :member
     get :cancel, on: :member
+  end
+
+  resources :tidings, only: [:index, :create, :destroy] do
+    post :activate, on: :member
+    post :deactivate, on: :member
+    post 'update', on: :member
   end
 end

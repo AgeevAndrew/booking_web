@@ -75,7 +75,6 @@ module Orders::Forms
 
     validates :company_id, presence: true
     validates :account_id, presence: true
-    validates :address_id, presence: true, unless: :pickup
     # TODO, Решить проблему с таймзонами
     # Как посчитать валидно ли датавремя доставки, если приложение работает с разными таймзонами
     # Компания указывает время (и только время) работы со своими таймзонами

@@ -6,6 +6,7 @@ class Order < ApplicationRecord
   belongs_to :status
 
   has_many :order_products, dependent: :destroy
+  has_one :order_token, dependent: :destroy
 
   def cancel?
     status_id == Statuses::CANCELLED

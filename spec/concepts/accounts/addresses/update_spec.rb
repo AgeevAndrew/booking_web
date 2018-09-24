@@ -54,7 +54,7 @@ module Accounts::Addresses
       end
 
       context 'fail' do
-        let(:title) { nil }
+        let(:city) { nil }
         it { expect(result).to eq false }
       end
     end

@@ -14,7 +14,7 @@ module Accounts::Forms
       super Phone.normalize(value)
     end
 
-    validates :id, :name, :phone, :email, presence: true
+    validates :id, :phone, presence: true
 
     validates :phone, format: { with: Phone::REGEX }
     validates :id, format: { with: Uuid::REGEX }

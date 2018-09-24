@@ -6,6 +6,7 @@ import ErrorsApp from 'bundles/Errors'
 import OrderList from 'bundles/OrderList'
 import PushMessages from 'bundles/PushMessages'
 import CompanyApp from 'bundles/Company'
+import TidingsApp from 'bundles/Tidings'
 import SharedReduxStore from 'store'
 import Turbolinks from 'turbolinks'
 Turbolinks.start()
@@ -17,6 +18,7 @@ ReactOnRails.register({
   OrderList,
   PushMessages,
   CompanyApp,
+  TidingsApp,
 })
 
 ReactOnRails.registerStore({
