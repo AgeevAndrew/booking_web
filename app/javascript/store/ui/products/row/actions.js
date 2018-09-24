@@ -7,6 +7,19 @@ export const cancel = () => ({ type: actionTypes.CANCEL_FORM })
 export const change = (key, value) => ({ type: actionTypes.CHANGE_FORM, key, value })
 export const setSend = () => ({ type: actionTypes.SEND_FORM })
 export const setFinish = () => ({ type: actionTypes.SEND_FINISH })
+export const changeMO = (key, value, index) => ({ type: actionTypes.CHANGE_MO, key, value, index })
+
+export const openNew = () => ({
+  type: actionTypes.OPEN,
+})
+
+export const close = () => ({
+  type: actionTypes.CLOSE,
+})
+
+export const increment = () => ({
+  type: actionTypes.INC,
+})
 
 export const update = (productForm) => (dispatch) => {
   dispatch(setSend())
@@ -15,5 +28,18 @@ export const update = (productForm) => (dispatch) => {
       if (response.success)
         dispatch(upsertEntity('products', { ...response.json }))
       dispatch(setFinish())
+    })
+}
+
+export const create = (productForm) => (dispatch) => {
+  productForm.active = true
+  dispatch(setSend())
+  ProductsEndpoint.create({ ...productForm })
+    .then((response) => {
+      if (response.success) {
+        dispatch(upsertEntity('products', { ...response.json }))
+        dispatch(setFinish())
+        dispatch(close())
+      }
     })
 }

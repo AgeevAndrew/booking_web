@@ -4,3 +4,7 @@ export const INIT_FORM = `${prefix}INIT_FORM`
 export const SEND_FORM = `${prefix}SEND_FORM`
 export const SEND_FINISH = `${prefix}SEND_FINISH`
 export const CANCEL_FORM = `${prefix}CANCELL_FORM`
+export const OPEN = `${prefix}OPEN`
+export const CLOSE = `${prefix}CLOSE`
+export const INC = `${prefix}INC`
+export const CHANGE_MO = `${prefix}CHANGE_MO`

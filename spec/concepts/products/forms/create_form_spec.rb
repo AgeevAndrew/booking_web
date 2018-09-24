@@ -53,7 +53,7 @@ module Products::Forms
         form.errors.messages
       end
 
-      %i[company_id category_id title description brief photo main_options].each do |field|
+      %i[company_id category_id title description brief main_options].each do |field|
         context field.to_s do
           let(field) { nil }
           it { expect(subject[field]).to include "can't be blank" }
